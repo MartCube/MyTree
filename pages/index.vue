@@ -6,7 +6,7 @@
 			</svg>
 		</div>
 		<div class="products">
-			<h2>Promotions</h2>
+			<h2>Promotion</h2>
 			<div class="grid">
 				<card>Latte Macchiato</card>
 				<card>Irish Coffee</card>
@@ -36,11 +36,9 @@ export default {
 </script>
 
 <style lang="scss">
-$color1: #7fc7af;
-$color2: #70f381;
 $color3: #22adc2;
-$color4: #2bc1a6;
-$color5: #0ee3b1;
+$color2: #2bc1a6;
+$color1: #0ee3b1;
 
 .container {
 	justify-content: flex-end;
@@ -63,7 +61,7 @@ $color5: #0ee3b1;
 	top: 0;
 
 	svg path {
-		fill: $color5;
+		fill: $color1;
 	}
 }
 </style>

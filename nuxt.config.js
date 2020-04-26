@@ -15,10 +15,10 @@ module.exports = {
 	css: ['~/assets/style.scss'],
 
 	// Plugins to load before mounting the App
-	//plugins: ['~/plugins/vue-notifications.js'],
+	plugins: ['~/plugins/VueQrcodeReader.js'],
 
 	// Nuxt.js modules
-	modules: ['@nuxtjs/pwa', '@nuxtjs/firebase'],
+	modules: ['@nuxtjs/pwa', '@nuxtjs/firebase', '@nuxtjs/localtunnel'],
 
 	firebase: {
 		config: {
