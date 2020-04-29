@@ -15,26 +15,27 @@ module.exports = {
 	css: ['~/assets/style.scss'],
 
 	// Plugins to load before mounting the App
-	plugins: ['~/plugins/VueQrcodeReader.js'],
+	plugins: [{ src: '@/plugins/QReader.js', mode: 'client' }],
 
 	// Nuxt.js modules
-	modules: ['@nuxtjs/pwa', '@nuxtjs/firebase', '@nuxtjs/localtunnel'],
+	modules: ['@nuxtjs/pwa'], //'@nuxtjs/firebase'
 
-	firebase: {
-		config: {
-			apiKey: 'AIzaSyBneDIF1zbDHeEizyH_2WZTg8NRD8xWbvY',
-			authDomain: 'my-tree-app.firebaseapp.com',
-			databaseURL: 'https://my-tree-app.firebaseio.com',
-			projectId: 'my-tree-app',
-			storageBucket: 'my-tree-app.appspot.com',
-			messagingSenderId: '168638748208',
-			appId: '1:168638748208:web:081771b6e6b37d2a7bfff5',
-			measurementId: 'G-E0EQY206SS',
-		},
-		services: {
-			firebase: true,
-		},
-	},
+	// firebase: {
+	// 	config: {
+	// 		apiKey: 'AIzaSyBneDIF1zbDHeEizyH_2WZTg8NRD8xWbvY',
+	// 		authDomain: 'my-tree-app.firebaseapp.com',
+	// 		databaseURL: 'https://my-tree-app.firebaseio.com',
+	// 		projectId: 'my-tree-app',
+	// 		storageBucket: 'my-tree-app.appspot.com',
+	// 		messagingSenderId: '168638748208',
+	// 		appId: '1:168638748208:web:081771b6e6b37d2a7bfff5',
+	// 		measurementId: 'G-E0EQY206SS',
+	// 	},
+	// 	services: {
+	// 		firebase: true,
+	// 	},
+	// },
+
 	pwa: {
 		manifest: {
 			name: 'My Tree App',

@@ -1,17 +1,18 @@
 <template>
 	<div class="container">
 		<div class="waves">
-			<svg viewBox="0 0 1000 1000">
-				<path d="M.5,1000.5V.5h1000v464s0,267-224,265c-153-1.37-552,3-552,3C.5,732.5.5,1000.5.5,1000.5Z" />
+			<svg width="100vw" height="50vh" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+				<path fill="#0ee3b1" d="M.5,1000.5V.5h1000v464s0,267-224,265c-153-1.37-552,3-552,3C.5,732.5.5,1000.5.5,1000.5Z" />
 			</svg>
 		</div>
-		<div class="products">
+		<!-- <div class="products">
 			<h2>Promotion</h2>
 			<div class="grid">
 				<card>Latte Macchiato</card>
 				<card>Irish Coffee</card>
 			</div>
-		</div>
+		</div> -->
+
 		<bar />
 	</div>
 </template>
@@ -23,13 +24,10 @@ import card from '~/components/card.vue'
 export default {
 	components: {
 		bar,
-		card,
+		// card,
 	},
 	data() {
-		return {
-			intro: true,
-			signin: false,
-		}
+		return {}
 	},
 	methods: {},
 }
@@ -41,7 +39,7 @@ $color2: #2bc1a6;
 $color1: #0ee3b1;
 
 .container {
-	justify-content: flex-end;
+	justify-content: center;
 }
 
 .products {
@@ -57,11 +55,8 @@ $color1: #0ee3b1;
 
 .waves {
 	width: 100%;
+	height: 50vh;
 	position: absolute;
 	top: 0;
-
-	svg path {
-		fill: $color1;
-	}
 }
 </style>
