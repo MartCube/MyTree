@@ -129,10 +129,14 @@ $text: #d2d9db;
 	width: 100%;
 	position: absolute;
 	bottom: 0;
+
 	z-index: -1;
-	svg path {
-		opacity: 0.5;
-		fill: $primary;
+	svg {
+		display: flex;
+		path {
+			opacity: 0.5;
+			fill: $primary;
+		}
 	}
 }
 </style>
