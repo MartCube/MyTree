@@ -1,6 +1,6 @@
 <template>
 	<div class="bar">
-		<div class="menu">
+		<div class="menu" @click="$router.push('login')">
 			<div class="burger-button">
 				<div class="wrapper">
 					<span></span>
@@ -22,44 +22,17 @@
 			</svg>
 			<span>Map</span>
 		</div>
-		<div class="QRcode" @click="toggleQR">
+		<div class="QRcode" @click="$router.push('qr')">
 			<svg viewBox="0 0 200 200">
 				<path d="M49.49,93H26.72V26.73H49.49V39.59h-9.9V80.17h9.9ZM76.21,53.45H43.54V66.31H76.21Zm4,22.76H93V26.73H70.27V39.59h9.9ZM66.31,103V70.27H53.45V103ZM103,80.17H70.27V93H103ZM80.17,150.51v9.9H39.59v-9.9H26.73v22.77H93V150.51ZM53.45,123.79v32.66H66.31V123.79Zm22.76-4V107H26.73v22.76H39.59v-9.9ZM103,133.69H70.27v12.86H103ZM80.17,97v32.74H93V97Zm70.34,22.84h9.9v40.58h-9.9v12.86h22.77V107H150.51Zm-26.72,26.72h32.67V133.68H123.79Zm-4-22.76H107v49.48h22.76V160.41h-9.9ZM133.69,97v32.74h12.86V97ZM97,119.83h32.74V107H97Zm22.84-70.34v-9.9h40.58v9.9h12.86V26.72H107V49.49Zm26.72,26.72V43.54H133.68V76.21ZM200,200H0V0H200Zm-12.86-53.44h-9.9V133.68h9.89V66.31H150.51V53.44h36.62V12.86H146.55v9.9H133.68V12.87H66.31V49.49H53.44V12.87H12.86V53.45h9.9V66.31H12.87v67.38H49.49v12.87H12.87v40.58H53.45v-9.9H66.31v9.89h67.38V150.51h12.87v36.62h40.58ZM123.79,80.17V93h49.48V70.27H160.41v9.9ZM97,66.31h32.74V53.45H97ZM119.83,103V70.27H107V103Z" />
 			</svg>
 			<span>Scan</span>
 		</div>
-		<div v-if="openQR" class="QRcontainer">
-			<h2>Tree App</h2>
-			<qrcode-stream @decode="onDecode" @init="onInit" />
-		</div>
 	</div>
 </template>
 
 <script>
-export default {
-	data() {
-		return {
-			openQR: false,
-		}
-	},
-	methods: {
-		toggleQR() {
-			console.log('toggleQR')
-			this.openQR = !this.openQR
-		},
-		onDecode(result) {
-			console.log(result)
-		},
-
-		async onInit(promise) {
-			try {
-				await promise
-			} catch (error) {
-				console.log(error.name)
-			}
-		},
-	},
-}
+export default {}
 </script>
 
 <style lang="scss">
@@ -142,13 +115,5 @@ export default {
 			height: 40px;
 		}
 	}
-}
-.QRcontainer {
-	position: fixed;
-	z-index: 1000;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
 }
 </style>

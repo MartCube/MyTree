@@ -33,7 +33,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $color3: #22adc2;
 $color2: #2bc1a6;
 $color1: #0ee3b1;
