@@ -3,7 +3,7 @@
 		<h2>Scan QRcode</h2>
 		<div class="loading">
 			<spinner v-show="!loaded" />
-			<img class="image lazyload" src="QRcode.png" alt="QRcode" @load="onLoaded" />
+			<img class="image lazyload" data-srcset="QRcode.png" alt="QRcode" @load="onLoaded" />
 		</div>
 	</div>
 </template>
