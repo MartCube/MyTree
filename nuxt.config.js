@@ -15,7 +15,7 @@ module.exports = {
 	css: ['~/assets/style.scss'],
 
 	// Plugins to load before mounting the App
-	plugins: [{ src: '@/plugins/QReader.js', mode: 'client' }],
+	plugins: [{ src: `~/plugins/lazysizes.client.js` }, { src: '@/plugins/QReader.js', mode: 'client' }],
 
 	// Nuxt.js modules
 	modules: ['@nuxtjs/pwa'], //'@nuxtjs/firebase'
@@ -47,6 +47,11 @@ module.exports = {
 	build: {
 		// You can extend webpack config here
 
-		extend(config, ctx) {},
+		extend(config, { isClient, loaders: { vue } }) {
+			if (isClient) {
+				vue.transformAssetUrls.img = ['data-src', 'src']
+				vue.transformAssetUrls.source = ['data-srcset', 'srcset']
+			}
+		},
 	},
 }
