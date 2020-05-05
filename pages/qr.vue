@@ -1,5 +1,5 @@
 <template>
-	<qrcode-stream class="QRcontainer" @decode="onDecode" @init="onInit">
+	<qrcode-stream class="QRcontainer" :track="track" @decode="onDecode" @init="onInit">
 		<div v-if="loading" class="loading-indicator">
 			<spinner />
 		</div>
@@ -16,6 +16,7 @@ export default {
 	data() {
 		return {
 			loading: false,
+			track: false,
 		}
 	},
 	computed: {
