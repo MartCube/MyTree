@@ -12,7 +12,9 @@
 				<card>Irish Coffee</card>
 			</div>
 		</div> -->
-
+		<div>
+			{{ QRscan }}
+		</div>
 		<bar />
 	</div>
 </template>
@@ -28,6 +30,11 @@ export default {
 	},
 	data() {
 		return {}
+	},
+	computed: {
+		QRscan() {
+			return this.$store.getters.QRscan
+		},
 	},
 	methods: {},
 }

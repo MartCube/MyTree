@@ -3,7 +3,6 @@
 		<div v-if="loading" class="loading-indicator">
 			<spinner />
 		</div>
-		<p>{{ result }}</p>
 	</qrcode-stream>
 </template>
 
@@ -17,12 +16,17 @@ export default {
 	data() {
 		return {
 			loading: false,
-			result: 'no results',
 		}
+	},
+	computed: {
+		QRscan() {
+			return this.$store.getters.QRscan
+		},
 	},
 	methods: {
 		onDecode(result) {
-			this.result = result
+			this.$store.dispatch('StoreQRscan', result)
+			this.$router.push('/')
 		},
 
 		async onInit(promise) {
