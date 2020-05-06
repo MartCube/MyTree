@@ -1,22 +1,31 @@
 <template>
 	<div class="container">
 		<h2>Scan QRcode</h2>
-		<div class="loading">
+		<!-- <div class="loading">
 			<spinner v-show="!loaded" />
 			<img class="image lazyload" data-srcset="/QRcode.png" alt="QRcode" @load="onLoaded" />
-		</div>
+		</div> -->
+		<vue-qrcode class="qrcode" :value="qrCodeOptions.value" :color="qrCodeOptions.color" :width="qrCodeOptions.width" :error-correction-level="qrCodeOptions.errorCorrectionLevel" />
 	</div>
 </template>
 
 <script>
-import spinner from '~/components/spinner.vue'
+// import spinner from '~/components/spinner.vue'
+import VueQrcode from 'vue-qrcode'
 
 export default {
 	components: {
-		spinner,
+		// spinner,
+		VueQrcode,
 	},
 	data: () => ({
 		loaded: false,
+		qrCodeOptions: {
+			value: 'mart cube',
+			color: { dark: '#383c41', light: '#0ee3b1' },
+			width: 500,
+			errorCorrectionLevel: 'M',
+		},
 	}),
 	methods: {
 		onLoaded() {
@@ -53,5 +62,10 @@ $width: 100%;
 			transition: all 0.6s cubic-bezier(0.45, 0, 0.55, 1);
 		}
 	}
+}
+.qrcode {
+	max-width: 500px;
+	width: 50%;
+	margin: 25px;
 }
 </style>
