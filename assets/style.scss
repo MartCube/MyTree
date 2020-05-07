@@ -1,3 +1,6 @@
+@import '~/assets/fonts.scss';
+
+
 * {
 	margin: 0;
 	padding: 0;
@@ -7,16 +10,8 @@
 	display: none;
 }
 
-@font-face {
-	font-family: 'config';
-	src: url('fonts/config.woff2') format('woff2');
-}
-
-@font-face {
-	font-family: 'config_bold';
-	src: url('fonts/config_bold.woff2') format('woff2');
-}
-
+$primary: #0ee3b1;
+$secondary: #2bc1a6;
 $text:#d2d9db;
 $bg:#383c41;
 
@@ -45,14 +40,18 @@ body{
 // ##### auth Transition #####
 
 .fade-enter-active{
-	transition: opacity .3s ease ;
+	transition: opacity 1s ease ;
+	transform: translateX(100%);
+
 	
 }
 .fade-leave-active {
-	transition: opacity .3s ease;
+	transition: opacity 1s ease;
+	// transform: translateX(100%);
 }
 .fade-enter, .fade-leave-to{
 	opacity: 0;
+
 }
 
 // ##### page Transition #####
@@ -62,4 +61,15 @@ body{
 }
 .page-enter, .page-leave-active {
 	opacity: 0
+}
+
+.slide-leave-active,
+.slide-enter-active {
+  transition: 0.2s;
+}
+.slide-enter {
+  transform: translate(100%, 0);
+}
+.slide-leave-to {
+  transform: translate(-100%, 0);
 }

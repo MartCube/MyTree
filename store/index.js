@@ -1,10 +1,12 @@
 export const state = () => ({
 	QRscan: 'no scan',
+	user: null,
 })
 
 // Functions that return back data contained in the state.
 export const getters = {
 	QRscan: (state) => state.QRscan,
+	user: (state) => state.user,
 }
 
 // Functions that directly mutate the state.
