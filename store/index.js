@@ -54,9 +54,9 @@ export const actions = {
 					})
 
 				if (state.isAuth) {
+					var user // create user coresponding if he is seller or not
 					if (userPayload.isSeller) {
-						// create user coresponding if he is seller or not
-						const user = {
+						user = {
 							email: userPayload.email,
 							isSeller: userPayload.isSeller,
 							userScansCounter: 0,
@@ -64,7 +64,7 @@ export const actions = {
 							scanList: [],
 						}
 					} else {
-						const user = {
+						user = {
 							email: userPayload.email,
 							isSeller: userPayload.isSeller,
 							userScansCounter: 0,

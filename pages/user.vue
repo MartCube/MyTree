@@ -49,7 +49,6 @@ export default {
 		userSignOut() {
 			this.$fireAuth.signOut()
 			this.$store.commit('setAuth', false)
-			this.$store.commit('setUser', null)
 			this.$router.push('/')
 		},
 	},
