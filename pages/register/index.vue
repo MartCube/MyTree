@@ -18,9 +18,8 @@
 			<ValidationObserver v-show="showSignUp" ref="signup" tag="form" class="signup" @submit.prevent="Submit">
 				<inputItem name="Email" :rules="'email|required'" @getValue="getEmail" />
 				<inputItem name="Password" :rules="'min:8|required'" type="password" @getValue="getPass" />
-
 				<checkbox name="Register as a Coffee shop owner." @getValue="getSeller" />
-
+				<span v-if="authError !== ''" class="authError">{{ authError }} <i class="icon icon-attention"></i></span>
 				<input type="submit" class="submit" value="Create Account" />
 			</ValidationObserver>
 		</div>
@@ -51,11 +50,17 @@ export default {
 	data: () => ({
 		showSignUp: false,
 		form: {
+			action: 'signUp',
 			email: '',
 			password: '',
 			isSeller: false,
 		},
 	}),
+	computed: {
+		authError() {
+			return this.$store.getters.authError
+		},
+	},
 	methods: {
 		getEmail(value) {
 			this.form.email = value
@@ -75,7 +80,8 @@ export default {
 			if (!isValid) {
 				return
 			}
-			console.log(this.form)
+
+			await this.$store.dispatch('authenticateUser', this.form)
 		},
 	},
 }
@@ -133,6 +139,17 @@ $text: #d2d9db;
 			text-align: center;
 			margin: 10px 0;
 		}
+	}
+	.authError {
+		width: 100%;
+		align-self: center;
+		color: #ff1461;
+		background-color: rgba(255, 255, 255, 0.9);
+		border-radius: 5px;
+		margin-top: 15px;
+		padding: 5px;
+
+		text-align: center;
 	}
 	.signup {
 		opacity: 0;

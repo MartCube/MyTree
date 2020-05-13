@@ -1,6 +1,6 @@
 <template>
 	<div class="bar">
-		<div class="menu" @click="$router.push('login')">
+		<div class="menu" @click="$router.push('user')">
 			<div class="burger-button">
 				<div class="wrapper">
 					<span></span>
@@ -10,7 +10,7 @@
 			</div>
 			<span>Menu</span>
 		</div>
-		<div class="map" @click="$router.push('seller')">
+		<div class="map" @click="$router.push('/')">
 			<svg viewBox="0 0 200 200">
 				<path class="cls-1" d="M.08,198.37A1.2,1.2,0,0,0,1.2,200H52.66l5.93-38.39H14Z" />
 				<path class="cls-1" d="M28.24,124.15,19.08,148.3H60.64l3.86-24.93H29.37A1.21,1.21,0,0,0,28.24,124.15Z" />

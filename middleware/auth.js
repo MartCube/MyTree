@@ -1,3 +1,3 @@
 export default function ({ store, redirect }) {
-	if (store.getters.user == null) return redirect('/login')
+	if (store.getters.isAuth == false) return redirect('/login')
 }

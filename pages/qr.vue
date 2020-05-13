@@ -10,6 +10,7 @@
 import spinner from '~/components/spinner.vue'
 
 export default {
+	middleware: 'auth',
 	components: {
 		spinner,
 	},

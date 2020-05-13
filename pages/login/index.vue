@@ -17,7 +17,8 @@
 			<ValidationObserver v-show="showSignIn" ref="signin" tag="form" class="signin" @submit.prevent="Submit">
 				<inputItem name="Email" :rules="'email|required'" @getValue="getEmail" />
 				<inputItem name="Password" :rules="'min:8|required'" type="password" @getValue="getPass" />
-				<input type="submit" class="submit" value="Create Account" />
+				<span v-if="authError !== ''" class="authError">{{ authError }} <i class="icon icon-attention"></i></span>
+				<input type="submit" class="submit" value="Sign In" />
 				<div class="links">
 					<n-link to="/register">Don't have an account ? </n-link>
 					<n-link to="/login">Forgot password ? </n-link>
@@ -49,10 +50,16 @@ export default {
 	data: () => ({
 		showSignIn: false,
 		form: {
+			action: 'signIn',
 			email: '',
 			password: '',
 		},
 	}),
+	computed: {
+		authError() {
+			return this.$store.getters.authError
+		},
+	},
 	methods: {
 		getEmail(value) {
 			this.form.email = value
@@ -66,10 +73,8 @@ export default {
 		},
 		async Submit() {
 			const isValid = await this.$refs.signin.validate()
-			if (!isValid) {
-				return
-			}
-			console.log(this.form)
+			if (!isValid) return
+			await this.$store.dispatch('authenticateUser', this.form)
 		},
 	},
 }
@@ -117,12 +122,10 @@ $text: #d2d9db;
 			cursor: pointer;
 			user-select: none;
 			text-decoration: none;
-
 			border: 2px solid #0ee3b1;
-
 			border-radius: 25px;
 			padding: 10px 20px;
-			margin: 10px 0;
+			margin-top: 15px;
 
 			background-color: transparent;
 			color: #d2d9db;
@@ -142,6 +145,17 @@ $text: #d2d9db;
 				background-color: #0ee3b1;
 				color: #383c41;
 			}
+		}
+		.authError {
+			width: 100%;
+			align-self: center;
+			color: #ff1461;
+			background-color: rgba(255, 255, 255, 0.9);
+			border-radius: 5px;
+			margin-top: 15px;
+			padding: 5px;
+
+			text-align: center;
 		}
 		.links {
 			display: flex;

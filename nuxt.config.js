@@ -18,23 +18,24 @@ module.exports = {
 	plugins: [{ src: `@/plugins/lazysizes.client.js` }, { src: '@/plugins/qrReader.js', mode: 'client' }, { src: '@/plugins/qrGenerator.js' }, { src: '@/plugins/vee-validate.js' }],
 
 	// Nuxt.js modules
-	modules: ['@nuxtjs/pwa'], //'@nuxtjs/firebase'
+	modules: ['@nuxtjs/pwa', '@nuxtjs/firebase'],
 
-	// firebase: {
-	// 	config: {
-	// 		apiKey: 'AIzaSyBneDIF1zbDHeEizyH_2WZTg8NRD8xWbvY',
-	// 		authDomain: 'my-tree-app.firebaseapp.com',
-	// 		databaseURL: 'https://my-tree-app.firebaseio.com',
-	// 		projectId: 'my-tree-app',
-	// 		storageBucket: 'my-tree-app.appspot.com',
-	// 		messagingSenderId: '168638748208',
-	// 		appId: '1:168638748208:web:081771b6e6b37d2a7bfff5',
-	// 		measurementId: 'G-E0EQY206SS',
-	// 	},
-	// 	services: {
-	// 		firebase: true,
-	// 	},
-	// },
+	firebase: {
+		config: {
+			apiKey: 'AIzaSyBneDIF1zbDHeEizyH_2WZTg8NRD8xWbvY',
+			authDomain: 'my-tree-app.firebaseapp.com',
+			databaseURL: 'https://my-tree-app.firebaseio.com',
+			projectId: 'my-tree-app',
+			storageBucket: 'my-tree-app.appspot.com',
+			messagingSenderId: '168638748208',
+			appId: '1:168638748208:web:081771b6e6b37d2a7bfff5',
+			measurementId: 'G-E0EQY206SS',
+		},
+		services: {
+			firestore: true,
+			auth: true,
+		},
+	},
 
 	pwa: {
 		manifest: {
