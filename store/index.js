@@ -1,3 +1,5 @@
+import { auth } from 'firebase'
+
 export const state = () => ({
 	QRscan: 'no scan',
 	authError: '',
@@ -17,7 +19,7 @@ export const getters = {
 export const mutations = {
 	async setQRscan(state, result) {
 		state.QRscan = result
-		state.user.scans++
+		state.user.userScansCounter++
 	},
 	setUser(state, user) {
 		state.user = user
@@ -33,15 +35,35 @@ export const mutations = {
 // Functions that call mutations on the state. They can call multiple mutations, can call other actions, and they support asynchronous operations.
 export const actions = {
 	async StoreQRscan({ commit, state }, result) {
-		commit('setQRscan', result)
-		const user = state.user
-		//	update firabase and store
-		await this.$fireStore.collection('users').doc(user.email).set(user)
-		this.$router.push('/')
-		// update seller firebase
-		// make a trigger onUpdate
+		//	update store
+		await commit('setQRscan', result)
+
+		//	update firabase
+		var updCounter = state.user.userScansCounter
+		await this.$fireStore.collection('users').doc(state.user.email).update({
+			userScansCounter: updCounter,
+		})
+		// update seller db (seller email is stored in result)
+		// make a trigger function onUpdate
+		// this.$router.push('/')
 	},
 	async authenticateUser({ commit, state }, userPayload) {
+		var user // create user
+		if (userPayload.isSeller) {
+			user = {
+				email: userPayload.email,
+				isSeller: userPayload.isSeller,
+				userScansCounter: 0,
+				sellerScansCounter: 0,
+				scanList: [],
+			}
+		} else {
+			user = {
+				email: userPayload.email,
+				isSeller: userPayload.isSeller,
+				userScansCounter: 0,
+			}
+		}
 		try {
 			if (userPayload.action == 'signUp') {
 				await this.$fireAuth
@@ -49,50 +71,42 @@ export const actions = {
 					.then((cred) => {
 						if (cred != null) commit('setAuth', true)
 					})
+					.then(async () => {
+						if (state.isAuth) {
+							//	create new user in db
+							await this.$fireStore.collection('users').doc(userPayload.email).set(user)
+						}
+					})
+					.then(() => {
+						//	update store
+						commit('setUser', user)
+						this.$router.push('/')
+					})
 					.catch(function (error) {
 						if (error.code === 'auth/email-already-in-use') commit('setError', 'Email already in use')
 					})
-
-				if (state.isAuth) {
-					var user // create user coresponding if he is seller or not
-					if (userPayload.isSeller) {
-						user = {
-							email: userPayload.email,
-							isSeller: userPayload.isSeller,
-							userScansCounter: 0,
-							sellerScansCounter: 0,
-							scanList: [],
-						}
-					} else {
-						user = {
-							email: userPayload.email,
-							isSeller: userPayload.isSeller,
-							userScansCounter: 0,
-						}
-					}
-					//	update firabase and store
-					await this.$fireStore.collection('users').doc(user.email).set(user)
-					commit('setUser', user)
-					this.$router.push('/')
-				}
 			} else if (userPayload.action == 'signIn') {
 				await this.$fireAuth
 					.signInWithEmailAndPassword(userPayload.email, userPayload.password)
 					.then((cred) => {
 						if (cred != null) commit('setAuth', true)
 					})
+					.then(async () => {
+						if (state.isAuth) {
+							//	get user from db
+							var ref = this.$fireStore.collection('users').doc(userPayload.email)
+							user = await ref.get()
+						}
+					})
+					.then(() => {
+						//	update store
+						commit('setUser', user.data())
+						this.$router.push('/')
+					})
 					.catch(function (error) {
 						if (error.code === 'auth/user-not-found') commit('setError', 'User not found')
 						if (error.code === 'auth/wrong-password') commit('setError', 'Wrong password')
 					})
-
-				if (state.isAuth) {
-					//	get user from  firabase and update store
-					const loginRef = this.$fireStore.collection('users').doc(userPayload.email)
-					const user = await loginRef.get()
-					commit('setUser', user.data())
-					this.$router.push('/')
-				}
 			}
 
 			// this.$fireAuth.onAuthStateChanged((user) => {})

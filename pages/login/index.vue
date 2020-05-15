@@ -122,6 +122,8 @@ $text: #d2d9db;
 			cursor: pointer;
 			user-select: none;
 			text-decoration: none;
+			-webkit-tap-highlight-color: transparent;
+
 			border: 2px solid #0ee3b1;
 			border-radius: 25px;
 			padding: 10px 20px;

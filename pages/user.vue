@@ -12,6 +12,9 @@
 			<p><i class="icon icon-user" />{{ user.email }}</p>
 			<p><i class="icon icon-qrcode" />scans {{ user.userScansCounter }}</p>
 		</div>
+		<div class="btn" @click="scan">
+			<span>fake scan</span>
+		</div>
 
 		<span v-if="user.isSeller">Custom generated QRcode</span>
 		<vue-qrcode v-if="user.isSeller" class="qrcode" :value="user.email" :color="qrCodeOptions.color" :width="qrCodeOptions.width" :error-correction-level="qrCodeOptions.errorCorrectionLevel" />
@@ -51,6 +54,9 @@ export default {
 			this.$store.commit('setAuth', false)
 			this.$router.push('/')
 		},
+		scan() {
+			this.$store.dispatch('StoreQRscan', 'mart')
+		},
 	},
 }
 </script>
@@ -88,13 +94,18 @@ export default {
 
 .logout {
 	align-self: flex-end;
-
 	user-select: none;
 	margin: 20px;
 	padding: 10px 20px;
 	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 1);
 
 	transition: all 0.2s cubic-bezier(0.31, -0.105, 0.43, 1.59);
+}
+.btn {
+	user-select: none;
+	margin: 20px;
+	padding: 10px 20px;
+	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 1);
 }
 .userInfo {
 	margin: 20px 0;

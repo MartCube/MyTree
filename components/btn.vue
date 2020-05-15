@@ -24,6 +24,7 @@ export default {
 	cursor: pointer;
 	user-select: none;
 	text-decoration: none;
+	-webkit-tap-highlight-color: transparent;
 
 	border: 2px solid #0ee3b1;
 
@@ -35,7 +36,10 @@ export default {
 	font-size: 1.2em;
 	text-align: center;
 
-	transition: all 0.2s ease;
+	transition: all 0.3s ease;
+	&:hover {
+		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+	}
 	&:active {
 		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
 	}
