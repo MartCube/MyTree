@@ -1,9 +1,6 @@
-import { auth } from 'firebase'
-
 export const state = () => ({
 	QRscan: 'no scan',
-	authError: '',
-	isAuth: false,
+	authError: null,
 	user: null,
 })
 
@@ -47,7 +44,7 @@ export const actions = {
 		// make a trigger function onUpdate
 		// this.$router.push('/')
 	},
-	async authenticateUser({ commit, state }, userPayload) {
+	async authenticateUser({ commit }, userPayload) {
 		var user // create user
 		if (userPayload.isSeller) {
 			user = {
@@ -68,19 +65,14 @@ export const actions = {
 			if (userPayload.action == 'signUp') {
 				await this.$fireAuth
 					.createUserWithEmailAndPassword(userPayload.email, userPayload.password)
-					.then((cred) => {
-						if (cred != null) commit('setAuth', true)
-					})
-					.then(async () => {
-						if (state.isAuth) {
+					.then(async (cred) => {
+						if (cred != null) {
 							//	create new user in db
 							await this.$fireStore.collection('users').doc(userPayload.email).set(user)
+							//	update store
+							commit('setUser', user)
+							this.$router.push('/')
 						}
-					})
-					.then(() => {
-						//	update store
-						commit('setUser', user)
-						this.$router.push('/')
 					})
 					.catch(function (error) {
 						if (error.code === 'auth/email-already-in-use') commit('setError', 'Email already in use')
@@ -88,28 +80,21 @@ export const actions = {
 			} else if (userPayload.action == 'signIn') {
 				await this.$fireAuth
 					.signInWithEmailAndPassword(userPayload.email, userPayload.password)
-					.then((cred) => {
-						if (cred != null) commit('setAuth', true)
-					})
-					.then(async () => {
-						if (state.isAuth) {
+					.then(async (cred) => {
+						if (cred != null) {
 							//	get user from db
 							var ref = this.$fireStore.collection('users').doc(userPayload.email)
 							user = await ref.get()
+							//	update store
+							commit('setUser', user.data())
+							this.$router.push('/')
 						}
-					})
-					.then(() => {
-						//	update store
-						commit('setUser', user.data())
-						this.$router.push('/')
 					})
 					.catch(function (error) {
 						if (error.code === 'auth/user-not-found') commit('setError', 'User not found')
 						if (error.code === 'auth/wrong-password') commit('setError', 'Wrong password')
 					})
 			}
-
-			// this.$fireAuth.onAuthStateChanged((user) => {})
 		} catch (err) {
 			console.error(err)
 		}

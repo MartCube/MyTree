@@ -17,7 +17,7 @@
 			<ValidationObserver v-show="showSignIn" ref="signin" tag="form" class="signin" @submit.prevent="Submit">
 				<inputItem name="Email" :rules="'email|required'" @getValue="getEmail" />
 				<inputItem name="Password" :rules="'min:8|required'" type="password" @getValue="getPass" />
-				<span v-if="authError !== ''" class="authError">{{ authError }} <i class="icon icon-attention"></i></span>
+				<span v-if="authError !== null" class="authError">{{ authError }} <i class="icon icon-attention"></i></span>
 				<input type="submit" class="submit" value="Sign In" />
 				<div class="links">
 					<n-link to="/register">Don't have an account ? </n-link>
@@ -59,6 +59,9 @@ export default {
 		authError() {
 			return this.$store.getters.authError
 		},
+	},
+	beforeDestroy: function () {
+		this.$store.commit('setError', null)
 	},
 	methods: {
 		getEmail(value) {
