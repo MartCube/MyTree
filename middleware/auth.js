@@ -1,5 +1,5 @@
-export default function ({ app, store, redirect }) {
-	app.$fireAuth.onAuthStateChanged(async (user) => {
+export default async function ({ app, store, redirect }) {
+	await app.$fireAuth.onAuthStateChanged(async (user) => {
 		if (user) {
 			// on refresh we lose store data so we get again
 			if (store.state.user === null) {
