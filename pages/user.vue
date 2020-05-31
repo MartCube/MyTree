@@ -51,7 +51,8 @@ export default {
 		},
 		userSignOut() {
 			this.$fireAuth.signOut()
-			this.$router.push('/')
+			this.$store.commit('setAuth', false)
+			this.$router.push('/login')
 		},
 		scan() {
 			this.$store.dispatch('StoreQRscan', 'mart')

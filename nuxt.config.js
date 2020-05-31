@@ -15,7 +15,7 @@ module.exports = {
 	css: ['~/assets/style.scss'],
 
 	// Plugins to load before mounting the App
-	plugins: [{ src: `@/plugins/lazysizes.client.js` }, { src: '@/plugins/qrReader.js', mode: 'client' }, { src: '@/plugins/qrGenerator.js' }, { src: '@/plugins/vee-validate.js' }],
+	plugins: [{ src: `@/plugins/lazysizes.client.js` }, { src: '@/plugins/qrReader.js', mode: 'client' }, { src: '@/plugins/qrGenerator.js' }, { src: '@/plugins/vee-validate.js' }, { src: '@/plugins/fireauth.js' }],
 
 	// Nuxt.js modules
 	modules: ['@nuxtjs/pwa', '@nuxtjs/firebase'],

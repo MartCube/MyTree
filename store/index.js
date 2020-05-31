@@ -1,6 +1,7 @@
 export const state = () => ({
 	QRscan: 'no scan',
 	authError: null,
+	isAuth: false,
 	user: null,
 })
 
@@ -87,6 +88,7 @@ export const actions = {
 							user = await ref.get()
 							//	update store
 							commit('setUser', user.data())
+							commit('setAuth', true)
 							this.$router.push('/')
 						}
 					})
@@ -98,5 +100,15 @@ export const actions = {
 		} catch (err) {
 			console.error(err)
 		}
+	},
+	async setUser({ commit }, userPayload) {
+		commit('setAuth', true)
+
+		//	get user from db
+		var ref = this.$fireStore.collection('users').doc(userPayload)
+		var user = await ref.get()
+
+		//	update store
+		commit('setUser', user.data())
 	},
 }
