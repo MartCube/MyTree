@@ -5,26 +5,26 @@ export function menuAnim(top, bot, menuActive) {
 		anime({
 			targets: top,
 			translateX: 200,
-			easing: 'easeInOutSine',
+			easing: 'easeInOutQuart',
 			duration: 250,
 		})
 		anime({
 			targets: bot,
 			translateX: -200,
-			easing: 'easeInOutSine',
+			easing: 'easeInOutQuart',
 			duration: 250,
 		})
 	} else {
 		anime({
 			targets: top,
 			translateX: 0,
-			easing: 'easeInOutSine',
+			easing: 'easeInOutQuart',
 			duration: 250,
 		})
 		anime({
 			targets: bot,
 			translateX: 0,
-			easing: 'easeInOutSine',
+			easing: 'easeInOutQuart',
 			duration: 250,
 		})
 	}

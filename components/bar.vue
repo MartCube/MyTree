@@ -119,13 +119,14 @@ $secondary: #00155f;
 		svg {
 			.primary,
 			.mid {
+				transition: fill 0.25s cubic-bezier(0.37, 0, 0.63, 1);
 				fill: #4c5157;
 			}
 			.secondary,
 			.top,
 			.bot {
-				fill: #5f656d;
-				opacity: 0.75;
+				transition: fill 0.25s cubic-bezier(0.37, 0, 0.63, 1);
+				fill: #9298a0;
 			}
 
 			.triangles .primary {
@@ -137,7 +138,6 @@ $secondary: #00155f;
 			width: 50px;
 			height: 50px;
 		}
-
 		&.nuxt-link-exact-active {
 			.primary,
 			.mid {
