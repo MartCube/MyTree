@@ -10,14 +10,14 @@
 	display: none;
 }
 
-$primary: #0ee3b1;
-$secondary: #2bc1a6;
-$text:#d2d9db;
-$bg:#383c41;
+$primary: #9eef6a;
+$secondary: #0ee3b1;
+$text:#383c41;
+$bg:#fff;
 
 body{
 	background-color: $bg;
-	color: #d2d9db;
+	color: $text;
 	font-family: 'config';
 	
 }

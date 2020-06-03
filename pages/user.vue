@@ -97,7 +97,7 @@ export default {
 	user-select: none;
 	margin: 20px;
 	padding: 10px 20px;
-	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 1);
+	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
 
 	transition: all 0.2s cubic-bezier(0.31, -0.105, 0.43, 1.59);
 }
@@ -105,7 +105,7 @@ export default {
 	user-select: none;
 	margin: 20px;
 	padding: 10px 20px;
-	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 1);
+	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
 }
 .userInfo {
 	margin: 20px 0;

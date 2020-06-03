@@ -1,10 +1,10 @@
 <template>
 	<div class="container">
-		<div class="waves">
+		<!-- <div class="waves">
 			<svg width="100vw" height="50vh" viewBox="0 0 1000 1000" preserveAspectRatio="none">
 				<path fill="#0ee3b1" d="M.5,1000.5V.5h1000v464s0,267-224,265c-153-1.37-552,3-552,3C.5,732.5.5,1000.5.5,1000.5Z" />
 			</svg>
-		</div>
+		</div> -->
 		<!-- <div class="products">
 			<h2>Promotion</h2>
 			<div class="grid">
@@ -12,21 +12,19 @@
 				<card>Irish Coffee</card>
 			</div>
 		</div> -->
-		<div>
+		<div class="QRscan">
 			{{ QRscan }}
 		</div>
-		<bar />
 	</div>
 </template>
 
 <script>
-import bar from '~/components/bar.vue'
 import card from '~/components/card.vue'
 
 export default {
 	middleware: 'auth',
 	components: {
-		bar,
+		// bar,
 		// card,
 	},
 	data() {
@@ -42,9 +40,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color3: #22adc2;
-$color2: #2bc1a6;
-$color1: #0ee3b1;
+$bg: rgba(210, 217, 219, 1);
+$primary: #9eef6a;
+$secondary: #0ee3b1;
 
 .container {
 	justify-content: center;
@@ -66,5 +64,6 @@ $color1: #0ee3b1;
 	height: 50vh;
 	position: absolute;
 	top: 0;
+	z-index: -1;
 }
 </style>
