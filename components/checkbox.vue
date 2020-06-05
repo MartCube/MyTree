@@ -35,14 +35,15 @@ export default {
 <style lang="scss" scoped>
 .checkbox {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	align-content: center;
+	width: 100%;
+	padding: 0 10px;
 	span {
 		font-size: 0.9em;
 
 		margin: 20px;
-		margin-right: 0;
 
 		user-select: none;
 	}

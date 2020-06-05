@@ -44,13 +44,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$bg: #4c5157;
 $primary: #0ee3b1;
 $secondary: #11998e;
-$white: #fff;
-$text: #d2d9db;
+$text: #fff;
+$error: #ff1461;
+
 .form__group {
 	position: relative;
 	padding: 25px 0 0;
+	margin: 10px 0;
 	width: 100%;
 
 	.error {
@@ -60,8 +63,11 @@ $text: #d2d9db;
 		margin: 5px 0;
 		font-size: 0.8em;
 		display: none;
-		color: #ff1461;
+		color: $text;
 
+		i {
+			color: $error;
+		}
 		&.invalid {
 			display: flex;
 		}
@@ -75,7 +81,7 @@ $text: #d2d9db;
 	border-bottom: 2px solid $text;
 	outline: 0;
 	font-size: 1.2rem;
-	color: $white;
+	color: $text;
 	padding: 7px 0;
 	background: transparent;
 	transition: border-color 0.2s;

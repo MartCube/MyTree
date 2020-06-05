@@ -5,3 +5,9 @@
 		<p>find the nearest around you</p>
 	</div>
 </template>
+
+<script>
+export default {
+	middleware: 'auth',
+}
+</script>

@@ -39,31 +39,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-$bg: rgba(210, 217, 219, 1);
-$primary: #9eef6a;
-$secondary: #0ee3b1;
-
-.container {
-	justify-content: center;
-}
-
-.products {
-	width: 100%;
-	margin-bottom: 100px;
-	h2 {
-		margin: 0 20px;
-	}
-	.grid {
-		display: flex;
-	}
-}
-
-.waves {
-	width: 100%;
-	height: 50vh;
-	position: absolute;
-	top: 0;
-	z-index: -1;
-}
-</style>
+<style lang="scss" scoped></style>

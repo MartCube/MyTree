@@ -10,16 +10,17 @@
 	display: none;
 }
 
-$primary: #9eef6a;
-$secondary: #0ee3b1;
-$text:#383c41;
-$bg:#fff;
+
+$primary: #0ee3b1;
+$secondary: #00155f;
+$text:#fff;
+$bg: #1d2228;
+
 
 body{
-	background-color: $bg;
 	color: $text;
+	background: $bg;
 	font-family: 'config';
-	
 }
 
 .container{
@@ -37,22 +38,7 @@ body{
 
 
 
-// ##### auth Transition #####
 
-.fade-enter-active{
-	transition: opacity 1s ease ;
-	transform: translateX(100%);
-
-	
-}
-.fade-leave-active {
-	transition: opacity 1s ease;
-	// transform: translateX(100%);
-}
-.fade-enter, .fade-leave-to{
-	opacity: 0;
-
-}
 
 // ##### page Transition #####
 
@@ -64,14 +50,14 @@ body{
 }
 
 
+// ##### bar Transition #####
+.bar-leave-active{
+	transition: opacity 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+.bar-enter-active {
+	transition: opacity 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) 1s;
+}
+.bar-enter, .bar-leave-active {
+	opacity: 0
+}
 
-.slide-leave-active,
-.slide-enter-active {
-  transition: 0.2s;
-}
-.slide-enter {
-  transform: translate(100%, 0);
-}
-.slide-leave-to {
-  transform: translate(-100%, 0);
-}

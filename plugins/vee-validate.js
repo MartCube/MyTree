@@ -3,15 +3,15 @@ import { required, email, min } from 'vee-validate/dist/rules'
 
 extend('required', {
 	...required,
-	message: ' Field required',
+	message: ' empty field',
 })
 
 extend('email', {
 	...email,
-	message: 'Email not valid', // the error message
+	message: 'email not valid', // the error message
 })
 
 extend('min', {
 	...min,
-	message: 'Min 8 characters', // the error message
+	message: 'min 8 char', // the error message
 })

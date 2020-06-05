@@ -20,19 +20,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary: #0ee3b1;
+$secondary: #00155f;
+$text: #fff;
+$bg: #4c5157;
+
 .btn {
 	cursor: pointer;
 	user-select: none;
 	text-decoration: none;
 	-webkit-tap-highlight-color: transparent;
 
-	border: 2px solid #0ee3b1;
+	border: 2px solid #fff;
 
 	border-radius: 25px;
 	padding: 10px 20px;
 	margin: 10px 0;
 
-	color: #d2d9db;
+	color: $text;
 	font-size: 1.2em;
 	text-align: center;
 
@@ -45,8 +50,8 @@ export default {
 	}
 
 	&.fill {
-		background-color: #0ee3b1;
-		color: #383c41;
+		background-color: $primary;
+		border: 2px solid transparent;
 	}
 }
 </style>

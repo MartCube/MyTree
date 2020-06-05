@@ -58,7 +58,7 @@ export function QRcodeAnim(line) {
 		translateY: '100%',
 		easing: 'easeInOutQuad',
 		direction: 'alternate',
-		duration: 500,
+		duration: 400,
 	})
 }
 
