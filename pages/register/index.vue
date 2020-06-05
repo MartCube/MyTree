@@ -2,14 +2,14 @@
 	<div class="container">
 		<img class="bg lazyload" :data-srcset="'/login/bg.jpg'" />
 
-		<svg class="logo" viewBox="0 0 512 512">
-			<g class="triangles">
-				<path class="secondary" d="M224.28,180.86,68.63,418.4c-16.53,25.22,1.57,58.71,31.73,58.71H411.64c30.16,0,48.26-33.49,31.73-58.71L287.72,180.86A37.92,37.92,0,0,0,224.28,180.86Z" />
-				<path class="primary" d="M224.05,66.26,70,307.21c-16.14,25.24,2,58.36,32,58.36h308.1c30,0,48.1-33.12,32-58.36L288,66.26A37.92,37.92,0,0,0,224.05,66.26Z" />
-			</g>
-		</svg>
-		<div class="title">
-			My Tree
+		<div class="logo">
+			<svg class="logo" viewBox="0 0 512 512">
+				<g class="triangles">
+					<path class="secondary" d="M224.28,180.86,68.63,418.4c-16.53,25.22,1.57,58.71,31.73,58.71H411.64c30.16,0,48.26-33.49,31.73-58.71L287.72,180.86A37.92,37.92,0,0,0,224.28,180.86Z" />
+					<path class="primary" d="M224.05,66.26,70,307.21c-16.14,25.24,2,58.36,32,58.36h308.1c30,0,48.1-33.12,32-58.36L288,66.26A37.92,37.92,0,0,0,224.05,66.26Z" />
+				</g>
+			</svg>
+			<span class="title">My Tree</span>
 		</div>
 
 		<ValidationObserver ref="signup" tag="form" class="auth" @submit.prevent="Submit('signIn')">
@@ -85,7 +85,7 @@ $secondary: rgba(17, 153, 142, 0.75);
 $text: #fff;
 
 .container {
-	justify-content: flex-start;
+	justify-content: space-between;
 	color: $text;
 }
 
@@ -108,33 +108,40 @@ $text: #fff;
 }
 
 .logo {
-	.primary {
-		transition: fill 0.25s cubic-bezier(0.37, 0, 0.63, 1);
-		fill: $primary;
-		opacity: 0.6;
-	}
-	.secondary {
-		transition: fill 0.25s cubic-bezier(0.37, 0, 0.63, 1);
-		fill: $secondary;
-		opacity: 0.8;
-	}
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
 
-	width: 30%;
-	height: auto;
-	margin: 5% 0;
-}
-
-.title {
-	font-size: 2.5em;
-	margin-bottom: 30px;
+	width: 100%;
+	.title {
+		font-size: 2.5em;
+	}
+	svg {
+		width: 30%;
+		height: auto;
+		margin: 5% 0;
+		.primary {
+			transition: fill 0.25s cubic-bezier(0.37, 0, 0.63, 1);
+			fill: $primary;
+			opacity: 0.6;
+		}
+		.secondary {
+			transition: fill 0.25s cubic-bezier(0.37, 0, 0.63, 1);
+			fill: $secondary;
+			opacity: 0.8;
+		}
+	}
 }
 
 .auth {
 	width: 80%;
+	margin: 10% 0;
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+	justify-content: flex-start;
+	align-items: flex-start;
 	align-content: center;
 	flex-wrap: wrap;
 	color: text;
@@ -164,6 +171,20 @@ $text: #fff;
 		}
 	}
 
+	.SMedias {
+		width: 50%;
+		margin-top: 25px;
+
+		display: flex;
+		justify-content: flex-end;
+		.media {
+			padding: 10px;
+			border-radius: 50%;
+
+			color: $primary;
+			font-size: 1.4em;
+		}
+	}
 	.authError {
 		width: 100%;
 		align-self: center;
@@ -177,13 +198,11 @@ $text: #fff;
 }
 
 .links {
+	width: 80%;
+	margin: 5% 0;
 	display: flex;
 	flex-direction: column;
-	position: absolute;
-	left: 10%;
-	bottom: 5%;
 	color: $text;
-
 	a {
 		width: fit-content;
 		margin: 5px 0;
