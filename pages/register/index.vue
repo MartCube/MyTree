@@ -79,7 +79,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$bg: #4c5157;
+$bg: #1d2228;
 $primary: #0ee3b1;
 $secondary: rgba(17, 153, 142, 0.75);
 $text: #fff;
@@ -103,7 +103,7 @@ $text: #fff;
 	}
 	&.lazyloaded {
 		opacity: 1;
-		transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+		transition: all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
 	}
 }
 

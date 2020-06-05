@@ -62,9 +62,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary: #0ee3b1;
+$secondary: rgba(17, 153, 142, 1);
+$text: #1d2228;
+$bg: #fff;
+
 .container {
 	justify-content: flex-start;
 }
+
 .loading {
 	max-width: 75%;
 	width: 100%;

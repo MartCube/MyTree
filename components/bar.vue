@@ -93,7 +93,7 @@ export default {
 <style lang="scss">
 $bg: #4c5157;
 $primary: #0ee3b1;
-$secondary: #1d2228;
+$secondary: rgba(17, 153, 142, 1);
 
 .bar {
 	width: 100%;

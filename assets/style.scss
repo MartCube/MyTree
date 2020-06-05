@@ -12,9 +12,9 @@
 
 
 $primary: #0ee3b1;
-$secondary: #00155f;
-$text:#fff;
-$bg: #1d2228;
+$secondary: #11998e;
+$bg:#1d2228;
+$text: white;
 
 
 body{
@@ -52,10 +52,10 @@ body{
 
 // ##### bar Transition #####
 .bar-leave-active{
-	transition: opacity 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+	transition: opacity 0.25s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
 .bar-enter-active {
-	transition: opacity 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) 1s;
+	transition: opacity 0.25s cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.5s;
 }
 .bar-enter, .bar-leave-active {
 	opacity: 0
