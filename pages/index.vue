@@ -1,22 +1,6 @@
 <template>
 	<div class="container">
-		<!-- <div class="products">
-			<h2>Promotion</h2>
-			<div class="grid">
-				<card>Latte Macchiato</card>
-				<card>Irish Coffee</card>
-			</div>
-		</div> -->
-		<div class="userInfo">
-			<p><i class="icon icon-user" />{{ user.email }}</p>
-			<p><i class="icon icon-qrcode" />scans {{ user.userScansCounter }}</p>
-		</div>
-		<div class="btn" @click="scan">
-			<span>fake scan</span>
-		</div>
-		<div class="QRscan">
-			{{ QRscan }}
-		</div>
+		index page
 	</div>
 </template>
 
@@ -47,17 +31,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.userInfo {
-	margin: 20px 0;
-	p {
-		margin: 5px 0;
-	}
-}
-.btn {
-	user-select: none;
-	margin: 20px;
-	padding: 10px 20px;
-	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
-}
-</style>
+<style lang="scss" scoped></style>

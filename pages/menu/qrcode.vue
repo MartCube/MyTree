@@ -1,5 +1,10 @@
 <template>
 	<div class="container">
+		<div class="title">
+			<div class="line"></div>
+			<span>QRcode</span>
+		</div>
+
 		<h2>Your personal QRcode</h2>
 		<p>Custom generated QRcode</p>
 		<vue-qrcode v-if="user.isSeller" class="qrcode" :value="user.email" :color="qrCodeOptions.color" :width="qrCodeOptions.width" :error-correction-level="qrCodeOptions.errorCorrectionLevel" />
@@ -38,7 +43,6 @@ export default {
 	},
 	mounted() {
 		var link = document.querySelector('.qrcode')
-		console.log(link)
 		this.QRlink = link.src
 	},
 	methods: {},
@@ -46,6 +50,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary: #0ee3b1;
+$secondary: rgba(17, 153, 142, 1);
+$text: #1d2228;
+$bg: #fff;
+
+.title {
+	width: 100%;
+	height: 70px;
+	margin-bottom: 10%;
+	box-shadow: 0px 0px 25px -18px rgba(76, 81, 87, 1);
+
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+
+	span {
+		text-decoration: none;
+		font-size: 1.5em;
+		color: $text;
+		margin: 0 5%;
+	}
+
+	.line {
+		width: 5%;
+		height: 100%;
+		background: $primary;
+	}
+}
+
 .qrcode {
 	max-width: 500px;
 	width: 50%;
@@ -57,7 +90,7 @@ export default {
 		path {
 			fill: #1d2228;
 		}
-		width: 1.2em;
+		width: 1em;
 		margin: 0 5px;
 	}
 }

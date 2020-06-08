@@ -1,6 +1,6 @@
 <template>
 	<a class="btn" :class="{ fill: fill }" @click="$router.push(link)">
-		<slot><h1>btn slot</h1></slot>
+		<slot>>btn slot></slot>
 	</a>
 </template>
 
