@@ -27,6 +27,9 @@ body{
 	height: 100vh;
 	overflow: hidden;
 	position: relative;
+	background: $text;
+	color: $bg;
+
 
 	display: flex;
 	flex-direction: column;

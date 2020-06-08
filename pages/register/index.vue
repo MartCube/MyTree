@@ -87,6 +87,7 @@ $text: #fff;
 .container {
 	justify-content: space-between;
 	color: $text;
+	background: none;
 }
 
 .bg {
