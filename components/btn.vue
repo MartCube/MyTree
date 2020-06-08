@@ -21,11 +21,17 @@ export default {
 
 <style lang="scss" scoped>
 $primary: #0ee3b1;
-$secondary: #00155f;
-$text: #fff;
-$bg: #4c5157;
+$secondary: #11998e;
+$bg: #0ee3b1;
+
+$text: #1d2228;
 
 .btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+
 	cursor: pointer;
 	user-select: none;
 	text-decoration: none;
@@ -40,15 +46,13 @@ $bg: #4c5157;
 	color: $text;
 	font-size: 1.2em;
 	text-align: center;
+	text-transform: uppercase;
 
 	transition: all 0.3s ease;
-	&:hover {
-		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-	}
-	&:active {
-		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-	}
 
+	&:active {
+		box-shadow: 0px 0px 15px -5px rgba(17, 153, 142, 1);
+	}
 	&.fill {
 		background-color: $primary;
 		border: 2px solid transparent;
