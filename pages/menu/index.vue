@@ -1,11 +1,11 @@
 <template>
 	<div class="container">
-		<div class="title">
+		<div class="menu_title">
 			<div class="line"></div>
 			<span>Menu</span>
 		</div>
 
-		<div class="links">
+		<div class="menu_links">
 			<nuxt-link class="item" to="/menu/account">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path d="M12 6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2m0 10c2.7 0 5.8 1.29 6 2H6c.23-.72 3.31-2 6-2m0-12C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 10c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
@@ -87,13 +87,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-$primary: #0ee3b1;
-$secondary: rgba(17, 153, 142, 1);
-$text: #1d2228;
-$bg: #fff;
+<style lang="scss">
+@import '~/assets/colors.scss';
 
-.title {
+.menu_title {
 	width: 100%;
 	height: 70px;
 	margin-bottom: 10%;
@@ -104,6 +101,7 @@ $bg: #fff;
 	align-items: center;
 
 	span {
+		user-select: none;
 		text-decoration: none;
 		font-size: 1.5em;
 		color: $text;
@@ -111,13 +109,32 @@ $bg: #fff;
 	}
 
 	.line {
-		width: 5%;
-		height: 100%;
+		width: 4px;
+		border-radius: 15px;
+		margin-left: 5%;
+		height: 50%;
 		background: $primary;
+	}
+
+	.go_back {
+		position: absolute;
+		right: 5%;
+		width: 35px;
+		height: 35px;
+		fill: $secondary_dark;
+		padding: 7px;
+		border-radius: 100%;
+
+		transition: all 0.15s cubic-bezier(0.37, 0, 0.63, 1);
+
+		&:active {
+			background: rgba(14, 227, 177, 0.2);
+			fill: $primary_dark;
+		}
 	}
 }
 
-.links {
+.menu_links {
 	width: 80%;
 
 	display: flex;

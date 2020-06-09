@@ -1,14 +1,18 @@
 <template>
 	<div class="container">
-		<div class="title">
+		<div class="menu_title">
 			<div class="line"></div>
 			<span>QRcode</span>
+			<nuxt-link to="/menu" class="go_back">
+				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M13.6,20.9L12.5,22c-0.4,0.4-1.2,0.4-1.6,0l-9.2-9.2c-0.4-0.4-0.4-1.2,0-1.6L10.9,2c0.4-0.4,1.2-0.4,1.6,0l1.1,1.1c0.4,0.4,0.4,1.2,0,1.6l-5.7,5.4h13.6c0.6,0,1.1,0.5,1.1,1.1v1.5c0,0.6-0.5,1.1-1.1,1.1H7.9l5.7,5.4C14,19.8,14,20.5,13.6,20.9L13.6,20.9z" />
+				</svg>
+			</nuxt-link>
 		</div>
 
 		<h2>Your personal QRcode</h2>
-		<p>Custom generated QRcode</p>
+		<p>Custom generated for each client.</p>
 		<vue-qrcode v-if="user.isSeller" class="qrcode" :value="user.email" :color="qrCodeOptions.color" :width="qrCodeOptions.width" :error-correction-level="qrCodeOptions.errorCorrectionLevel" />
-
 		<btn fill :href="QRlink" download>
 			download
 			<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -50,39 +54,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$primary: #0ee3b1;
-$secondary: rgba(17, 153, 142, 1);
-$text: #1d2228;
-$bg: #fff;
-
-.title {
-	width: 100%;
-	height: 70px;
-	margin-bottom: 10%;
-	box-shadow: 0px 0px 25px -18px rgba(76, 81, 87, 1);
-
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-
-	span {
-		text-decoration: none;
-		font-size: 1.5em;
-		color: $text;
-		margin: 0 5%;
-	}
-
-	.line {
-		width: 5%;
-		height: 100%;
-		background: $primary;
-	}
-}
-
 .qrcode {
 	max-width: 500px;
 	width: 50%;
-	margin: 25px;
+	margin: 15% 0;
 }
 
 .btn {
