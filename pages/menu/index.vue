@@ -119,10 +119,10 @@ export default {
 	.go_back {
 		position: absolute;
 		right: 5%;
-		width: 35px;
-		height: 35px;
+		width: 40px;
+		height: 40px;
 		fill: $secondary_dark;
-		padding: 7px;
+		padding: 10px;
 		border-radius: 100%;
 
 		transition: all 0.15s cubic-bezier(0.37, 0, 0.63, 1);
