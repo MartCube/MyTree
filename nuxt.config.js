@@ -15,7 +15,7 @@ module.exports = {
 	css: ['~/assets/style.scss'],
 
 	// Plugins to load before mounting the App
-	plugins: [{ src: `@/plugins/lazysizes.client.js` }, { src: '@/plugins/qrReader.js', mode: 'client' }, { src: '@/plugins/qrGenerator.js' }, { src: '@/plugins/vee-validate.js' }, { src: '@/plugins/fireauth.js' }],
+	plugins: [{ src: `@/plugins/x5gMap.js` }, { src: `@/plugins/lazysizes.client.js` }, { src: '@/plugins/qrReader.js', mode: 'client' }, { src: '@/plugins/qrGenerator.js' }, { src: '@/plugins/vee-validate.js' }, { src: '@/plugins/fireauth.js' }],
 
 	// Nuxt.js modules
 	modules: ['@nuxtjs/pwa', '@nuxtjs/firebase'],
@@ -47,6 +47,7 @@ module.exports = {
 	// Build configuration
 	build: {
 		// You can extend webpack config here
+		transpile: ['x5gMaps'],
 
 		extend(config, { isClient, loaders: { vue } }) {
 			if (isClient) {
