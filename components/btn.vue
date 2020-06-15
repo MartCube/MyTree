@@ -20,11 +20,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$primary: #0ee3b1;
-$secondary: #11998e;
-$bg: #0ee3b1;
-
-$text: #1d2228;
+@import '~/assets/colors.scss';
 
 .btn {
 	display: flex;
@@ -51,7 +47,7 @@ $text: #1d2228;
 	transition: all 0.3s ease;
 
 	&:active {
-		box-shadow: 0px 0px 15px -5px rgba(17, 153, 142, 1);
+		box-shadow: 0px 0px 15px -5px $secondary;
 	}
 	&.fill {
 		background-color: $primary;

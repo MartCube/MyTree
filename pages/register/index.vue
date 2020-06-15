@@ -79,14 +79,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$bg: #1d2228;
-$primary: #0ee3b1;
-$secondary: rgba(17, 153, 142, 0.75);
-$text: #fff;
+@import '~/assets/colors.scss';
 
 .container {
 	justify-content: space-between;
-	color: $text;
+	color: $bg;
 	background: none;
 }
 
@@ -154,7 +151,7 @@ $text: #fff;
 		border-radius: 25px;
 		background-color: $secondary;
 
-		color: $text;
+		color: $bg;
 		font-size: 1.2em;
 		font-family: 'config';
 		text-align: center;
@@ -203,14 +200,13 @@ $text: #fff;
 	margin: 5% 0;
 	display: flex;
 	flex-direction: column;
-	color: $text;
 	a {
 		width: fit-content;
 		margin: 5px 0;
 
 		font-size: 1.2em;
 		text-decoration: underline;
-		color: $text;
+		color: $bg;
 	}
 }
 </style>

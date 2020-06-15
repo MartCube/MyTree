@@ -6,7 +6,7 @@
 				<rect class="mid" x="83" y="235.5" width="346" height="41" rx="20.5" ry="20.5" />
 				<rect class="bot" x="256" y="360" width="173" height="41" rx="20.5" ry="20.5" />
 			</svg>
-			Menu
+			<!-- Menu -->
 		</nuxt-link>
 		<nuxt-link class="link home" to="/" @click.native="homeAnim">
 			<svg viewBox="0 0 512 512">
@@ -15,7 +15,7 @@
 					<path class="primary" d="M224.05,66.26,70,307.21c-16.14,25.24,2,58.36,32,58.36h308.1c30,0,48.1-33.12,32-58.36L288,66.26A37.92,37.92,0,0,0,224.05,66.26Z" />
 				</g>
 			</svg>
-			Home
+			<!-- Home -->
 		</nuxt-link>
 		<nuxt-link class="link map" to="/map" @click.native="mapAnim">
 			<svg viewBox="0 0 512 512">
@@ -27,7 +27,7 @@
 				<path class="secondary" d="M183,349l-20,86.91a3,3,0,0,0,2.82,4.09H334" />
 				<path class="primary" d="M215.84,265.79c7.68,12.55,15.26,23.94,21.74,33.33C248.47,314.56,256,324.6,256,324.6s6.73-8.76,16.39-22.59c7-10,15.51-22.79,24.12-36.85,3.44-5.62,6.9-11.47,10.29-17.42,17.8-31.37,33.44-66.16,33.44-91.56a84.24,84.24,0,0,0-168.48,0c0,25.4,15.64,60.24,33.44,91.56C208.71,253.92,212.3,260,215.84,265.79ZM256,121.87a34.41,34.41,0,1,1-.1,0Z" />
 			</svg>
-			Find
+			<!-- Find -->
 		</nuxt-link>
 		<nuxt-link class="link qr" to="/qr" @click.native="QRcodeAnim">
 			<svg viewBox="0 0 512 512">
@@ -56,7 +56,7 @@
 				</g>
 				<rect class="scannerLine" width="512" height="60" />
 			</svg>
-			Scan
+			<!-- Scan -->
 		</nuxt-link>
 	</div>
 </template>
@@ -145,8 +145,8 @@ export default {
 
 				opacity: 0;
 			}
-			width: 40px;
-			height: 40px;
+			width: 45px;
+			height: 45px;
 		}
 		&.nuxt-link-exact-active {
 			.primary,

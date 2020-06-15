@@ -1,36 +1,127 @@
 <template>
 	<div class="card">
-		<div class="text">
-			<h3><slot>name slot</slot></h3>
-			<span>$2.35</span>
-		</div>
-		<img src="coffee.png" alt="" />
+		<n-link to="/detail-product">
+			<div link class="image">
+				<img :src="image" alt />
+			</div>
+			<div class="info">
+				<h2>{{ title }}</h2>
+				<div class="rating">
+					<span v-for="r in rate" :key="r.id">
+						<img src="/index/star.svg" alt="" />
+					</span>
+				</div>
+				<div class="description">
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, impedit.</p>
+				</div>
+			</div>
+		</n-link>
 	</div>
 </template>
 
+<script>
+export default {
+	name: 'Card',
+	props: {
+		image: {
+			type: String,
+			required: true,
+		},
+		title: {
+			type: String,
+			required: true,
+		},
+		id: {
+			type: String,
+			required: true,
+		},
+		rate: {
+			type: Number,
+			required: true,
+		},
+	},
+	data() {
+		return {}
+	},
+	methods: {},
+}
+</script>
+
 <style lang="scss" scoped>
+@import '~/assets/colors.scss';
+
 .card {
-	min-width: 200px;
-	min-height: 100px;
-	margin: 20px;
-	padding: 0 15px;
-
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	align-content: center;
-
-	border: 2px solid #4a4d52;
-	border-left: 2px solid #0ee3b1;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 20px;
-
-	.text {
-		width: 50%;
+	width: 80vw;
+	margin: 10px 5px;
+	height: 30vw;
+	overflow: hidden;
+	a {
+		// color: #fff;
+		text-decoration: none;
+		display: flex;
+		align-items: stretch;
+		height: 100%;
 	}
-	img {
-		width: 30px;
-		margin: 0 10px;
+	.image {
+		width: 100%;
+		height: 100%;
+
+		overflow: hidden;
+		border-radius: 5px 0 0 5px;
+		position: relative;
+
+		img {
+			width: 100%;
+			height: 100%;
+
+			object-fit: cover;
+			object-position: center;
+		}
+	}
+	.info {
+		font-weight: 600;
+		font-size: 1.1rem;
+		display: flex;
+		width: 100%;
+		justify-content: flex-start;
+		flex-direction: column;
+		align-items: flex-start;
+		color: #191919;
+		padding: 5px 10px 0;
+		background: rgba(255, 255, 255, 0.32);
+		position: relative;
+		&::before {
+			content: '';
+			width: 4px;
+			height: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+			background-color: $primary;
+		}
+		h2 {
+			font-size: 1em;
+			line-height: 1;
+		}
+		.description {
+			font-weight: 400;
+			margin-top: 5px;
+			font-family: sans-serif;
+			font-size: 13px;
+			line-height: initial;
+		}
+		.rating {
+			display: flex;
+			margin: 3px 0;
+			span {
+				height: fit-content;
+				display: flex;
+			}
+			img {
+				width: 10px;
+				height: 10px;
+			}
+		}
 	}
 }
 </style>

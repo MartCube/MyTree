@@ -1,0 +1,25 @@
+@mixin d-flex($jc: center, $al: center, $w: 100%) {
+	display: flex;
+	justify-content: $jc;
+	align-items: $al;
+	width: $w;
+}
+
+@mixin title($fz: 1rem, $fw: 700) {
+	font-weight: $fw;
+	position: relative;
+	padding-left: 1rem;
+	line-height: 1.1;
+	width: 100%;
+	font-size: $fz;
+	margin-top: 1rem;
+	&::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 5px;
+		background-color: var(--green);
+	}
+}

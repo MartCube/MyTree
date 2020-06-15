@@ -3,6 +3,12 @@ export const state = () => ({
 	authError: null,
 	isAuth: false,
 	user: null,
+	shop: {
+		image: '/index/coffee_shop1.jpg',
+		title: 'Shop Title',
+		description: '',
+		rate: '0',
+	},
 })
 
 // Functions that return back data contained in the state.
@@ -11,6 +17,7 @@ export const getters = {
 	user: (state) => state.user,
 	authError: (state) => state.authError,
 	isAuth: (state) => state.isAuth,
+	shop: (state) => state.shop,
 }
 
 // Functions that directly mutate the state.
