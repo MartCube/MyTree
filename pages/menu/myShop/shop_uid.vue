@@ -2,7 +2,11 @@
 	<div class="container">
 		<div class="shop">
 			<img :src="shop.image" alt="" />
-			<p>{{ shop.title }}</p>
+
+			<input ref="fileUpload" class="fileUpload" type="file" @change="OnFileSelected" />
+			<div class="upload" @click="Upload">
+				Upload
+			</div>
 		</div>
 		<div class="menu_links">
 			<nuxt-link to="/menu/myShop" class="item go_back">
@@ -18,7 +22,9 @@
 <script>
 export default {
 	components: {},
-	data: () => ({}),
+	data: () => ({
+		file: null,
+	}),
 	computed: {
 		user() {
 			return this.$store.getters.user
@@ -27,8 +33,36 @@ export default {
 			return this.$store.getters.shop
 		},
 	},
-	mounted() {},
-	methods: {},
+	methods: {
+		async OnFileSelected(event) {
+			this.file = event.target.files[0]
+			console.log(this.file)
+
+			var storageRef = this.$fireStorage.ref()
+			console.log(storageRef)
+
+			var imageRef = storageRef.child(`shop/${this.file.name}`)
+			console.log(imageRef.location.path_)
+
+			await imageRef.put(this.file)
+
+			console.log(' Uploaded!')
+
+			storageRef
+				.child(`shop/${this.file.name}`)
+				.getDownloadURL()
+				.then(function (url) {
+					// `url` is the download URL for 'images/stars.jpg'
+					console.log(url)
+
+					// var img = document.getElementById('myimg')
+					// img.src = url
+				})
+		},
+		Upload() {
+			this.$refs.fileUpload.click()
+		},
+	},
 }
 </script>
 
@@ -42,6 +76,16 @@ export default {
 	img {
 		width: 50%;
 		margin: 10%;
+	}
+
+	.upload {
+		background: #ccc;
+		margin: 20px 0;
+		padding: 10px;
+	}
+
+	.fileUpload {
+		display: none;
 	}
 }
 </style>

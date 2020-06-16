@@ -34,6 +34,7 @@ module.exports = {
 		services: {
 			firestore: true,
 			auth: true,
+			storage: true,
 		},
 	},
 
