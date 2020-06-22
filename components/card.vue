@@ -52,7 +52,7 @@ export default {
 
 .card {
 	width: 80vw;
-	margin: 10px 5px;
+	margin: 15px 5px;
 	height: 30vw;
 	overflow: hidden;
 	a {

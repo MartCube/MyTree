@@ -9,7 +9,7 @@ module.exports = {
 	},
 
 	// Customize the progress-bar color
-	loading: { color: 'rgb(111, 255, 233)' },
+	// loading: { color: 'rgb(111, 255, 233)' },
 
 	// Global css
 	css: ['~/assets/style.scss'],

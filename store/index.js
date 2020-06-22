@@ -3,12 +3,7 @@ export const state = () => ({
 	authError: null,
 	isAuth: false,
 	user: null,
-	shop: {
-		image: '/index/coffee_shop1.jpg',
-		title: 'Shop Title',
-		description: '',
-		rate: '0',
-	},
+	shop: null,
 })
 
 // Functions that return back data contained in the state.
@@ -35,40 +30,38 @@ export const mutations = {
 	setAuth(state, value) {
 		state.isAuth = value
 	},
+	setShop(state, payload) {
+		state.shop = payload
+	},
 }
 
 // Functions that call mutations on the state. They can call multiple mutations, can call other actions, and they support asynchronous operations.
 export const actions = {
+	updateShop({ commit }, result) {
+		commit('setShop', result)
+	},
 	async StoreQRscan({ commit, state }, result) {
 		//	update store
 		await commit('setQRscan', result)
 
 		//	update firabase
-		var updCounter = state.user.userScansCounter
+		var updCounter = state.user.scans
 		await this.$fireStore.collection('users').doc(state.user.email).update({
-			userScansCounter: updCounter,
+			scans: updCounter,
 		})
 		// update seller db (seller email is stored in result)
 		// make a trigger function onUpdate
 		// this.$router.push('/')
 	},
 	async authenticateUser({ commit }, userPayload) {
-		var user // create user
-		if (userPayload.isSeller) {
-			user = {
-				email: userPayload.email,
-				isSeller: userPayload.isSeller,
-				userScansCounter: 0,
-				sellerScansCounter: 0,
-				scanList: [],
-			}
-		} else {
-			user = {
-				email: userPayload.email,
-				isSeller: userPayload.isSeller,
-				userScansCounter: 0,
-			}
+		// create user
+		var user = {
+			email: userPayload.email,
+			isSeller: userPayload.isSeller,
+			scans: 0,
+			shopScans: 0,
 		}
+
 		try {
 			if (userPayload.action == 'signUp') {
 				await this.$fireAuth
@@ -85,7 +78,8 @@ export const actions = {
 					.catch(function (error) {
 						if (error.code === 'auth/email-already-in-use') commit('setError', 'Email already in use')
 					})
-			} else if (userPayload.action == 'signIn') {
+			}
+			if (userPayload.action == 'signIn') {
 				await this.$fireAuth
 					.signInWithEmailAndPassword(userPayload.email, userPayload.password)
 					.then(async (cred) => {
@@ -93,8 +87,12 @@ export const actions = {
 							//	get user from db
 							var ref = this.$fireStore.collection('users').doc(userPayload.email)
 							user = await ref.get()
+							//	get shop from db
+							ref = this.$fireStore.collection('shops').doc(userPayload.email)
+							var shop = await ref.get()
 							//	update store
 							commit('setUser', user.data())
+							commit('setShop', shop.data())
 							commit('setAuth', true)
 							this.$router.push('/')
 						}
@@ -114,8 +112,24 @@ export const actions = {
 		//	get user from db
 		var ref = this.$fireStore.collection('users').doc(userPayload)
 		var user = await ref.get()
-
-		//	update store
 		commit('setUser', user.data())
+
+		//	get shop from db
+
+		ref = this.$fireStore.collection('shops').doc(userPayload)
+		await ref
+			.get()
+			.then(function (doc) {
+				if (doc.exists) {
+					// update store
+					commit('setShop', doc.data())
+				} else {
+					// doc.data() will be undefined in this case
+					console.log('No such document!')
+				}
+			})
+			.catch(function (error) {
+				console.log('Error getting document:', error)
+			})
 	},
 }

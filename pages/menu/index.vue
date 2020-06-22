@@ -153,7 +153,7 @@ export default {
 			padding: 10px;
 			border-radius: 15px;
 
-			fill: $bg;
+			fill: $secondary;
 			background: $primary;
 		}
 

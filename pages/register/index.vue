@@ -67,7 +67,7 @@ export default {
 			this.form.password = value
 		},
 		getSeller(value) {
-			this.form.seller = value
+			this.form.isSeller = value
 		},
 		async Submit() {
 			const isValid = await this.$refs.signup.validate()
