@@ -7,8 +7,8 @@
 			</svg>
 		</div>
 
-		<input v-if="type == 'input'" v-model="input_value" :type="type" class="input" :placeholder="name" :name="name" @change="emitValue" />
-		<textarea v-if="type == 'textarea'" v-model="input_value" :type="type" class="input" :placeholder="name" :name="name" @change="emitValue" />
+		<input v-if="type == 'input'" v-model="input_value" :type="type" class="input" :placeholder="name" :name="name" />
+		<textarea v-if="type == 'textarea'" v-model="input_value" :type="type" class="input" :placeholder="name" :name="name" />
 	</ValidationProvider>
 </template>
 

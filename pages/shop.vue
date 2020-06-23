@@ -1,18 +1,22 @@
 <template>
 	<div class="container shop">
-		<div class="edit" @click="editToggle">
-			<svg v-if="edit" class="icon" viewBox="0 0 24 24">
-				<path class="cls-1" d="M22.78,5.53,18.47,1.22A2.47,2.47,0,0,0,16.73.5H3A2.46,2.46,0,0,0,.5,3V21A2.46,2.46,0,0,0,3,23.5H21A2.46,2.46,0,0,0,23.5,21V7.27a2.47,2.47,0,0,0-.72-1.74ZM12,20.21a3.29,3.29,0,1,1,3.29-3.28A3.29,3.29,0,0,1,12,20.21ZM16.93,4.58V9.74a.62.62,0,0,1-.62.62H4.4a.61.61,0,0,1-.61-.62V4.4a.61.61,0,0,1,.61-.61H16.13a.6.6,0,0,1,.44.18l.18.17A.67.67,0,0,1,16.93,4.58Z" />
-			</svg>
-
-			<svg v-if="!edit" class="icon" viewBox="0 0 24 24">
+		<div class="edit">
+			<svg v-if="!edit" class="icon" viewBox="0 0 24 24" @click="editOn">
 				<path d="M16.58,5.1l3.6,3.6a.39.39,0,0,1,0,.55L11.46,18l-3.71.41a.78.78,0,0,1-.86-.86l.41-3.7L16,5.1a.4.4,0,0,1,.56,0ZM23,4.18,21.1,2.23a1.58,1.58,0,0,0-2.21,0L17.48,3.65a.39.39,0,0,0,0,.55l3.6,3.6a.39.39,0,0,0,.55,0L23,6.39A1.56,1.56,0,0,0,23,4.18ZM15.83,15.6v4.06H3.06V6.89h9.17a.52.52,0,0,0,.34-.14l1.6-1.6a.48.48,0,0,0-.34-.82H2.42A1.92,1.92,0,0,0,.5,6.25V20.3a1.92,1.92,0,0,0,1.92,1.92H16.47a1.92,1.92,0,0,0,1.92-1.92V14a.48.48,0,0,0-.82-.34L16,15.26A.52.52,0,0,0,15.83,15.6Z" />
+			</svg>
+			<svg v-if="edit" class="icon" viewBox="0 0 24 24" @click="save">
+				<path class="cls-1" d="M22.78,5.53,18.47,1.22A2.47,2.47,0,0,0,16.73.5H3A2.46,2.46,0,0,0,.5,3V21A2.46,2.46,0,0,0,3,23.5H21A2.46,2.46,0,0,0,23.5,21V7.27a2.47,2.47,0,0,0-.72-1.74ZM12,20.21a3.29,3.29,0,1,1,3.29-3.28A3.29,3.29,0,0,1,12,20.21ZM16.93,4.58V9.74a.62.62,0,0,1-.62.62H4.4a.61.61,0,0,1-.61-.62V4.4a.61.61,0,0,1,.61-.61H16.13a.6.6,0,0,1,.44.18l.18.17A.67.67,0,0,1,16.93,4.58Z" />
 			</svg>
 		</div>
 
+		<div v-if="modal" class="modal">
+			<div class="msg">
+				<h2>Saving ...</h2>
+			</div>
+		</div>
+
 		<div class="image" @click="Upload">
-			<img v-if="shop" :src="shop.image" alt="" />
-			<img v-else :src="myShop.image" alt="" />
+			<img ref="image" class="lazyload" :data-src="shop.image" alt="" />
 
 			<template v-if="edit">
 				<div class="color_overlay"></div>
@@ -24,10 +28,8 @@
 		</div>
 		<div class="content">
 			<div class="title">
-				<h2 v-if="shop" v-show="!edit">{{ shop.title }}</h2>
-				<h2 v-else v-show="!edit">{{ myShop.title }}</h2>
-
-				<inputEdit v-show="edit" :name="myShop.title" @getValue="getTitle" />
+				<h2 v-if="!edit">{{ shop.title }}</h2>
+				<input v-else ref="title" :value="shop.title" type="text" />
 			</div>
 			<div class="info">
 				<div class="item rating">
@@ -50,38 +52,19 @@
 				</div>
 			</div>
 			<div class="description">
-				<p v-if="shop" v-show="!edit">{{ shop.description }}</p>
-				<p v-else v-show="!edit">{{ myShop.description }}</p>
-
-				<inputEdit v-show="edit" type="textarea" :name="myShop.description" @getValue="getDescription" />
-			</div>
-		</div>
-
-		<div v-if="modal" class="modal">
-			<div class="msg">
-				<h2>Saving ...</h2>
+				<p v-if="!edit">{{ shop.description }}</p>
+				<textarea v-else ref="description" :value="shop.description" />
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import inputEdit from '~/components/inputEdit.vue'
-import { ValidationObserver } from 'vee-validate'
-
 export default {
-	components: {
-		inputEdit,
-	},
 	middleware: 'auth',
 	data: () => ({
 		file: null,
 		edit: false,
-		myShop: {
-			image: '/index/coffee_shop1.jpg',
-			title: 'My Tree Coffee Shop',
-			description: 'Here you can write short description about your coffee shop. Keep it in two three lines.',
-		},
 		modal: false,
 	}),
 	computed: {
@@ -118,31 +101,33 @@ export default {
 			// set url
 			var img = document.querySelector('.shop .image img')
 			img.src = ImgUrl
-
-			this.myShop.image = ImgUrl
 		},
 		Upload() {
 			if (this.edit) this.$refs.fileUpload.click()
 		},
-		getTitle(value) {
-			this.myShop.title = value
+
+		editOn() {
+			console.log('editOn')
+			this.edit = true
 		},
-		getDescription(value) {
-			this.myShop.description = value
-		},
 
-		async editToggle() {
-			this.edit = !this.edit
-			console.log(this.edit)
+		async save() {
+			var image = this.$refs.image.src
+			var title = this.$refs.title.value
+			var description = this.$refs.description.value
 
-			if (!this.edit) {
-				//save chages to store
-				console.log(this.myShop)
-				this.$store.dispatch('updateShop', this.myShop)
+			//save chages to store
+			await this.$store.commit('setShop', {
+				image: image,
+				title: title,
+				description: description,
+			})
 
-				//	create new shop in db
-				await this.$fireStore.collection('shops').doc(this.user.email).set(this.myShop)
-			}
+			//	create new shop in db
+			await this.$fireStore.collection('shops').doc(this.user.email).set(this.shop)
+
+			this.edit = false
+			console.log('saved')
 		},
 	},
 }
@@ -150,6 +135,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
+
+.shop {
+	background: $text;
+}
 
 .edit {
 	position: absolute;
@@ -193,6 +182,15 @@ export default {
 		width: 100%;
 		object-fit: cover;
 		object-position: center;
+
+		&.lazyload,
+		&.lazyloading {
+			opacity: 0;
+		}
+		&.lazyloaded {
+			opacity: 1;
+			transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+		}
 	}
 	.color_overlay {
 		position: absolute;
@@ -259,6 +257,19 @@ export default {
 			color: $text;
 			font-size: 1.5em;
 		}
+		input {
+			width: 100%;
+			height: 40px;
+
+			outline: 0;
+			border: none;
+			border-bottom: 1px solid $text;
+
+			font-size: 1.5em;
+			&:focus {
+				border-color: $primary;
+			}
+		}
 	}
 	.info {
 		width: 70%;
@@ -292,6 +303,19 @@ export default {
 		min-height: 15%;
 		margin: 5% 0;
 		overflow: auto;
+		textarea {
+			width: 100%;
+			height: 100%;
+
+			outline: 0;
+			border: none;
+			border-bottom: 1px solid $text;
+
+			font-size: 1.2em;
+			&:focus {
+				border-color: $primary;
+			}
+		}
 	}
 }
 

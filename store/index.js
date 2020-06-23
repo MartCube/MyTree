@@ -3,7 +3,11 @@ export const state = () => ({
 	authError: null,
 	isAuth: false,
 	user: null,
-	shop: null,
+	shop: {
+		image: '/index/coffee_shop1.jpg',
+		title: 'My Tree Coffee Shop',
+		description: 'This is short description about the coffee shop.',
+	},
 })
 
 // Functions that return back data contained in the state.
@@ -19,7 +23,7 @@ export const getters = {
 export const mutations = {
 	async setQRscan(state, result) {
 		state.QRscan = result
-		state.user.userScansCounter++
+		state.user.scans++
 	},
 	setUser(state, user) {
 		state.user = user
@@ -31,7 +35,7 @@ export const mutations = {
 		state.isAuth = value
 	},
 	setShop(state, payload) {
-		state.shop = payload
+		state.shop = Object.assign(payload)
 	},
 }
 

@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<svg class="icon_my_location" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" @click="getLocation">
+		<svg class="icon_my_location" viewBox="0 0 24 24" @click="getLocation">
 			<path class="secondary" d="M12,22A10,10,0,1,1,22,12,10,10,0,0,1,12,22ZM12,4a8,8,0,1,0,8,8A8,8,0,0,0,12,4Z" />
 			<rect class="primary" x="11.13" y="17" width="1.75" height="7" />
 			<rect class="primary" y="11.13" width="7" height="1.75" />
@@ -8,7 +8,6 @@
 			<rect class="primary" x="11.13" width="1.75" height="7" />
 			<circle class="primary" cx="12" cy="12" r="4" />
 		</svg>
-
 		<gmaps-map class="map" :options="mapOptions">
 			<gmaps-marker v-for="(shop, i) in shops" :key="i" class="shop" :options="shops[i]" @click="show" />
 			<gmaps-marker class="shop" :options="pickShopLocation" @click="show" />
