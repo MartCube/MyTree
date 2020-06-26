@@ -7,6 +7,7 @@ export const state = () => ({
 		image: '/index/coffee_shop1.jpg',
 		title: 'My Tree Coffee Shop',
 		description: 'This is short description about the coffee shop.',
+		position: { lat: 0, lng: 0 },
 	},
 })
 

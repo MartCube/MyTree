@@ -9,7 +9,11 @@ module.exports = {
 	},
 
 	// Customize the progress-bar color
-	// loading: { color: 'rgb(111, 255, 233)' },
+	loadingIndicator: {
+		name: 'wandering-cubes',
+		color: '#3a506b',
+		background: 'white',
+	},
 
 	// Global css
 	css: ['~/assets/style.scss'],

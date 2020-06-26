@@ -121,6 +121,7 @@ export default {
 				image: image,
 				title: title,
 				description: description,
+				position: { lat: 41.34, lng: 21.21 },
 			})
 
 			//	create new shop in db

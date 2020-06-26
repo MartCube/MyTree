@@ -8,22 +8,17 @@
 		<div class="menu_links">
 			<div class="item">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M12,1L3,5v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V5L12,1z M19,11c0,1.85-0.51,3.65-1.38,5.21l-1.45-1.45 c1.29-1.94,1.07-4.58-0.64-6.29c-1.95-1.95-5.12-1.95-7.07,0c-1.95,1.95-1.95,5.12,0,7.07c1.71,1.71,4.35,1.92,6.29,0.64 l1.72,1.72c-1.19,1.42-2.73,2.51-4.47,3.04C7.98,19.69,5,15.52,5,11V6.3l7-3.11l7,3.11V11z M12,15c-1.66,0-3-1.34-3-3s1.34-3,3-3 s3,1.34,3,3S13.66,15,12,15z" />
+					<path d="M23.06,9.07a.27.27,0,0,1,.44.21v9.19a2.16,2.16,0,0,1-2.16,2.15H2.66A2.16,2.16,0,0,1,.5,18.47V9.29a.27.27,0,0,1,.44-.21c1,.78,2.34,1.77,6.92,5.1,1,.69,2.55,2.15,4.14,2.14s3.23-1.48,4.15-2.14C20.73,10.85,22.06,9.85,23.06,9.07ZM12,14.87c1,0,2.54-1.31,3.3-1.85,6-4.33,6.41-4.71,7.79-5.79a1.06,1.06,0,0,0,.41-.85V5.53a2.16,2.16,0,0,0-2.16-2.15H2.66A2.15,2.15,0,0,0,.5,5.53v.85a1.06,1.06,0,0,0,.41.85C2.29,8.31,2.74,8.69,8.7,13c.76.54,2.26,1.87,3.3,1.85Z" />
 				</svg>
 				<span> {{ user.email }}</span>
 			</div>
 			<div class="item">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M12,1L3,5v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V5L12,1z M19,11c0,1.85-0.51,3.65-1.38,5.21l-1.45-1.45 c1.29-1.94,1.07-4.58-0.64-6.29c-1.95-1.95-5.12-1.95-7.07,0c-1.95,1.95-1.95,5.12,0,7.07c1.71,1.71,4.35,1.92,6.29,0.64 l1.72,1.72c-1.19,1.42-2.73,2.51-4.47,3.04C7.98,19.69,5,15.52,5,11V6.3l7-3.11l7,3.11V11z M12,15c-1.66,0-3-1.34-3-3s1.34-3,3-3 s3,1.34,3,3S13.66,15,12,15z" />
+					<path d="M23.5,8.41a7.9,7.9,0,0,1-9.38,7.76L13,17.39a1.08,1.08,0,0,1-.81.36H10.56v1.8a1.08,1.08,0,0,1-1.08,1.08H7.69v1.79A1.08,1.08,0,0,1,6.61,23.5h-5A1.08,1.08,0,0,1,.5,22.42v-3.5a1.07,1.07,0,0,1,.32-.77l7.26-7.27a8.08,8.08,0,0,1-.39-2.47,7.91,7.91,0,1,1,15.81,0ZM15.59,6.25a2.16,2.16,0,1,0,2.16-2.16A2.16,2.16,0,0,0,15.59,6.25Z" />
 				</svg>
-				<span>change password</span>
+				<span>Change Password</span>
 			</div>
-			<div class="item">
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-				</svg>
-				<span>About</span>
-			</div>
+
 			<nuxt-link to="/menu" class="item go_back">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path d="M7.38,14.05h15.5a.61.61,0,0,0,.62-.61V10.56a.61.61,0,0,0-.62-.61H7.38V7.58a1.23,1.23,0,0,0-2.1-.87L.86,11.13a1.23,1.23,0,0,0,0,1.74l4.42,4.42a1.23,1.23,0,0,0,2.1-.87V14.05Z" />
@@ -56,8 +51,101 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.info {
+@import '~/assets/colors.scss';
+
+.menu_title {
+	width: 100%;
+	height: 70px;
+	margin-bottom: 10%;
+	box-shadow: 0px 0px 25px -18px rgba(76, 81, 87, 1);
+
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+
+	span {
+		user-select: none;
+		text-decoration: none;
+		font-size: 1.5em;
+		color: $text;
+		margin: 0 5%;
+	}
+
+	.line {
+		width: 4px;
+		border-radius: 15px;
+		margin-left: 5%;
+		height: 50%;
+		background: $primary;
+	}
+
+	.go_back {
+		position: absolute;
+		right: 5%;
+		width: 40px;
+		height: 40px;
+		fill: $secondary_dark;
+		padding: 10px;
+		border-radius: 100%;
+
+		transition: all 0.15s cubic-bezier(0.37, 0, 0.63, 1);
+
+		&:active {
+			background: rgba(14, 227, 177, 0.2);
+			fill: $primary_dark;
+		}
+	}
+}
+
+.menu_links {
 	width: 80%;
-	margin: 10% 0;
+	flex-grow: 1;
+	padding-bottom: 70px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: center;
+	.item {
+		width: 100%;
+		margin: 10px 0;
+		user-select: none;
+		border-radius: 15px;
+
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		align-content: center;
+		&:last-child {
+			position: absolute;
+			width: 80%;
+			bottom: 100px;
+			left: 10%;
+		}
+
+		text-decoration: none;
+		color: $text;
+		font-size: 1.2em;
+
+		transition: all 0.15s cubic-bezier(0.37, 0, 0.63, 1);
+		&:active {
+			background: rgba($primary, 0.3);
+		}
+
+		.icon {
+			width: 50px;
+			padding: 10px;
+			border-radius: 15px;
+
+			fill: $secondary;
+			background: $primary;
+		}
+
+		span {
+			margin: 0 5%;
+		}
+	}
 }
 </style>
