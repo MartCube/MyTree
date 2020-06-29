@@ -1,5 +1,5 @@
 <template>
-	<div class="container shop">
+	<div class="container shop" :class="{ edit_mode: edit }">
 		<div class="edit">
 			<svg v-if="!edit" class="icon" viewBox="0 0 24 24" @click="editOn">
 				<path d="M16.58,5.1l3.6,3.6a.39.39,0,0,1,0,.55L11.46,18l-3.71.41a.78.78,0,0,1-.86-.86l.41-3.7L16,5.1a.4.4,0,0,1,.56,0ZM23,4.18,21.1,2.23a1.58,1.58,0,0,0-2.21,0L17.48,3.65a.39.39,0,0,0,0,.55l3.6,3.6a.39.39,0,0,0,.55,0L23,6.39A1.56,1.56,0,0,0,23,4.18ZM15.83,15.6v4.06H3.06V6.89h9.17a.52.52,0,0,0,.34-.14l1.6-1.6a.48.48,0,0,0-.34-.82H2.42A1.92,1.92,0,0,0,.5,6.25V20.3a1.92,1.92,0,0,0,1.92,1.92H16.47a1.92,1.92,0,0,0,1.92-1.92V14a.48.48,0,0,0-.82-.34L16,15.26A.52.52,0,0,0,15.83,15.6Z" />
@@ -14,6 +14,11 @@
 				<h2>Saving ...</h2>
 			</div>
 		</div>
+		<template v-if="showMap">
+			<gmaps-map class="map" :options="mapOptions">
+				<gmaps-marker class="shop" :options="shopLocation" />
+			</gmaps-map>
+		</template>
 
 		<div class="image" @click="Upload">
 			<img ref="image" class="lazyload" :data-src="shop.image" alt="" />
@@ -60,12 +65,31 @@
 </template>
 
 <script>
+import { gmapsMap, gmapsMarker } from 'x5-gmaps'
+
 export default {
 	middleware: 'auth',
+	components: { gmapsMap, gmapsMarker },
 	data: () => ({
 		file: null,
 		edit: false,
 		modal: false,
+		showMap: true,
+		mapOptions: {
+			center: { lat: 41.3663232, lng: 21.253324799999998 },
+			zoom: 12,
+			rotateControl: true,
+			fullscreenControl: false,
+			mapTypeControl: false,
+			scaleControl: false,
+			zoomControl: false,
+			streetViewControl: false,
+		},
+		shopLocation: {
+			position: { lat: 41.41, lng: 21.21 },
+			icon: require('~/static/icons/location.svg'),
+			draggable: true,
+		},
 	}),
 	computed: {
 		user() {
@@ -105,12 +129,10 @@ export default {
 		Upload() {
 			if (this.edit) this.$refs.fileUpload.click()
 		},
-
 		editOn() {
 			console.log('editOn')
 			this.edit = true
 		},
-
 		async save() {
 			var image = this.$refs.image.src
 			var title = this.$refs.title.value
@@ -121,7 +143,6 @@ export default {
 				image: image,
 				title: title,
 				description: description,
-				position: { lat: 41.34, lng: 21.21 },
 			})
 
 			//	create new shop in db
@@ -134,187 +155,198 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~/assets/colors.scss';
 
 .shop {
 	background: $text;
-}
-
-.edit {
-	position: absolute;
-	top: 5%;
-	right: 5%;
-	z-index: 5;
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-
-	span {
-		color: white;
-		margin: 0 10px;
-		font-size: 1.8em;
-	}
-	.icon {
-		width: 50px;
-		padding: 10px;
-		border-radius: 15px;
-
-		fill: $secondary;
-		background: $primary;
-	}
-}
-
-.image {
-	width: 100%;
-	height: 40vh;
-	z-index: 2;
-	color: #fff;
-	transition: all 1s cubic-bezier(0.65, 0, 0.35, 1);
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-	img {
-		height: 50vh;
-		width: 100%;
-		object-fit: cover;
-		object-position: center;
-
-		&.lazyload,
-		&.lazyloading {
-			opacity: 0;
+	position: relative;
+	&.edit_mode {
+		overflow: visible;
+		.content {
+			height: 100vh;
+			.description {
+				height: -webkit-fill-available;
+			}
+			textarea {
+				min-height: 5rem;
+				&:focus {
+					height: 10rem !important;
+				}
+			}
 		}
-		&.lazyloaded {
-			opacity: 1;
-			transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+		~ .bar {
+			display: none !important;
 		}
 	}
-	.color_overlay {
+
+	.edit {
 		position: absolute;
+		top: 5%;
+		right: 5%;
+		z-index: 5;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		align-content: center;
+
+		span {
+			color: white;
+			margin: 0 10px;
+			font-size: 1.8em;
+		}
+		.icon {
+			width: 50px;
+			padding: 10px;
+			border-radius: 15px;
+
+			fill: $secondary;
+			background: $primary;
+		}
+	}
+	.image {
 		width: 100%;
-		height: 100%;
+		height: 40vh;
+		z-index: 2;
+		position: absolute;
 		top: 0;
-		left: 0;
-		background: rgba(72, 91, 114, 0.75);
-		opacity: 1;
-		transition: all 0.35s ease;
-	}
-	.text {
-		user-select: none;
-		position: absolute;
-		color: white;
-		font-size: 1.8em;
+		color: #fff;
+		transition: all 1s cubic-bezier(0.65, 0, 0.35, 1);
 
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		align-content: center;
-	}
-	.fileUpload {
-		display: none;
-	}
-}
-
-.content {
-	width: 100%;
-	height: 60vh;
-	overflow: hidden;
-	z-index: 3;
-	background-color: $bg;
-	border-radius: 30px 30px 0 0;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	align-content: center;
-
-	filter: drop-shadow(2px 4px 14px rgba(0, 0, 0, 0.6));
-	transition: all 0.6s cubic-bezier(0.5, 0, 0.75, 0);
-	&::after {
-		content: '';
-		position: absolute;
-		width: 5px;
-		height: 100%;
-		background-color: $primary;
-		left: 5%;
-	}
-
-	.title {
-		position: relative;
-		width: 70%;
-		margin: 10% 0 5% 0;
-		z-index: 3;
-
-		display: flex;
-		align-items: center;
-		h2 {
+		img {
+			height: 50vh;
 			width: 100%;
-			height: 40px;
-			color: $text;
-			font-size: 1.5em;
-		}
-		input {
-			width: 100%;
-			height: 40px;
+			object-fit: cover;
+			object-position: center;
 
-			outline: 0;
-			border: none;
-			border-bottom: 1px solid $text;
-
-			font-size: 1.5em;
-			&:focus {
-				border-color: $primary;
+			&.lazyload,
+			&.lazyloading {
+				opacity: 0;
+			}
+			&.lazyloaded {
+				opacity: 1;
+				transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1);
 			}
 		}
-	}
-	.info {
-		width: 70%;
-
-		display: flex;
-		flex-direction: column;
-		.item {
-			width: 100%;
-			margin-bottom: 5%;
-
-			display: flex;
-			justify-content: flex-start;
-			align-items: center;
-			align-content: center;
-
-			p {
-				margin: 0 10px;
-			}
-			.icon {
-				width: 1.2em;
-				margin: 0 2px;
-				fill: $primary;
-			}
-			&.map {
-				text-decoration: underline;
-			}
-		}
-	}
-	.description {
-		width: 70%;
-		min-height: 15%;
-		margin: 5% 0;
-		overflow: auto;
-		textarea {
+		.color_overlay {
+			position: absolute;
 			width: 100%;
 			height: 100%;
+			top: 0;
+			left: 0;
+			background: rgba(72, 91, 114, 0.75);
+			opacity: 1;
+			transition: all 0.35s ease;
+		}
+		.text {
+			user-select: none;
+			position: absolute;
+			color: white;
+			font-size: 1.8em;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			align-content: center;
+		}
+		.fileUpload {
+			display: none;
+		}
+	}
+	.content {
+		width: 100%;
+		height: 70vh;
+		flex-grow: 1;
+		top: 35vh;
+		position: absolute;
+		overflow: hidden;
+		z-index: 3;
+		background-color: $bg;
+		border-radius: 30px 30px 0 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		align-content: center;
+		filter: drop-shadow(2px 4px 14px rgba(0, 0, 0, 0.6));
+		transition: all 0.6s cubic-bezier(0.5, 0, 0.75, 0);
+		&::after {
+			content: '';
+			position: absolute;
+			width: 5px;
+			height: 100%;
+			background-color: $primary;
+			left: 5%;
+		}
+		.title {
+			position: relative;
+			width: 70%;
+			margin: 10% 0 5% 0;
+			z-index: 3;
+			display: flex;
+			align-items: center;
+			h2 {
+				width: 100%;
+				height: 40px;
+				color: $text;
+				font-size: 1.5em;
+			}
+			input {
+				width: 100%;
+				height: 40px;
+				outline: 0;
+				border: none;
+				border-bottom: 1px solid $text;
+				font-size: 1.5em;
+				&:focus {
+					border-color: $primary;
+				}
+			}
+		}
+		.info {
+			width: 70%;
+			display: flex;
+			flex-direction: column;
+			.item {
+				width: 100%;
+				margin-bottom: 5%;
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				align-content: center;
 
-			outline: 0;
-			border: none;
-			border-bottom: 1px solid $text;
-
-			font-size: 1.2em;
-			&:focus {
-				border-color: $primary;
+				p {
+					margin: 0 10px;
+				}
+				.icon {
+					width: 1.2em;
+					margin: 0 2px;
+					fill: $primary;
+				}
+				&.map {
+					text-decoration: underline;
+				}
+			}
+		}
+		.description {
+			width: 70%;
+			// min-height: 15%;
+			margin: 5% 0;
+			// overflow: auto;
+			textarea {
+				width: 100%;
+				height: 100%;
+				display: block;
+				outline: 0;
+				border: none;
+				border-bottom: 1px solid $text;
+				font-size: 1.2em;
+				&:focus {
+					border-color: $primary;
+				}
 			}
 		}
 	}

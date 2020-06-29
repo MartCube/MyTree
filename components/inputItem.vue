@@ -97,11 +97,16 @@ export default {
 	padding: 7px 0;
 	background: transparent;
 	transition: border-color 0.2s;
-
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus {
+		-webkit-text-fill-color: #fff;
+		box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+		transition: background-color 5000s ease-in-out 0s;
+	}
 	&::placeholder {
 		color: transparent;
 	}
-
 	&:placeholder-shown ~ .form__label {
 		font-size: 1.1rem;
 		cursor: text;

@@ -11,7 +11,7 @@
 
 		<gmaps-map class="map" :options="mapOptions">
 			<gmaps-marker v-for="(shop, i) in shopList" :key="i" class="shop" :position="shop.position" :icon="icon" />
-			<!-- <gmaps-marker class="shop" :options="pickShopLocation" @click="show" /> -->
+			<gmaps-marker class="shop" :options="pickShopLocation" />
 		</gmaps-map>
 	</div>
 </template>
@@ -78,8 +78,8 @@ export default {
 			else if (error.TIMEOUT) alert('The request to get user location timed out.')
 			else alert('An unknown error occurred.')
 		},
-		show() {
-			console.log('clicked')
+		show(value) {
+			console.log('clicked', value)
 		},
 	},
 }
