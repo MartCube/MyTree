@@ -10,17 +10,24 @@
 		</svg>
 
 		<gmaps-map class="map" :options="mapOptions">
+			<template v-slot:loading>
+				<div></div>
+			</template>
+
 			<gmaps-marker v-for="(shop, i) in shopList" :key="i" class="shop" :position="shop.position" :icon="icon" />
 			<gmaps-marker class="shop" :options="pickShopLocation" />
 		</gmaps-map>
+
+		<modal v-if="modal.show" />
 	</div>
 </template>
 
 <script>
 import { gmapsMap, gmapsMarker } from 'x5-gmaps'
+import modal from '~/components/modal'
 
 export default {
-	components: { gmapsMap, gmapsMarker },
+	components: { gmapsMap, gmapsMarker, modal },
 	async asyncData({ app }) {
 		var shopList = []
 
@@ -59,14 +66,21 @@ export default {
 		},
 	}),
 	computed: {
-		user() {
-			return this.$store.getters.user
+		modal() {
+			return this.$store.getters.modal
 		},
 	},
 	methods: {
 		getLocation() {
 			if (navigator.geolocation) navigator.geolocation.getCurrentPosition(this.setLocation, this.locationError)
 			else alert('Geolocation is not supported by this browser.')
+
+			this.$store.commit('setModal', {
+				show: true,
+				type: 'prompt',
+				data: 'Default message',
+				value: false,
+			})
 		},
 		setLocation(pos) {
 			this.mapOptions = { ...this.mapOptions, center: { lat: pos.coords.latitude, lng: pos.coords.longitude } }
@@ -109,14 +123,5 @@ export default {
 	.secondary {
 		fill: $secondary;
 	}
-}
-
-.shop {
-	width: 70px;
-	padding: 10px;
-}
-
-.map {
-	margin-bottom: 70px;
 }
 </style>

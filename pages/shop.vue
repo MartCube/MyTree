@@ -14,8 +14,9 @@
 				<h2>Saving ...</h2>
 			</div>
 		</div>
+
 		<template v-if="showMap">
-			<gmaps-map class="map" :options="mapOptions">
+			<gmaps-map id="map" :options="mapOptions">
 				<gmaps-marker class="shop" :options="shopLocation" />
 			</gmaps-map>
 		</template>
@@ -74,7 +75,7 @@ export default {
 		file: null,
 		edit: false,
 		modal: false,
-		showMap: true,
+		showMap: false,
 		mapOptions: {
 			center: { lat: 41.3663232, lng: 21.253324799999998 },
 			zoom: 12,
@@ -151,11 +152,26 @@ export default {
 			this.edit = false
 			console.log('saved')
 		},
+
+		getLocation() {
+			if (navigator.geolocation) navigator.geolocation.getCurrentPosition(this.setLocation, this.locationError)
+			else alert('Geolocation is not supported by this browser.')
+		},
+		setLocation(pos) {
+			this.mapOptions = { ...this.mapOptions, center: { lat: pos.coords.latitude, lng: pos.coords.longitude } }
+			this.center = { lat: pos.coords.latitude, lng: pos.coords.longitude }
+		},
+		locationError(error) {
+			if (error.PERMISSION_DENIED) alert('User denied the request for Geolocation.')
+			else if (error.POSITION_UNAVAILABLE) alert('Location information is unavailable.')
+			else if (error.TIMEOUT) alert('The request to get user location timed out.')
+			else alert('An unknown error occurred.')
+		},
 	},
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~/assets/colors.scss';
 
 .shop {
@@ -376,5 +392,10 @@ export default {
 		border-radius: 15px;
 		background: $bg;
 	}
+}
+
+#map {
+	z-index: 99;
+	height: 100vh;
 }
 </style>

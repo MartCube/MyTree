@@ -9,6 +9,12 @@ export const state = () => ({
 		description: 'This is short description about the coffee shop.',
 		position: { lat: 0, lng: 0 },
 	},
+	modal: {
+		show: true,
+		type: 'prompt',
+		data: 'Default message',
+		value: false,
+	},
 })
 
 // Functions that return back data contained in the state.
@@ -18,6 +24,7 @@ export const getters = {
 	authError: (state) => state.authError,
 	isAuth: (state) => state.isAuth,
 	shop: (state) => state.shop,
+	modal: (state) => state.modal,
 }
 
 // Functions that directly mutate the state.
@@ -37,6 +44,9 @@ export const mutations = {
 	},
 	setShop(state, payload) {
 		state.shop = Object.assign(payload)
+	},
+	setModal(state, payload) {
+		state.modal = Object.assign(payload)
 	},
 }
 
