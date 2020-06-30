@@ -100,7 +100,7 @@ export default {
 	height: 70px;
 	position: fixed;
 	bottom: 0;
-	z-index: 9999;
+	z-index: 99;
 
 	background: #fff;
 	box-shadow: 0px 0px 25px -18px rgba(76, 81, 87, 1);

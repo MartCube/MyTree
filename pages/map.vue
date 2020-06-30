@@ -17,8 +17,6 @@
 			<gmaps-marker v-for="(shop, i) in shopList" :key="i" class="shop" :position="shop.position" :icon="icon" />
 			<gmaps-marker class="shop" :options="pickShopLocation" />
 		</gmaps-map>
-
-		<modal v-if="modal.show" />
 	</div>
 </template>
 
@@ -27,7 +25,7 @@ import { gmapsMap, gmapsMarker } from 'x5-gmaps'
 import modal from '~/components/modal'
 
 export default {
-	components: { gmapsMap, gmapsMarker, modal },
+	components: { gmapsMap, gmapsMarker },
 	async asyncData({ app }) {
 		var shopList = []
 
@@ -74,13 +72,6 @@ export default {
 		getLocation() {
 			if (navigator.geolocation) navigator.geolocation.getCurrentPosition(this.setLocation, this.locationError)
 			else alert('Geolocation is not supported by this browser.')
-
-			this.$store.commit('setModal', {
-				show: true,
-				type: 'prompt',
-				data: 'Default message',
-				value: false,
-			})
 		},
 		setLocation(pos) {
 			this.mapOptions = { ...this.mapOptions, center: { lat: pos.coords.latitude, lng: pos.coords.longitude } }

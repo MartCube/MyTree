@@ -9,6 +9,7 @@ module.exports = {
 	},
 
 	// Customize the progress-bar color
+	loading: false,
 	loadingIndicator: {
 		name: 'wandering-cubes',
 		color: '#3a506b',

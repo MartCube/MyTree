@@ -9,12 +9,6 @@ export const state = () => ({
 		description: 'This is short description about the coffee shop.',
 		position: { lat: 0, lng: 0 },
 	},
-	modal: {
-		show: true,
-		type: 'prompt',
-		data: 'Default message',
-		value: false,
-	},
 })
 
 // Functions that return back data contained in the state.
@@ -87,7 +81,6 @@ export const actions = {
 							await this.$fireStore.collection('users').doc(userPayload.email).set(user)
 							//	update store
 							commit('setUser', user)
-							this.$router.push('/')
 						}
 					})
 					.catch(function (error) {
@@ -109,7 +102,6 @@ export const actions = {
 							commit('setUser', user.data())
 							commit('setShop', shop.data())
 							commit('setAuth', true)
-							this.$router.push('/')
 						}
 					})
 					.catch(function (error) {
@@ -120,6 +112,7 @@ export const actions = {
 		} catch (err) {
 			console.error(err)
 		}
+		this.$router.push('/')
 	},
 	async setUser({ commit }, userPayload) {
 		commit('setAuth', true)

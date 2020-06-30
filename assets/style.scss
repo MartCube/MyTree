@@ -20,7 +20,7 @@ $text: white;
 
 body{
 	color: $text;
-	background: $bg;
+	background: white;
 	font-family: 'config';
 
 	-webkit-tap-highlight-color: transparent;
@@ -59,12 +59,23 @@ body{
 
 // ##### bar Transition #####
 .bar-leave-active{
-	transition: opacity 0.25s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+	transition: opacity .2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
 .bar-enter-active {
-	transition: opacity 0.25s cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.5s;
+	transition: opacity .2s cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.5s;
 }
 .bar-enter, .bar-leave-active {
 	opacity: 0
 }
 
+
+// ##### modal Transition #####
+.modal-enter-active, .modal-leave-active {
+	transition: all 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+	opacity: 1;
+	transform: scale(1);
+}
+.modal-enter, .modal-leave-active {
+	opacity: 0;
+	transform: scale(0.75);
+}

@@ -6,7 +6,9 @@
 	</div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '~/assets/colors.scss';
+
 .spinner {
 	display: flex;
 	position: absolute;
@@ -27,7 +29,7 @@
 .looping-rhombuses-spinner .rhombus {
 	height: 15px;
 	width: 15px;
-	background-color: #0ee3b1;
+	background-color: $secondary;
 	left: calc(15px * 4);
 	position: absolute;
 	margin: 0 auto;

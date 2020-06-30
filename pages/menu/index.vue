@@ -36,25 +36,34 @@
 				</svg>
 				<span>About My Tree</span>
 			</div>
+
 			<div class="item" @click="userSignOut">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path d="M22.7,12.74l-7.34,7.34a1.05,1.05,0,0,1-1.79-.75V15.14H7.64a1,1,0,0,1-1-1.05V9.9a1,1,0,0,1,1-1h5.93V4.67a1.05,1.05,0,0,1,1.79-.75l7.34,7.34A1.06,1.06,0,0,1,22.7,12.74ZM9.38,19.86V18.11a.52.52,0,0,0-.52-.52H5.19a1.4,1.4,0,0,1-1.4-1.4V7.81a1.4,1.4,0,0,1,1.4-1.4H8.86a.52.52,0,0,0,.52-.52V4.14a.52.52,0,0,0-.52-.52H5.19A4.2,4.2,0,0,0,1,7.81v8.38a4.2,4.2,0,0,0,4.19,4.19H8.86A.52.52,0,0,0,9.38,19.86Z" />
 				</svg>
-
 				<span>Sign Out</span>
 			</div>
 		</div>
+
+		<transition name="modal">
+			<modal v-if="modalSignOut" @getValue="getModalSignOut">
+				Do you want to Sign Out ?
+			</modal>
+		</transition>
 	</div>
 </template>
 
 <script>
-import VueQrcode from 'vue-qrcode'
+import modal from '~/components/modal'
 
 export default {
 	middleware: 'auth',
 	components: {
-		// VueQrcode,
+		modal,
 	},
+	data: () => ({
+		modalSignOut: false,
+	}),
 	computed: {
 		user() {
 			return this.$store.getters.user
@@ -62,9 +71,14 @@ export default {
 	},
 	methods: {
 		userSignOut() {
-			this.$fireAuth.signOut()
-			this.$store.commit('setAuth', false)
-			this.$router.push('/login')
+			this.modalSignOut = true
+		},
+		getModalSignOut(value) {
+			if (value) {
+				this.$fireAuth.signOut()
+				this.$store.commit('setAuth', false)
+				this.$router.push('/login')
+			} else this.modalSignOut = false
 		},
 	},
 }
