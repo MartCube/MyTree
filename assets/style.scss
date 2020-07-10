@@ -12,11 +12,6 @@
 }
 
 
-$primary: #0ee3b1;
-$secondary: #11998e;
-$bg:#1d2228;
-$text: white;
-
 
 body{
 	color: $text;
@@ -24,16 +19,17 @@ body{
 	font-family: 'config';
 
 	-webkit-tap-highlight-color: transparent;
-
+	&.dark {
+		background: $text;
+	}
 }
 
 .container{
 	min-height: 100vh;
 	overflow: hidden;
 	position: relative;
-	background: $text;
-	color: $bg;
-
+	background: $bg;
+	color: $text;
 
 	display: flex;
 	flex-direction: column;
@@ -59,10 +55,10 @@ body{
 
 // ##### bar Transition #####
 .bar-leave-active{
-	transition: opacity .2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+	transition: opacity .2s ease;
 }
 .bar-enter-active {
-	transition: opacity .2s cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.5s;
+	transition: opacity .2s ease 0.5s;
 }
 .bar-enter, .bar-leave-active {
 	opacity: 0
@@ -71,7 +67,7 @@ body{
 
 // ##### modal Transition #####
 .modal-enter-active, .modal-leave-active {
-	transition: all 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+	transition: all 0.2s ease;
 	opacity: 1;
 	transform: scale(1);
 }

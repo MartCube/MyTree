@@ -80,7 +80,7 @@ export const actions = {
 							//	create new user in db
 							await this.$fireStore.collection('users').doc(userPayload.email).set(user)
 							//	update store
-							commit('setUser', user)
+							await commit('setUser', user)
 						}
 					})
 					.catch(function (error) {
@@ -99,9 +99,9 @@ export const actions = {
 							ref = this.$fireStore.collection('shops').doc(userPayload.email)
 							var shop = await ref.get()
 							//	update store
-							commit('setUser', user.data())
-							commit('setShop', shop.data())
-							commit('setAuth', true)
+							await commit('setUser', user.data())
+							await commit('setShop', shop.data())
+							await commit('setAuth', true)
 						}
 					})
 					.catch(function (error) {

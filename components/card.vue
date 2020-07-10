@@ -31,10 +31,7 @@ export default {
 			type: String,
 			required: true,
 		},
-		id: {
-			type: Number,
-			required: true,
-		},
+
 		rate: {
 			type: Number,
 			required: true,

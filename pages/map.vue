@@ -15,7 +15,6 @@
 			</template>
 
 			<gmaps-marker v-for="(shop, i) in shopList" :key="i" class="shop" :position="shop.position" :icon="icon" />
-			<gmaps-marker class="shop" :options="pickShopLocation" />
 		</gmaps-map>
 	</div>
 </template>
@@ -28,7 +27,6 @@ export default {
 	components: { gmapsMap, gmapsMarker },
 	async asyncData({ app }) {
 		var shopList = []
-
 		await app.$fireStore
 			.collection('shops')
 			.get()
@@ -43,7 +41,6 @@ export default {
 		}
 	},
 	data: () => ({
-		center: null,
 		mapOptions: {
 			center: { lat: 41.3663232, lng: 21.253324799999998 },
 			zoom: 12,
@@ -54,14 +51,7 @@ export default {
 			zoomControl: false,
 			streetViewControl: false,
 		},
-
 		icon: require('~/static/icons/location.svg'),
-
-		pickShopLocation: {
-			position: { lat: 41.41, lng: 21.21 },
-			icon: require('~/static/icons/location.svg'),
-			draggable: true,
-		},
 	}),
 	computed: {
 		modal() {
@@ -75,7 +65,6 @@ export default {
 		},
 		setLocation(pos) {
 			this.mapOptions = { ...this.mapOptions, center: { lat: pos.coords.latitude, lng: pos.coords.longitude } }
-			this.center = { lat: pos.coords.latitude, lng: pos.coords.longitude }
 		},
 		locationError(error) {
 			if (error.PERMISSION_DENIED) alert('User denied the request for Geolocation.')

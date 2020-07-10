@@ -6,7 +6,7 @@
 			</div>
 			<div class="buttons-wrapper">
 				<btn fill class="ok" @click.native="emitValue(true)">Yes </btn>
-				<btn class="cancel" @click.native="emitValue(false)"> Cancel </btn>
+				<btn class="cancel" @click.native="emitValue(false)"> No </btn>
 			</div>
 		</div>
 		<div class="overlay"></div>
@@ -45,7 +45,7 @@ export default {
 	position: fixed;
 	@include d-flex();
 	height: 100vh;
-	z-index: 98;
+	z-index: 100;
 
 	.overlay {
 		position: fixed;
@@ -76,17 +76,17 @@ export default {
 		}
 
 		.buttons-wrapper {
-			@include d-flex(space-between, center);
+			@include d-flex(space-around, center);
 			.ok {
 				background-color: $secondary;
 				color: $primary;
-				width: 45%;
+				width: 40%;
 				text-transform: initial;
 			}
 			.cancel {
 				border: 2px solid $secondary;
 				color: $secondary;
-				width: 45%;
+				width: 40%;
 				text-transform: initial;
 			}
 		}

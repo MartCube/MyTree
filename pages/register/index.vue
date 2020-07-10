@@ -33,7 +33,6 @@
 <script>
 import inputItem from '~/components/inputItem.vue'
 import btn from '~/components/btn.vue'
-import { slideRight } from '~/assets/animate'
 import { ValidationObserver } from 'vee-validate'
 import checkbox from '~/components/checkbox.vue'
 
@@ -56,7 +55,10 @@ export default {
 			return this.$store.getters.authError
 		},
 	},
-	beforeDestroy: function () {
+	mounted() {
+		this.$nextTick().then(() => document.body.classList.add('dark'))
+	},
+	destroyed() {
 		this.$store.commit('setError', null)
 	},
 	methods: {

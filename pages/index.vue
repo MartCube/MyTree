@@ -1,74 +1,18 @@
 <template>
 	<div class="container home-page">
-		<div class="image-bg">
-			<img ref="image" class="lazyload" :data-src="bgImage" alt="" />
-		</div>
-		<div class="user-container" :class="{ open: triggerClass }" @click="closeBottomBar">
-			<div class="wrapper">
-				<div class="avatar">
-					<div class="image">
-						<img src="/index/user.jpg" alt="" />
-					</div>
-					<h1>Hello UserName !</h1>
-				</div>
-			</div>
-			<div class="info-container">
-				<div class="cups info-item">
-					<p class="title">
-						Free cup
-					</p>
-					<div class="numbers">
-						3
-					</div>
-					<div class="statistic">
-						<radial-progress-bar :diameter="diameter" :completed-steps="3" :total-steps="totalSteps" :stroke-width="strokeWidth" :start-color="startColor" :stop-color="stopColor" :inner-stroke-color="innerStrokeColor" :inner-stroke-width="innerStrokeWidth" />
+		<div class="top-container" :class="{ open: triggerClass }" @click="closeBottomBar">
+			<div class="user-card">
+				{{ user.email }}
+				<svg class="icon" viewBox="0 0 512 512">
+					<polygon points="133.6,383.9 188.5,286.4 162.8,284.4 203.9,220.8 178.2,218.8 233,147.1 209,145.2 262.1,53.7 262.7,55.9 262.8,53 315.9,144.5 291.9,146.5 346.7,218.1 321,220.1 362.1,283.7 336.4,285.7 391.3,383.2 346.2,382.6 346.3,382.8 " />
+					<rect x="252.6" y="370" width="19.6" height="89" />
 
-						<div class="icon">
-							<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-								<path d="M0 0h24v24H0V0z" fill="none" />
-								<path d="M6 13c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V5H6v8z" opacity=".3" />
-								<path d="M4 19h16v2H4zM20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.9 2-2V5c0-1.11-.89-2-2-2zm-4 10c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V5h10v8zm4-5h-2V5h2v3z" />
-							</svg>
-						</div>
-					</div>
-				</div>
-				<div class="balance info-item">
-					<p class="title">
-						Bonuces
-					</p>
-					<div class="numbers">
-						5
-					</div>
-					<div class="statistic">
-						<radial-progress-bar :diameter="diameter" :completed-steps="completedSteps" :total-steps="totalSteps" :stroke-width="strokeWidth" :start-color="startColor" :stop-color="stopColor" :inner-stroke-color="innerStrokeColor" :inner-stroke-width="innerStrokeWidth" />
+					<polygon points="86.8,423.6 127.3,351.8 108.3,350.3 138.6,303.4 119.7,301.9 160.1,249.1 142.4,247.7 181.6,180.2 182,181.9 182,179.7 221.2,247.2 203.5,248.6 243.9,301.4 224.9,302.9 255.3,349.8 236.3,351.3 276.7,423.1 243.5,422.7 243.6,422.8" />
+					<rect x="174.6" y="410.7" width="14.5" height="48.3" />
 
-						<div class="icon">
-							<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-								<path d="M0 0h24v24H0V0z" fill="none" />
-								<path d="M15 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z" opacity=".3" />
-								<path d="M15 4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zM3 12c0-2.61 1.67-4.83 4-5.65V4.26C3.55 5.15 1 8.27 1 12c0 3.73 2.55 6.85 6 7.74v-2.09c-2.33-.82-4-3.04-4-5.65z" />
-							</svg>
-						</div>
-					</div>
-				</div>
-				<div class="trees info-item">
-					<p class="title">
-						Trees
-					</p>
-					<div class="numbers">
-						7
-					</div>
-					<div class="statistic">
-						<radial-progress-bar :diameter="diameter" :completed-steps="7" :total-steps="totalSteps" :stroke-width="strokeWidth" :start-color="startColor" :stop-color="stopColor" :inner-stroke-color="innerStrokeColor" :inner-stroke-width="innerStrokeWidth" />
-						<div class="icon">
-							<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-								<path d="M0 0h24v24H0V0z" fill="none" />
-								<path d="M15 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z" opacity=".3" />
-								<path d="M15 4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zM3 12c0-2.61 1.67-4.83 4-5.65V4.26C3.55 5.15 1 8.27 1 12c0 3.73 2.55 6.85 6 7.74v-2.09c-2.33-.82-4-3.04-4-5.65z" />
-							</svg>
-						</div>
-					</div>
-				</div>
+					<polygon points="274.7,429.9 308,370.7 292.4,369.5 317.4,330.8 301.8,329.6 335.1,286.1 320.5,284.9 352.8,229.4 353.1,230.8 353.1,228.9 385.4,284.5 370.8,285.7 404.1,329.2 388.5,330.4 413.5,369 397.9,370.3 431.1,429.4 403.8,429.1 403.8,429.2" />
+					<rect x="347" y="415.3" width="11.9" height="43.8" />
+				</svg>
 			</div>
 		</div>
 		<div class="bottom-container" :class="{ open: triggerClass }" @click="openBottomBar">
@@ -83,7 +27,7 @@
 			</div>
 			<div class="bottom-content">
 				<div class="slider-container">
-					<card v-for="card in cards" :id="card.id" :key="card.id" :image="card.image" :rate="card.rate" :title="card.title"></card>
+					<card v-for="shop in shopList" :key="shop.image" :image="shop.image" :rate="5" :title="shop.title"></card>
 				</div>
 			</div>
 		</div>
@@ -98,30 +42,44 @@ export default {
 	middleware: 'auth',
 	components: {
 		card,
-		RadialProgressBar,
+		// RadialProgressBar,
 	},
-	data() {
+	async asyncData({ app }) {
+		var shopList = []
+		await app.$fireStore
+			.collection('shops')
+			.get()
+			.then(function (querySnapshot) {
+				querySnapshot.forEach(function (doc) {
+					shopList.push(doc.data())
+					console.log(doc)
+				})
+			})
+
 		return {
-			cards: [
-				{ id: 1, title: 'Cofee-shop', image: '/index/coffee_shop1.jpg', rate: 5 },
-				{ id: 2, title: 'Rachel! Who ?!', image: '/index/coffee_shop2.jpg', rate: 4 },
-				{ id: 3, title: 'Coffee to go', image: '/index/coffee_shop3.jpg', rate: 5 },
-				{ id: 4, title: 'Cofee-shop', image: '/index/coffee_shop1.jpg', rate: 5 },
-				{ id: 5, title: 'Rachel! Who ?!', image: '/index/coffee_shop2.jpg', rate: 4 },
-				{ id: 6, title: 'Coffee to go', image: '/index/coffee_shop3.jpg', rate: 3 },
-			],
-			completedSteps: 5,
-			totalSteps: 10,
-			startColor: '#6fffe9',
-			stopColor: '#6fffe9',
-			innerStrokeColor: 'rgba(255,255,255,.4)',
-			innerStrokeWidth: 6,
-			strokeWidth: 6,
-			diameter: 80,
-			triggerClass: false,
-			bgImage: '/index/bg.jpg',
+			shopList: shopList,
 		}
 	},
+	data: () => ({
+		cards: [
+			{ id: 1, title: 'Cofee-shop', image: '/index/coffee_shop1.jpg', rate: 5 },
+			{ id: 2, title: 'Rachel! Who ?!', image: '/index/coffee_shop2.jpg', rate: 4 },
+			{ id: 3, title: 'Coffee to go', image: '/index/coffee_shop3.jpg', rate: 5 },
+			{ id: 4, title: 'Cofee-shop', image: '/index/coffee_shop1.jpg', rate: 5 },
+			{ id: 5, title: 'Rachel! Who ?!', image: '/index/coffee_shop2.jpg', rate: 4 },
+			{ id: 6, title: 'Coffee to go', image: '/index/coffee_shop3.jpg', rate: 3 },
+		],
+		completedSteps: 5,
+		totalSteps: 10,
+		startColor: '#6fffe9',
+		stopColor: '#6fffe9',
+		innerStrokeColor: 'rgba(255,255,255,.4)',
+		innerStrokeWidth: 6,
+		strokeWidth: 6,
+		diameter: 80,
+		triggerClass: false,
+		bgImage: '/login/bg.jpg',
+	}),
 	computed: {
 		QRscan() {
 			return this.$store.getters.QRscan
@@ -129,6 +87,9 @@ export default {
 		user() {
 			return this.$store.getters.user
 		},
+	},
+	mounted() {
+		this.$nextTick().then(() => document.body.classList.remove('dark'))
 	},
 	methods: {
 		openBottomBar() {
@@ -148,154 +109,35 @@ export default {
 .container.home-page {
 	position: relative;
 	width: 100%;
-	.image-bg {
-		width: 100%;
-		height: 55vh;
-		position: absolute;
-
+	background: $secondary;
+	.top-container {
 		z-index: 2;
-		color: #fff;
-		transition: transform 0.6s cubic-bezier(0, 0.55, 0.45, 1);
-
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		align-content: center;
-		filter: blur(0.6px);
-		background-color: rgba(0, 0, 0, 0.4);
-		img {
-			height: 55vh;
-			width: 100%;
-			object-fit: cover;
-			object-position: center;
-			mix-blend-mode: saturation;
-			&.lazyload,
-			&.lazyloading {
-				opacity: 0;
-			}
-			&.lazyloaded {
-				opacity: 1;
-				transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1);
-			}
-		}
-	}
-	.user-container {
 		width: 100%;
 		height: 50vh;
-		z-index: 2;
-		color: #fff;
-		transition: padding 0.4s linear;
-		// will-change: height;
-		padding: 1rem;
-		width: 100%;
+		padding: 5%;
+		padding-top: 10vh;
 		overflow: hidden;
-		&.open {
-			padding: 1px;
-			// height: 10vh;
-			overflow: hidden;
-			.wrapper {
-				.avatar {
-					.image {
-						// width: 2.5rem;
-						margin-right: 1rem;
-						// height: 2.5rem;
-						border-radius: 50%;
-						transform: scale(0.5);
-						overflow: hidden;
-						border: 2px solid #364784;
-					}
-					h1 {
-						// font-size: 1rem;
-						transform: scale(0.7);
-					}
-				}
-			}
-		}
-		.wrapper {
+
+		transition: padding 0.4s linear;
+
+		.user-card {
 			display: flex;
 			flex-direction: column;
+			justify-content: center;
 			align-items: center;
-			.avatar {
-				display: flex;
-				width: 100%;
-				align-items: center;
-				justify-content: space-between;
-				h1 {
-					font-size: 1.5rem;
-					transition: all 0.6s linear;
-					display: flex;
-					flex-grow: 1;
-					justify-content: flex-start;
-				}
-				.image {
-					width: 5rem;
-					margin: 0 10px;
-					height: 5rem;
-					border-radius: 50%;
-					transition: all 0.6s linear;
-					overflow: hidden;
-					border: 3px solid $primary;
-				}
-				img {
-					width: 100%;
-					height: 100%;
-					object-fit: contain;
-					object-position: center;
-				}
-			}
-		}
-		.info-container {
-			display: flex;
+			align-content: center;
+
 			width: 100%;
-			justify-content: space-between;
-			margin-top: 2rem;
-			align-items: flex-start;
-			.info-item {
-				width: 30%;
-				justify-content: center;
-				p.title {
-					font-size: 1.2em;
-					text-align: center;
-				}
-				.numbers {
-					text-align: center;
-					font-size: 1.3em;
-				}
-				.statistic {
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					margin-top: 1rem;
-					.icon {
-						display: flex;
-						justify-content: center;
-						align-items: center;
-						position: absolute;
-						// width: 100%;
-						// height: 100%;
-						svg {
-							width: 2rem;
-							height: 2rem;
-							fill: $primary;
-						}
-					}
-				}
-				&.balance {
-					.statistic {
-						svg #shape {
-							stroke-dasharray: 100;
-							stroke-dashoffset: 100;
-						}
-					}
-				}
-				&.trees {
-					.statistic {
-						svg #shape {
-							stroke-dasharray: 100;
-							stroke-dashoffset: 300;
-						}
-					}
-				}
+			height: 100%;
+			border-radius: 40px;
+			background: linear-gradient(145deg, #344860, #3e5672);
+			box-shadow: 10px 10px 40px #31445b, -10px -10px 40px #435c7b;
+			color: white;
+			.icon {
+				width: 50px;
+				margin: 10px;
+
+				fill: $primary;
 			}
 		}
 	}
@@ -313,27 +155,26 @@ export default {
 
 		position: absolute;
 		height: 90vh;
-		filter: drop-shadow(2px 4px 14px rgba(0, 0, 0, 0.6));
+		// filter: drop-shadow(2px 4px 14px rgba(0, 0, 0, 0.6));
 		transition: transform 0.6s cubic-bezier(0, 0.55, 0.45, 1);
 		will-change: transform;
+
+		&.open {
+			transform: translateY(10vh);
+			// filter: drop-shadow(0 0 4rem rgba(0, 0, 0, 1));
+			.arrow {
+				svg {
+					animation: bottomBarArrow 1.5s linear 0.5s infinite;
+				}
+			}
+		}
 		.arrow {
 			margin: 10px auto;
 			width: fit-content;
 			svg {
 				fill: $secondary;
 				transform: rotateX(180deg);
-				animation: bottomBarArrowReverse 1.5s linear 0.5s infinite;
-			}
-		}
-		&.open {
-			// height: 90vh;
-			// top: 4rem;
-			transform: translateY(10vh);
-			filter: drop-shadow(0 0 4rem rgba(0, 0, 0, 1));
-			.arrow {
-				svg {
-					animation: bottomBarArrow 1.5s linear 0.5s infinite;
-				}
+				// animation: bottomBarArrowReverse 1.5s linear 0.5s infinite;
 			}
 		}
 		.title-container {
@@ -369,6 +210,7 @@ export default {
 		}
 	}
 }
+
 @keyframes bottomBarArrow {
 	0% {
 		opacity: 1;

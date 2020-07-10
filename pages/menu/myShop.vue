@@ -1,5 +1,5 @@
 <template>
-	<div class="container shop" :class="{ edit_mode: edit }">
+	<div class="container shop" :class="{ edit_mode: edit, map_mode: showMap }">
 		<div class="edit">
 			<svg v-if="!edit" class="icon" viewBox="0 0 24 24" @click="editOn">
 				<path d="M16.58,5.1l3.6,3.6a.39.39,0,0,1,0,.55L11.46,18l-3.71.41a.78.78,0,0,1-.86-.86l.41-3.7L16,5.1a.4.4,0,0,1,.56,0ZM23,4.18,21.1,2.23a1.58,1.58,0,0,0-2.21,0L17.48,3.65a.39.39,0,0,0,0,.55l3.6,3.6a.39.39,0,0,0,.55,0L23,6.39A1.56,1.56,0,0,0,23,4.18ZM15.83,15.6v4.06H3.06V6.89h9.17a.52.52,0,0,0,.34-.14l1.6-1.6a.48.48,0,0,0-.34-.82H2.42A1.92,1.92,0,0,0,.5,6.25V20.3a1.92,1.92,0,0,0,1.92,1.92H16.47a1.92,1.92,0,0,0,1.92-1.92V14a.48.48,0,0,0-.82-.34L16,15.26A.52.52,0,0,0,15.83,15.6Z" />
@@ -9,17 +9,25 @@
 			</svg>
 		</div>
 
-		<div v-if="modal" class="modal">
-			<div class="msg">
-				<h2>Saving ...</h2>
-			</div>
-		</div>
-
-		<template v-if="showMap">
-			<gmaps-map id="map" :options="mapOptions">
-				<gmaps-marker class="shop" :options="shopLocation" />
+		<div v-if="showMap" id="map">
+			<gmaps-map :options="mapOptions">
+				<template v-slot:loading>
+					<div></div>
+				</template>
+				<gmaps-marker ref="shop" :options="shopOptions" />
 			</gmaps-map>
-		</template>
+			<svg class="icon_my_location" viewBox="0 0 24 24" @click="getLocation">
+				<path class="secondary" d="M12,22A10,10,0,1,1,22,12,10,10,0,0,1,12,22ZM12,4a8,8,0,1,0,8,8A8,8,0,0,0,12,4Z" />
+				<rect class="secondary" x="11.13" y="17" width="1.75" height="7" />
+				<rect class="secondary" y="11.13" width="7" height="1.75" />
+				<rect class="secondary" x="17" y="11.13" width="7" height="1.75" />
+				<rect class="secondary" x="11.13" width="1.75" height="7" />
+				<circle class="secondary" cx="12" cy="12" r="4" />
+			</svg>
+			<svg class="icon_save" viewBox="0 0 24 24" @click="savePosition">
+				<path class="secondary" d="M22.78,5.53,18.47,1.22A2.47,2.47,0,0,0,16.73.5H3A2.46,2.46,0,0,0,.5,3V21A2.46,2.46,0,0,0,3,23.5H21A2.46,2.46,0,0,0,23.5,21V7.27a2.47,2.47,0,0,0-.72-1.74ZM12,20.21a3.29,3.29,0,1,1,3.29-3.28A3.29,3.29,0,0,1,12,20.21ZM16.93,4.58V9.74a.62.62,0,0,1-.62.62H4.4a.61.61,0,0,1-.61-.62V4.4a.61.61,0,0,1,.61-.61H16.13a.6.6,0,0,1,.44.18l.18.17A.67.67,0,0,1,16.93,4.58Z" />
+			</svg>
+		</div>
 
 		<div class="image" @click="Upload">
 			<img ref="image" class="lazyload" :data-src="shop.image" alt="" />
@@ -54,7 +62,8 @@
 					<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 						<path d="M11.13,23C4.59,13.62,3.41,12.64,3.41,9.09a8.59,8.59,0,0,1,17.18,0c0,3.45-1.18,4.38-7.72,14a1.06,1.06,0,0,1-1.74,0ZM12,12.75a3.6,3.6,0,0,0,3.65-3.66A3.51,3.51,0,0,0,12,5.54,3.58,3.58,0,0,0,8.35,9.09,3.67,3.67,0,0,0,12,12.75Z" />
 					</svg>
-					<p>View on map</p>
+					<p v-if="!edit">View on map</p>
+					<p v-else @click="pickPosition">Pick your position on map</p>
 				</div>
 			</div>
 			<div class="description">
@@ -67,6 +76,7 @@
 
 <script>
 import { gmapsMap, gmapsMarker } from 'x5-gmaps'
+import btn from '~/components/btn'
 
 export default {
 	middleware: 'auth',
@@ -74,10 +84,9 @@ export default {
 	data: () => ({
 		file: null,
 		edit: false,
-		modal: false,
 		showMap: false,
 		mapOptions: {
-			center: { lat: 41.3663232, lng: 21.253324799999998 },
+			center: { lat: 0, lng: 0 },
 			zoom: 12,
 			rotateControl: true,
 			fullscreenControl: false,
@@ -86,8 +95,8 @@ export default {
 			zoomControl: false,
 			streetViewControl: false,
 		},
-		shopLocation: {
-			position: { lat: 41.41, lng: 21.21 },
+		shopOptions: {
+			position: { lat: 0, lng: 0 },
 			icon: require('~/static/icons/location.svg'),
 			draggable: true,
 		},
@@ -132,6 +141,8 @@ export default {
 		},
 		editOn() {
 			console.log('editOn')
+			this.shopOptions.position = this.shop.position
+			this.mapOptions.center = this.shop.position
 			this.edit = true
 		},
 		async save() {
@@ -144,6 +155,7 @@ export default {
 				image: image,
 				title: title,
 				description: description,
+				position: this.shopOptions.position,
 			})
 
 			//	create new shop in db
@@ -159,13 +171,23 @@ export default {
 		},
 		setLocation(pos) {
 			this.mapOptions = { ...this.mapOptions, center: { lat: pos.coords.latitude, lng: pos.coords.longitude } }
-			this.center = { lat: pos.coords.latitude, lng: pos.coords.longitude }
+			this.shopOptions = { ...this.shopOptions, position: { lat: pos.coords.latitude, lng: pos.coords.longitude } }
 		},
 		locationError(error) {
 			if (error.PERMISSION_DENIED) alert('User denied the request for Geolocation.')
 			else if (error.POSITION_UNAVAILABLE) alert('Location information is unavailable.')
 			else if (error.TIMEOUT) alert('The request to get user location timed out.')
 			else alert('An unknown error occurred.')
+		},
+
+		pickPosition() {
+			console.log('pickPosition')
+			this.showMap = true
+		},
+		savePosition() {
+			console.log('savePosition')
+			this.shopOptions.position = this.$refs.shop.marker.position.toJSON()
+			this.showMap = false
 		},
 	},
 }
@@ -177,6 +199,7 @@ export default {
 .shop {
 	background: $text;
 	position: relative;
+
 	&.edit_mode {
 		overflow: visible;
 		.content {
@@ -194,6 +217,9 @@ export default {
 		~ .bar {
 			display: none !important;
 		}
+	}
+	&.map_mode {
+		overflow: hidden;
 	}
 
 	.edit {
@@ -340,7 +366,7 @@ export default {
 				.icon {
 					width: 1.2em;
 					margin: 0 2px;
-					fill: $primary;
+					fill: $secondary;
 				}
 				&.map {
 					text-decoration: underline;
@@ -368,34 +394,32 @@ export default {
 	}
 }
 
-.modal {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	z-index: 99;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-
-	background: rgba(72, 91, 114, 0.75);
-	transition: all 0.35s ease;
-
-	.msg {
-		width: 50%;
-		color: $secondary;
-		padding: 5% 10%;
-		border-radius: 15px;
-		background: $bg;
-	}
-}
-
 #map {
-	z-index: 99;
+	z-index: 91;
+	width: 100%;
 	height: 100vh;
+
+	.icon_save,
+	.icon_my_location {
+		position: absolute;
+		bottom: 5vh;
+		right: 5vh;
+		z-index: 92;
+
+		width: 50px;
+		padding: 10px;
+		background: $bg;
+		border-radius: 15px;
+
+		.primary {
+			fill: $primary;
+		}
+		.secondary {
+			fill: $secondary;
+		}
+	}
+	.icon_save {
+		left: 5vh;
+	}
 }
 </style>
