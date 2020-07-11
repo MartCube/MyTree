@@ -45,7 +45,7 @@ module.exports = {
 
 	pwa: {
 		manifest: {
-			name: '',
+			name: 'My Tree',
 			short_name: 'My Tree',
 			// display: 'Fullscreen',
 			theme_color: '#3a506b',

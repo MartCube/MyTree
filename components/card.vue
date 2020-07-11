@@ -1,6 +1,6 @@
 <template>
 	<div class="card">
-		<n-link to="/detail-product">
+		<n-link :to="`${id}`">
 			<div link class="image">
 				<img :src="image" alt />
 			</div>
@@ -23,6 +23,10 @@
 export default {
 	name: 'Card',
 	props: {
+		id: {
+			type: String,
+			required: true,
+		},
 		image: {
 			type: String,
 			required: true,
@@ -31,7 +35,6 @@ export default {
 			type: String,
 			required: true,
 		},
-
 		rate: {
 			type: Number,
 			required: true,

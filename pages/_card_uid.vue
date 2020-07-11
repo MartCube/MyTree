@@ -1,11 +1,11 @@
 <template>
 	<div class="container shop">
 		<div class="image">
-			<img ref="image" class="lazyload" :data-src="shop.image" alt="" />
+			<img ref="image" class="lazyload" :src="shopList.image" alt="" />
 		</div>
 		<div class="content">
 			<div class="title">
-				<h2>{{ shop.title }}</h2>
+				<h2>{{ shopList.title }}</h2>
 			</div>
 			<div class="info">
 				<div class="item rating">
@@ -28,7 +28,7 @@
 				</div>
 			</div>
 			<div class="description">
-				<p>{{ shop.description }}</p>
+				<p>{{ shopList.description }}</p>
 			</div>
 		</div>
 	</div>
@@ -36,28 +36,37 @@
 
 <script>
 export default {
-	async asyncData({ app }) {
-		var shopList = []
-		await app.$fireStore
+	async fetch() {
+		const shopDetail = await this.$fireStore
 			.collection('shops')
+			.doc($nuxt.$route.params.card_uid)
 			.get()
-			.then(function (querySnapshot) {
-				querySnapshot.forEach(function (doc) {
-					shopList.push(doc.data())
-					console.log(doc)
-				})
+			.then((doc) => {
+				if (doc.exists) {
+					doc.data()
+					this.shopList = {
+						image: doc.data().image,
+						title: doc.data().title,
+						description: doc.data().description,
+					}
+				} else {
+					console.log('No such document!')
+				}
 			})
-
-		return {
-			shopList: shopList,
-		}
 	},
-	data: () => ({}),
-	computed: {
-		shop() {
-			return this.$store.getters.shop
+	data: () => ({
+		shopList: {
+			title: {
+				type: String,
+			},
+			description: {
+				type: String,
+			},
+			image: {
+				type: String,
+			},
 		},
-	},
+	}),
 	methods: {},
 }
 </script>

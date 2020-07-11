@@ -19,7 +19,7 @@
 		"animejs": "^3.2.0",
 		"firebase": "^7.14.0",
 		"lazysizes": "^5.2.2",
-		"nuxt": "^2.12.1",
+		"nuxt": "^2.13.3",
 		"qrcode": "^1.4.4",
 		"vee-validate": "^3.3.0",
 		"vue-qrcode": "^0.3.3",

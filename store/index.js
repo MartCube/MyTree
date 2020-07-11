@@ -23,7 +23,7 @@ export const getters = {
 
 // Functions that directly mutate the state.
 export const mutations = {
-	async setQRscan(state, result) {
+	setQRscan(state, result) {
 		state.QRscan = result
 		state.user.scans++
 	},
@@ -54,9 +54,8 @@ export const actions = {
 		await commit('setQRscan', result)
 
 		//	update firabase
-		var updCounter = state.user.scans
 		await this.$fireStore.collection('users').doc(state.user.email).update({
-			scans: updCounter,
+			scans: state.user.scans,
 		})
 		// update seller db (seller email is stored in result)
 		// make a trigger function onUpdate
