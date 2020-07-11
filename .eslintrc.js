@@ -27,7 +27,7 @@ module.exports = {
 			'warn',
 			{
 				useTabs: true,
-				printWidth: 999,
+				printWidth: 9999,
 				tabWidth: 4,
 				singleQuote: true,
 				semi: false,
