@@ -156,6 +156,7 @@ export default {
 				title: title,
 				description: description,
 				position: this.shopOptions.position,
+				shopScans: 0,
 			})
 
 			//	create new shop in db

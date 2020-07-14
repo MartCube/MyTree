@@ -50,7 +50,8 @@ export default {
 		box-shadow: 0px 0px 15px -5px $secondary;
 	}
 	&.fill {
-		background-color: $primary;
+		background-color: $secondary;
+		color: white;
 		border: 2px solid transparent;
 	}
 }

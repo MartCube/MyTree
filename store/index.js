@@ -4,10 +4,11 @@ export const state = () => ({
 	isAuth: false,
 	user: null,
 	shop: {
-		image: '/index/coffee_shop1.jpg',
+		image: 'https://firebasestorage.googleapis.com/v0/b/my-tree-app.appspot.com/o/local%2Fcoffee_shop.jpg?alt=media&token=d6a7d68d-6048-4515-9f2e-70e2e4e344a3',
 		title: 'My Tree Coffee Shop',
 		description: 'This is short description about the coffee shop.',
 		position: { lat: 0, lng: 0 },
+		shopScans: 0,
 	},
 })
 
@@ -57,6 +58,7 @@ export const actions = {
 		await this.$fireStore.collection('users').doc(state.user.email).update({
 			scans: state.user.scans,
 		})
+
 		// update seller db (seller email is stored in result)
 		// make a trigger function onUpdate
 		// this.$router.push('/')
@@ -67,7 +69,6 @@ export const actions = {
 			email: userPayload.email,
 			isSeller: userPayload.isSeller,
 			scans: 0,
-			shopScans: 0,
 		}
 
 		try {
@@ -122,7 +123,6 @@ export const actions = {
 		commit('setUser', user.data())
 
 		//	get shop from db
-
 		ref = this.$fireStore.collection('shops').doc(userPayload)
 		await ref
 			.get()

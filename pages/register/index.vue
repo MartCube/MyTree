@@ -32,7 +32,6 @@
 
 <script>
 import inputItem from '~/components/inputItem.vue'
-import btn from '~/components/btn.vue'
 import { ValidationObserver } from 'vee-validate'
 import checkbox from '~/components/checkbox.vue'
 

@@ -38,7 +38,7 @@
 			</div>
 			<div class="bottom-content">
 				<div class="slider-container">
-					<card v-for="shop in shopList" :id="shop.id" :key="shop.id" :image="shop.data.image" :title="shop.data.title" :rate="5"></card>
+					<card v-for="(shop, i) in shopList" :id="shop.id" :key="i" :image="shop.data.image" :title="shop.data.title" :rate="5"></card>
 				</div>
 			</div>
 		</div>
