@@ -1,5 +1,5 @@
 <template>
-	<ValidationProvider v-slot="{ errors, classes }" :rules="rules" :mode="mode" tag="div" class="form__group field">
+	<ValidationProvider v-slot="{ errors, classes }" :rules="rules" :mode="mode" tag="div" class="form_group field">
 		<div v-if="errors.length" class="error" :class="classes">
 			{{ errors[0] }}
 			<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -7,8 +7,8 @@
 			</svg>
 		</div>
 
-		<input :id="name" v-model="input_value" :type="type" class="form__field" :placeholder="name" :name="name" @change="emitValue" />
-		<label :for="name" class="form__label">{{ name }}</label>
+		<input :id="name" v-model="input_value" :type="type" class="form_field" :placeholder="name" :name="name" @change="emitValue" />
+		<label :for="name" class="form_label">{{ name }}</label>
 	</ValidationProvider>
 </template>
 
@@ -29,8 +29,8 @@ export default {
 			default: 'input',
 		},
 		rules: {
-			type: String,
-			default: 'required',
+			type: [Object, String],
+			required: true,
 		},
 		mode: {
 			type: String,
@@ -51,7 +51,7 @@ export default {
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
 
-.form__group {
+.form_group {
 	position: relative;
 	padding: 25px 0 0;
 	margin: 10px 0;
@@ -84,63 +84,64 @@ export default {
 			display: flex;
 		}
 	}
-}
 
-.form__field {
-	font-family: inherit;
-	width: 100%;
-	border: 0;
-	border-bottom: 2px solid $bg;
-	outline: 0;
-	font-size: 1.2rem;
-	color: $bg;
-	padding: 7px 0;
-	background: transparent;
-	transition: border-color 0.2s;
-	&:-webkit-autofill,
-	&:-webkit-autofill:hover,
-	&:-webkit-autofill:focus {
-		-webkit-text-fill-color: #fff;
-		box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
-		transition: background-color 5000s ease-in-out 0s;
-	}
-	&::placeholder {
-		color: transparent;
-	}
-	&:placeholder-shown ~ .form__label {
-		font-size: 1.1rem;
-		cursor: text;
-		top: 20px;
-	}
-}
+	.form_field {
+		font-family: inherit;
+		width: 100%;
+		border: 0;
+		border-bottom: 2px solid $bg;
+		outline: 0;
+		font-size: 1.2rem;
+		color: $bg;
+		padding: 7px 0;
+		background: transparent;
+		transition: border-color 0.2s;
+		&:-webkit-autofill,
+		&:-webkit-autofill:hover,
+		&:-webkit-autofill:focus {
+			-webkit-text-fill-color: #fff;
+			box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+			transition: background-color 5000s ease-in-out 0s;
+		}
+		&::placeholder {
+			color: transparent;
+		}
+		&:placeholder-shown ~ .form_label {
+			font-size: 1.1rem;
+			cursor: text;
+			top: 20px;
+		}
 
-.form__label {
-	position: absolute;
-	top: 0;
-	display: block;
-	transition: 0.2s;
-	font-size: 1rem;
-	color: $bg;
-}
+		&:focus {
+			~ .form_label {
+				position: absolute;
+				top: 0;
+				display: block;
+				transition: 0.2s;
+				font-size: 1rem;
+				color: $primary;
+				font-weight: 700;
+			}
+			padding-bottom: 6px;
+			font-weight: 700;
+			border-width: 3px;
+			border-image: linear-gradient(to right, $primary, $secondary);
+			border-image-slice: 1;
+		}
+	}
 
-.form__field:focus {
-	~ .form__label {
+	.form_label {
 		position: absolute;
 		top: 0;
 		display: block;
 		transition: 0.2s;
 		font-size: 1rem;
-		color: $primary;
-		font-weight: 700;
+		color: $bg;
 	}
-	padding-bottom: 6px;
-	font-weight: 700;
-	border-width: 3px;
-	border-image: linear-gradient(to right, $primary, $secondary);
-	border-image-slice: 1;
 }
+
 /* reset input */
-.form__field {
+.form_field {
 	&:required,
 	&:invalid {
 		box-shadow: none;

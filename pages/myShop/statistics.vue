@@ -2,55 +2,83 @@
 	<div class="container">
 		<div class="menu_title">
 			<div class="line"></div>
-			<span>Account settings</span>
+			<span>Statistcs</span>
+		</div>
+
+		<h2>shop scans</h2>
+		<p>{{ shopScans }}</p>
+		<br />
+		<h2>scan history</h2>
+		<div v-for="(scanLog, i) in scanLogs" :key="i">
+			<p>
+				{{ scanLog.user }} <span>{{ scanLog.date }}</span>
+			</p>
 		</div>
 
 		<div class="menu_links">
-			<div class="item">
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M23.06,9.07a.27.27,0,0,1,.44.21v9.19a2.16,2.16,0,0,1-2.16,2.15H2.66A2.16,2.16,0,0,1,.5,18.47V9.29a.27.27,0,0,1,.44-.21c1,.78,2.34,1.77,6.92,5.1,1,.69,2.55,2.15,4.14,2.14s3.23-1.48,4.15-2.14C20.73,10.85,22.06,9.85,23.06,9.07ZM12,14.87c1,0,2.54-1.31,3.3-1.85,6-4.33,6.41-4.71,7.79-5.79a1.06,1.06,0,0,0,.41-.85V5.53a2.16,2.16,0,0,0-2.16-2.15H2.66A2.15,2.15,0,0,0,.5,5.53v.85a1.06,1.06,0,0,0,.41.85C2.29,8.31,2.74,8.69,8.7,13c.76.54,2.26,1.87,3.3,1.85Z" />
-				</svg>
-				<span> {{ user.email }}</span>
-			</div>
-			<div class="item">
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M23.5,8.41a7.9,7.9,0,0,1-9.38,7.76L13,17.39a1.08,1.08,0,0,1-.81.36H10.56v1.8a1.08,1.08,0,0,1-1.08,1.08H7.69v1.79A1.08,1.08,0,0,1,6.61,23.5h-5A1.08,1.08,0,0,1,.5,22.42v-3.5a1.07,1.07,0,0,1,.32-.77l7.26-7.27a8.08,8.08,0,0,1-.39-2.47,7.91,7.91,0,1,1,15.81,0ZM15.59,6.25a2.16,2.16,0,1,0,2.16-2.16A2.16,2.16,0,0,0,15.59,6.25Z" />
-				</svg>
-				<span>Change Password</span>
-			</div>
-
-			<nuxt-link to="/menu" class="item go_back">
+			<nuxt-link to="/myShop" class="item go_back">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path d="M7.38,14.05h15.5a.61.61,0,0,0,.62-.61V10.56a.61.61,0,0,0-.62-.61H7.38V7.58a1.23,1.23,0,0,0-2.1-.87L.86,11.13a1.23,1.23,0,0,0,0,1.74l4.42,4.42a1.23,1.23,0,0,0,2.1-.87V14.05Z" />
 				</svg>
 				<span>Go Back</span>
 			</nuxt-link>
 		</div>
+
+		<transition name="modal">
+			<modal v-if="modal" @getValue="getModal">
+				Accept scan ?
+			</modal>
+		</transition>
 	</div>
 </template>
 
 <script>
+import modal from '~/components/modal'
+
 export default {
-	middleware: 'auth',
-	components: {
-		// card,
-	},
-	data() {
-		return {}
-	},
+	name: 'Statistics',
+	components: { modal },
+	data: () => ({
+		modal: false,
+	}),
 	computed: {
-		QRscan() {
-			return this.$store.getters.QRscan
-		},
 		user() {
 			return this.$store.getters.user
 		},
+		shopScans() {
+			return this.$store.getters.shop.shopScans
+		},
+		scanLogs() {
+			return this.$store.getters.shop.scanLogs
+		},
 	},
-	methods: {},
+	watch: {
+		scanLogs(newValue, oldValue) {
+			console.log('watcher', newValue, oldValue)
+			if (oldValue.length != 0) {
+				console.log('shop scanned')
+				this.modal = true
+			}
+		},
+	},
+	mounted() {},
+	methods: {
+		async getModal(value) {
+			if (value) {
+				console.log('accept scan and increment user scans')
+				//	update scanned shop in firabase
+				const increment = this.$fireStoreObj.FieldValue.increment(1)
+				await this.$fireStore.collection('users').doc(this.scanLogs[0].user).update({ scans: increment })
+			} else {
+				console.log('decline scan and make timeout')
+			}
+			this.modal = false
+		},
+	},
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~/assets/colors.scss';
 
 .menu_title {

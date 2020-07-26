@@ -13,8 +13,8 @@
 		</div>
 
 		<ValidationObserver ref="signup" tag="form" class="auth" @submit.prevent="Submit('signIn')">
-			<inputItem name="Email" :rules="'email|required'" @getValue="getEmail" />
-			<inputItem name="Password" :rules="'min:8|required'" type="password" @getValue="getPass" />
+			<inputItem name="Email" :rules="emailRules" @getValue="getEmail" />
+			<inputItem name="Password" :rules="passwordRules" type="password" @getValue="getPass" />
 			<checkbox name="Register as a Coffee shop owner." @getValue="getSeller" />
 
 			<span v-if="authError !== null" class="authError">{{ authError }} <i class="icon icon-attention"></i></span>
@@ -32,8 +32,8 @@
 
 <script>
 import inputItem from '~/components/inputItem.vue'
-import { ValidationObserver } from 'vee-validate'
 import checkbox from '~/components/checkbox.vue'
+import { ValidationObserver } from 'vee-validate'
 
 export default {
 	components: {
@@ -48,6 +48,8 @@ export default {
 			password: '',
 			isSeller: false,
 		},
+		emailRules: { required: true, email: true },
+		passwordRules: { required: true, min: 8, regexNumber: /^(?=.*[0-9])/, regexSpecialSign: /^(?=.*[!@#\$%\^&\*])/ },
 	}),
 	computed: {
 		authError() {
@@ -193,6 +195,7 @@ export default {
 		margin-top: 15px;
 		padding: 5px;
 		text-align: center;
+		user-select: none;
 	}
 }
 

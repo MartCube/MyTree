@@ -2,7 +2,7 @@
 	<div class="card">
 		<n-link :to="`${id}`">
 			<div link class="image">
-				<img :src="image" alt />
+				<img class="lazyload" :data-src="image" alt />
 			</div>
 			<div class="info">
 				<h2>{{ title }}</h2>
@@ -69,13 +69,21 @@ export default {
 		overflow: hidden;
 		border-radius: 5px 0 0 5px;
 		position: relative;
-
+		background-color: $secondary;
 		img {
 			width: 100%;
 			height: 100%;
 
 			object-fit: cover;
 			object-position: center;
+			&.lazyload,
+			&.lazyloading {
+				opacity: 0;
+			}
+			&.lazyloaded {
+				opacity: 1;
+				transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+			}
 		}
 	}
 	.info {

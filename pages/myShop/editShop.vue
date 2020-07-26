@@ -157,6 +157,7 @@ export default {
 				description: description,
 				position: this.shopOptions.position,
 				shopScans: 0,
+				scanLogs: [],
 			})
 
 			//	create new shop in db

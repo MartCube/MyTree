@@ -1,6 +1,6 @@
 <template>
 	<div class="container home-page">
-		<div class="top-container" :class="{ open: triggerClass }" @click="closeBottomBar">
+		<div class="top-container" :class="{ open: toggleClass }" @click="toggleBar">
 			<div class="user-card">
 				<span>Welcome {{ user.email }}</span>
 				<div class="info">
@@ -15,9 +15,9 @@
 							<polygon style="fill: #00ccad;" points="274.7,429.9 308,370.7 292.4,369.5 317.4,330.8 301.8,329.6 335.1,286.1 320.5,284.9 352.8,229.4 353.1,230.8 353.1,228.9 385.4,284.5 370.8,285.7 404.1,329.2 388.5,330.4 413.5,369 397.9,370.3 431.1,429.4 403.8,429.1 403.8,429.2" />
 							<rect x="347" y="415.3" width="11.9" height="43.8" />
 						</svg>
-						<span class="number">2</span>
+						<span class="number">{{ shopScans }}</span>
 					</div>
-					<div class="coins">
+					<div class="coins" @click="fakeScan()">
 						<svg class="icon" viewBox="0 0 512 512">
 							<path d="M52,272v31.13c0,16.19,34,34.29,79.43,34.29a158,158,0,0,0,32.39-3.27V292.32a173.37,173.37,0,0,1-32.39,3C97,295.34,68.19,286.2,52,272Zm0-58.54V244.6c0,16.18,34,34.27,79.43,34.27a158.06,158.06,0,0,0,32.39-3.26V233.8a173.37,173.37,0,0,1-32.39,3c-34.43,0-63.24-9.13-79.43-23.35ZM460,244.6c0-16.18-34-34.29-79.44-34.29a157.9,157.9,0,0,0-32.38,3.27v62a158.6,158.6,0,0,0,32.38,3.27C426,278.89,460,260.8,460,244.6ZM52,186.05c0,16.19,34,34.29,79.43,34.29a158.06,158.06,0,0,0,32.39-3.26V155a158.07,158.07,0,0,0-32.39-3.27C86,151.77,52,169.87,52,186.05Zm0,144.47v31.15C52,377.84,86,396,131.43,396a157.32,157.32,0,0,0,32.39-3.28V350.86a173.37,173.37,0,0,1-32.39,3c-34.43,0-63.24-9.12-79.43-23.34Zm296.18,20.35v41.82A158.64,158.64,0,0,0,380.56,396C426,396,460,377.86,460,361.67V330.52c-16.19,14.23-45,23.37-79.44,23.37a175.07,175.07,0,0,1-32.38-3Zm0-58.53v41.81a159.3,159.3,0,0,0,32.38,3.26c45.47,0,79.44-18.1,79.44-34.27V272c-16.19,14.23-45,23.36-79.44,23.36a173.36,173.36,0,0,1-32.38-3ZM176.57,137.06v31.15c0,16.16,34,34.26,79.42,34.26s79.44-18.1,79.44-34.26V137.06c-16.19,14.22-45,23.35-79.44,23.35S192.76,151.28,176.57,137.06ZM256,75.37c-45.45,0-79.42,18.11-79.42,34.29S210.54,144,256,144s79.44-18.1,79.44-34.29S301.46,75.37,256,75.37ZM176.57,254.13v31.14c0,16.2,34,34.29,79.42,34.29s79.44-18.09,79.44-34.29V254.13c-16.19,14.23-45,23.35-79.44,23.35S192.76,268.36,176.57,254.13Zm0-58.55v31.15c0,16.2,34,34.29,79.42,34.29s79.44-18.09,79.44-34.29V195.58C319.24,209.82,290.39,219,256,219S192.76,209.83,176.57,195.58Zm0,117.08v31.15c0,16.17,34,34.29,79.42,34.29s79.44-18.12,79.44-34.29V312.66C319.24,326.87,290.39,336,256,336S192.76,326.88,176.57,312.66Zm0,58.53v31.16c0,16.17,34,34.28,79.42,34.28s79.44-18.11,79.44-34.28V371.19c-16.19,14.24-45,23.36-79.44,23.36S192.76,385.44,176.57,371.19Z" />
 						</svg>
@@ -26,7 +26,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="bottom-container" :class="{ open: triggerClass }" @click="openBottomBar">
+		<div class="bottom-container" :class="{ open: toggleClass }" @click="toggleBar">
 			<div class="arrow">
 				<svg height="24" viewBox="0 0 24 24" width="24">
 					<path d="M0 0h24v24H0z" fill="none" />
@@ -38,22 +38,30 @@
 			</div>
 			<div class="bottom-content">
 				<div class="slider-container">
-					<card v-for="(shop, i) in shopList" :id="shop.id" :key="i" :image="shop.data.image" :title="shop.data.title" :rate="5"></card>
+					<card v-for="(shopItem, i) in shopList" :id="shopItem.id" :key="i" :image="shopItem.data.image" :title="shopItem.data.title" :rate="5"></card>
 				</div>
 			</div>
 		</div>
+
+		<modal v-if="modalScan" type="success" @getValue="getModal">
+			<svg class="icon" viewBox="0 0 24 24">
+				<circle cx="12" cy="12" r="11.5" style="fill: #3a506b;" />
+				<path d="M9.59,18.37,4.72,13.5a.75.75,0,0,1,0-1.06l1.06-1.06a.74.74,0,0,1,1.06,0l3.28,3.28,7-7a.74.74,0,0,1,1.06,0l1.06,1.06a.75.75,0,0,1,0,1.06l-8.62,8.62a.75.75,0,0,1-1.07,0Z" style="fill: #6fffe9;" />
+			</svg>
+			<span>Successful Scan</span>
+		</modal>
 	</div>
 </template>
 
 <script>
 import card from '~/components/card'
-import RadialProgressBar from 'vue-radial-progress'
+import modal from '~/components/modal'
 
 export default {
 	middleware: 'auth',
 	components: {
 		card,
-		// RadialProgressBar,
+		modal,
 	},
 	async asyncData({ app }) {
 		var shopList = []
@@ -75,23 +83,27 @@ export default {
 		}
 	},
 	data: () => ({
-		completedSteps: 5,
-		totalSteps: 10,
-		startColor: '#6fffe9',
-		stopColor: '#6fffe9',
-		innerStrokeColor: 'rgba(255,255,255,.4)',
-		innerStrokeWidth: 6,
-		strokeWidth: 6,
-		diameter: 80,
-		triggerClass: false,
-		bgImage: '/login/bg.jpg',
+		toggleClass: false,
+		modalScan: false,
 	}),
 	computed: {
-		QRscan() {
-			return this.$store.getters.QRscan
-		},
 		user() {
 			return this.$store.getters.user
+		},
+		shopScans() {
+			return this.$store.getters.shop.shopScans
+		},
+		userScans() {
+			return this.$store.getters.user.scans
+		},
+	},
+	watch: {
+		userScans(newValue, oldValue) {
+			console.log('watcher', newValue, oldValue)
+			if (oldValue != 0) {
+				console.log('shop scanned')
+				this.modalScan = true
+			}
 		},
 	},
 	mounted() {
@@ -99,14 +111,18 @@ export default {
 	},
 	methods: {
 		fakeScan() {
-			this.$store.dispatch('StoreQRscan', result)
+			this.$store.dispatch('StoreQRscan', 'mart@shop.com')
 		},
-		openBottomBar() {
-			this.triggerClass = !this.triggerClass
-			console.log(this.triggerClass)
+		toggleBar() {
+			this.toggleClass = !this.toggleClass
 		},
-		closeBottomBar() {
-			this.triggerClass = false
+		async getModal(value) {
+			if (value) {
+				console.log('accept ')
+			} else {
+				console.log('decline')
+			}
+			this.modalScan = false
 		},
 	},
 }

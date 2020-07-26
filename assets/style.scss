@@ -58,7 +58,7 @@ body{
 	transition: opacity .2s ease;
 }
 .bar-enter-active {
-	transition: opacity .2s ease 0.5s;
+	transition: opacity .2s ease 1s;
 }
 .bar-enter, .bar-leave-active {
 	opacity: 0

@@ -1,0 +1,146 @@
+<template>
+	<div class="container">
+		<div class="menu_title">
+			<div class="line"></div>
+			<span>My Shop</span>
+		</div>
+
+		<div class="menu_links">
+			<nuxt-link class="item" to="/myShop/editShop">
+				<svg class="icon" viewBox="0 0 24 24">
+					<path d="M16.58,5.1l3.6,3.6a.39.39,0,0,1,0,.55L11.46,18l-3.71.41a.78.78,0,0,1-.86-.86l.41-3.7L16,5.1a.4.4,0,0,1,.56,0ZM23,4.18,21.1,2.23a1.58,1.58,0,0,0-2.21,0L17.48,3.65a.39.39,0,0,0,0,.55l3.6,3.6a.39.39,0,0,0,.55,0L23,6.39A1.56,1.56,0,0,0,23,4.18ZM15.83,15.6v4.06H3.06V6.89h9.17a.52.52,0,0,0,.34-.14l1.6-1.6a.48.48,0,0,0-.34-.82H2.42A1.92,1.92,0,0,0,.5,6.25V20.3a1.92,1.92,0,0,0,1.92,1.92H16.47a1.92,1.92,0,0,0,1.92-1.92V14a.48.48,0,0,0-.82-.34L16,15.26A.52.52,0,0,0,15.83,15.6Z" />
+				</svg>
+				<span>Edit Shop</span>
+			</nuxt-link>
+			<nuxt-link class="item" to="/myShop/statistics">
+				<svg class="icon" viewBox="0 0 24 24">
+					<path d="M15.45,14.88h1.72a.62.62,0,0,0,.58-.58v-6a.62.62,0,0,0-.58-.57H15.45a.61.61,0,0,0-.57.57v6A.61.61,0,0,0,15.45,14.88Zm4.31,0h1.73a.62.62,0,0,0,.57-.58V4a.61.61,0,0,0-.57-.57H19.76a.61.61,0,0,0-.57.57V14.3A.61.61,0,0,0,19.76,14.88Zm-12.94,0H8.55a.61.61,0,0,0,.57-.58V11.14a.61.61,0,0,0-.57-.58H6.82a.62.62,0,0,0-.57.58V14.3A.62.62,0,0,0,6.82,14.88Zm4.32,0h1.72a.62.62,0,0,0,.58-.58V5.39a.62.62,0,0,0-.58-.58H11.14a.62.62,0,0,0-.58.58V14.3A.62.62,0,0,0,11.14,14.88Zm11.64,2.87H3.38V4.09a.72.72,0,0,0-.72-.71H1.22a.71.71,0,0,0-.72.71v15.1a1.44,1.44,0,0,0,1.44,1.44H22.78a.72.72,0,0,0,.72-.72V18.47A.72.72,0,0,0,22.78,17.75Z" />
+				</svg>
+				<span>Statistics </span>
+			</nuxt-link>
+			<nuxt-link class="item" to="/myShop/QRcode">
+				<svg class="icon" viewBox="0 0 24 24">
+					<path d="M1,10.43h9.43V1H1ZM4.14,4.14H7.29V7.29H4.14ZM13.57,1v9.43H23V1Zm6.29,6.29H16.71V4.14h3.15ZM1,23h9.43V13.57H1Zm3.14-6.29H7.29v3.15H4.14Zm17.29-3.14H23v6.29H18.29V18.29H16.71V23H13.57V13.57h4.72v1.57h3.14Zm0,7.86H23V23H21.43Zm-3.14,0h1.57V23H18.29Z" />
+				</svg>
+				<span>Download QRcode</span>
+			</nuxt-link>
+
+			<nuxt-link to="/menu" class="item go_back">
+				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M7.38,14.05h15.5a.61.61,0,0,0,.62-.61V10.56a.61.61,0,0,0-.62-.61H7.38V7.58a1.23,1.23,0,0,0-2.1-.87L.86,11.13a1.23,1.23,0,0,0,0,1.74l4.42,4.42a1.23,1.23,0,0,0,2.1-.87V14.05Z" />
+				</svg>
+				<span>Go Back</span>
+			</nuxt-link>
+		</div>
+	</div>
+</template>
+
+<script>
+export default {
+	middleware: 'auth',
+	components: {},
+	data: () => ({}),
+	computed: {},
+	methods: {},
+}
+</script>
+
+<style lang="scss" scoped>
+@import '~/assets/colors.scss';
+
+.menu_title {
+	width: 100%;
+	height: 70px;
+	margin-bottom: 10%;
+	box-shadow: 0px 0px 25px -18px rgba(76, 81, 87, 1);
+
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+
+	span {
+		user-select: none;
+		text-decoration: none;
+		font-size: 1.5em;
+		color: $text;
+		margin: 0 5%;
+	}
+
+	.line {
+		width: 4px;
+		border-radius: 15px;
+		margin-left: 5%;
+		height: 50%;
+		background: $primary;
+	}
+
+	.go_back {
+		position: absolute;
+		right: 5%;
+		width: 40px;
+		height: 40px;
+		fill: $secondary_dark;
+		padding: 10px;
+		border-radius: 100%;
+
+		transition: all 0.15s cubic-bezier(0.37, 0, 0.63, 1);
+
+		&:active {
+			background: rgba(14, 227, 177, 0.2);
+			fill: $primary_dark;
+		}
+	}
+}
+
+.menu_links {
+	width: 80%;
+	flex-grow: 1;
+	padding-bottom: 70px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: center;
+	.item {
+		width: 100%;
+		margin: 10px 0;
+		user-select: none;
+		border-radius: 15px;
+
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		align-content: center;
+		&:last-child {
+			position: absolute;
+			width: 80%;
+			bottom: 100px;
+			left: 10%;
+		}
+
+		text-decoration: none;
+		color: $text;
+		font-size: 1.2em;
+
+		transition: all 0.15s cubic-bezier(0.37, 0, 0.63, 1);
+		&:active {
+			background: rgba($primary, 0.3);
+		}
+
+		.icon {
+			width: 50px;
+			padding: 10px;
+			border-radius: 15px;
+
+			fill: $secondary;
+			background: $primary;
+		}
+
+		span {
+			margin: 0 5%;
+		}
+	}
+}
+</style>

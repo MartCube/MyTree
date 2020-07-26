@@ -14,7 +14,7 @@
 
 		<ValidationObserver ref="signin" tag="form" class="auth" @submit.prevent="Submit('signIn')">
 			<inputItem name="Email" :rules="'email|required'" @getValue="getEmail" />
-			<inputItem name="Password" :rules="'min:8|required'" type="password" @getValue="getPass" />
+			<inputItem name="Password" :rules="'required'" type="password" @getValue="getPass" />
 			<span v-if="authError !== null" class="authError">{{ authError }} </span>
 			<input type="submit" class="submit" value="Sign In" />
 
@@ -42,8 +42,8 @@
 
 <script>
 import inputItem from '~/components/inputItem.vue'
-import { ValidationObserver } from 'vee-validate'
 import checkbox from '~/components/checkbox.vue'
+import { ValidationObserver } from 'vee-validate'
 
 export default {
 	components: {
@@ -215,6 +215,7 @@ export default {
 		margin-top: 15px;
 		padding: 5px;
 		text-align: center;
+		user-select: none;
 	}
 }
 

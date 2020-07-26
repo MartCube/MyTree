@@ -62,13 +62,18 @@ export function QRcodeAnim(line) {
 	})
 }
 
-export function slideRight(el) {
+export function modalAnim(content, overlay) {
 	anime({
-		targets: el,
-		translateX: ['75%', '0%'],
-		easing: 'easeInOutCubic',
+		targets: content,
 		opacity: [0, 1],
-		duration: 300,
-		offset: 0,
+		scale: [0.7, 1],
+		easing: 'easeInOutQuad',
+		duration: 250,
+	})
+	anime({
+		targets: overlay,
+		opacity: [0, 1],
+		easing: 'easeInOutQuad',
+		duration: 250,
 	})
 }

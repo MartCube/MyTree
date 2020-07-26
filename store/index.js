@@ -2,13 +2,18 @@ export const state = () => ({
 	QRscan: 'no scan',
 	authError: null,
 	isAuth: false,
-	user: null,
+	user: {
+		email: '',
+		isSeller: false,
+		scans: 0,
+	},
 	shop: {
 		image: 'https://firebasestorage.googleapis.com/v0/b/my-tree-app.appspot.com/o/local%2Fcoffee_shop.jpg?alt=media&token=d6a7d68d-6048-4515-9f2e-70e2e4e344a3',
 		title: 'My Tree Coffee Shop',
 		description: 'This is short description about the coffee shop.',
 		position: { lat: 0, lng: 0 },
 		shopScans: 0,
+		scanLogs: [],
 	},
 })
 
@@ -26,7 +31,6 @@ export const getters = {
 export const mutations = {
 	setQRscan(state, result) {
 		state.QRscan = result
-		state.user.scans++
 	},
 	setUser(state, user) {
 		state.user = user
@@ -37,31 +41,55 @@ export const mutations = {
 	setAuth(state, value) {
 		state.isAuth = value
 	},
-	setShop(state, payload) {
-		state.shop = Object.assign(payload)
-	},
 	setModal(state, payload) {
 		state.modal = Object.assign(payload)
+	},
+	setShop(state, payload) {
+		const scanLogsArray = []
+		Object.keys(payload.scanLogs).forEach((key) => {
+			scanLogsArray.push(payload.scanLogs[key])
+		})
+		scanLogsArray.reverse()
+
+		payload.scanLogs = scanLogsArray
+		state.shop = Object.assign(payload)
 	},
 }
 
 // Functions that call mutations on the state. They can call multiple mutations, can call other actions, and they support asynchronous operations.
 export const actions = {
-	updateShop({ commit }, result) {
-		commit('setShop', result)
-	},
 	async StoreQRscan({ commit, state }, result) {
 		//	update store
 		await commit('setQRscan', result)
+		console.log('scanned shop: ', result)
 
-		//	update firabase
-		await this.$fireStore.collection('users').doc(state.user.email).update({
-			scans: state.user.scans,
-		})
+		//	update scanned shop in firabase
+		const increment = this.$fireStoreObj.FieldValue.increment(1)
+		await this.$fireStore.collection('shops').doc(result).update({ shopScans: increment })
 
-		// update seller db (seller email is stored in result)
-		// make a trigger function onUpdate
-		// this.$router.push('/')
+		// create Scan DateTime
+		var date = new Date()
+		var options = {
+			year: 'numeric',
+			month: 'numeric',
+			day: 'numeric',
+			hour: 'numeric',
+			minute: 'numeric',
+			second: 'numeric',
+			hour12: false,
+		}
+		date = new Intl.DateTimeFormat('default', options).format(date)
+		// create scanLog
+		var scanLog = {
+			user: state.user.email,
+			date: date,
+		}
+
+		// update shop scanLogs array
+		await this.$fireStore
+			.collection('shops')
+			.doc(result)
+			.update({ scanLogs: this.$fireStoreObj.FieldValue.arrayUnion(scanLog) })
 	},
 	async authenticateUser({ commit }, userPayload) {
 		// create user
@@ -118,25 +146,53 @@ export const actions = {
 		commit('setAuth', true)
 
 		//	get user from db
-		var ref = this.$fireStore.collection('users').doc(userPayload)
-		var user = await ref.get()
-		commit('setUser', user.data())
+		this.$fireStore
+			.collection('users')
+			.doc(userPayload)
+			.onSnapshot(
+				function (doc) {
+					console.log('Current user data: ', doc.data())
+					commit('setUser', doc.data())
+				},
+				function (error) {
+					console.log(error)
+					// After an error, the listener will not receive any events and there is no need to detach listener
+				},
+			)
 
 		//	get shop from db
-		ref = this.$fireStore.collection('shops').doc(userPayload)
-		await ref
-			.get()
-			.then(function (doc) {
-				if (doc.exists) {
-					// update store
+		this.$fireStore
+			.collection('shops')
+			.doc(userPayload)
+			.onSnapshot(
+				function (doc) {
+					if (!doc.exists) {
+						console.log('shop data not found!')
+						return
+					}
+					console.log('Current shop data: ', doc.data())
 					commit('setShop', doc.data())
-				} else {
-					// doc.data() will be undefined in this case
-					console.log('No such document!')
-				}
-			})
-			.catch(function (error) {
-				console.log('Error getting document:', error)
-			})
+				},
+				function (error) {
+					console.log(error)
+					// After an error, the listener will not receive any events and there is no need to detach listener
+				},
+			)
+
+		// var ref = this.$fireStore.collection('shops').doc(userPayload)
+		// await ref
+		// 	.get()
+		// 	.then(function (doc) {
+		// 		if (doc.exists) {
+		// 			// update store
+		// 			commit('setShop', doc.data())
+		// 		} else {
+		// 			// doc.data() will be undefined in this case
+		// 			console.log('No such document!')
+		// 		}
+		// 	})
+		// 	.catch(function (error) {
+		// 		console.log('Error getting document:', error)
+		// 	})
 	},
 }

@@ -1,7 +1,7 @@
 <template>
 	<div class="container shop">
 		<div class="image">
-			<img ref="image" class="lazyload" :src="shopList.image" alt="" />
+			<img ref="image" class="lazyload" :data-src="shopList.image" alt="" />
 		</div>
 		<div class="content">
 			<div class="title">

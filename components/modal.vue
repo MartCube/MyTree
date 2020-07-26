@@ -1,12 +1,17 @@
 <template>
 	<div class="modal">
-		<div class="content">
+		<div v-if="type == 'YesNo'" class="content">
 			<div class="text">
-				<p><slot>Slot Text</slot></p>
+				<slot>Slot Text</slot>
 			</div>
 			<div class="buttons-wrapper">
-				<btn fill class="ok" @click.native="emitValue(true)">Yes </btn>
-				<btn class="cancel" @click.native="emitValue(false)"> No </btn>
+				<btn fill class="ok" @click.native="emitValue(true)">Yes</btn>
+				<btn class="cancel" @click.native="emitValue(false)">No</btn>
+			</div>
+		</div>
+		<div v-if="type == 'success'" class="content" @click="emitValue(false)">
+			<div class="text">
+				<slot>Slot Text</slot>
 			</div>
 		</div>
 		<div class="overlay"></div>
@@ -15,6 +20,7 @@
 
 <script>
 import btn from '~/components/btn'
+import { modalAnim } from '~/assets/animate'
 
 export default {
 	name: 'Modal',
@@ -24,8 +30,13 @@ export default {
 	props: {
 		type: {
 			type: String,
-			default: 'info',
+			default: 'YesNo',
 		},
+	},
+	mounted() {
+		var content = document.querySelector('.modal .content')
+		var overlay = document.querySelector('.modal .overlay')
+		modalAnim(content, overlay)
 	},
 
 	methods: {
@@ -49,8 +60,7 @@ export default {
 
 	.overlay {
 		position: fixed;
-		background-color: rgba(255, 255, 255, 0.5);
-		// backdrop-filter: blur(5px);
+		background-color: rgba(0, 0, 0, 0.5);
 		z-index: 1;
 		top: 0;
 		width: 100vw;
@@ -89,6 +99,11 @@ export default {
 				width: 40%;
 				text-transform: initial;
 			}
+		}
+
+		.icon {
+			width: 1.5em;
+			margin-right: 1.5em;
 		}
 	}
 }
