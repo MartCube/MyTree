@@ -1,5 +1,5 @@
 <template>
-	<ValidationProvider v-slot="{ errors, classes }" :rules="rules" :mode="mode" tag="div" class="form_group field">
+	<ValidationProvider v-slot="{ errors, classes }" :rules="rules" :mode="mode" tag="div" :class="{ dark: dark }" class="form_group">
 		<div v-if="errors.length" class="error" :class="classes">
 			{{ errors[0] }}
 			<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -36,6 +36,10 @@ export default {
 			type: String,
 			default: 'eager',
 		},
+		dark: {
+			type: Boolean,
+			default: false,
+		},
 	},
 	data: () => ({
 		input_value: '',
@@ -56,34 +60,6 @@ export default {
 	padding: 25px 0 0;
 	margin: 10px 0;
 	width: 100%;
-
-	.error {
-		position: absolute;
-		top: 0;
-		right: 0;
-		margin: 5px 0;
-		font-size: 0.8em;
-		display: none;
-		color: $bg;
-
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		align-content: center;
-		.icon {
-			path {
-				fill: $bg;
-			}
-			width: 1em;
-			padding: 1px;
-			margin: 0 5px;
-			background: $error;
-			border-radius: 50px;
-		}
-		&.invalid {
-			display: flex;
-		}
-	}
 
 	.form_field {
 		font-family: inherit;
@@ -125,7 +101,7 @@ export default {
 			padding-bottom: 6px;
 			font-weight: 700;
 			border-width: 3px;
-			border-image: linear-gradient(to right, $primary, $secondary);
+			border-image: linear-gradient(to right, $primary, #00e0bf);
 			border-image-slice: 1;
 		}
 	}
@@ -137,6 +113,51 @@ export default {
 		transition: 0.2s;
 		font-size: 1rem;
 		color: $bg;
+	}
+
+	.error {
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin: 5px 0;
+		font-size: 0.8em;
+		color: $error;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		align-content: center;
+		.icon {
+			path {
+				fill: $bg;
+			}
+			width: 1em;
+			padding: 1px;
+			margin: 0 5px;
+			background: $error;
+			border-radius: 50px;
+		}
+		&.invalid {
+			display: flex;
+		}
+	}
+
+	&.dark {
+		.form_field {
+			color: $secondary;
+			border-color: $secondary;
+			&:focus {
+				~ .form_label {
+					color: $secondary;
+				}
+			}
+		}
+		.form_label {
+			color: $secondary;
+		}
+		.error {
+			color: $secondary;
+		}
 	}
 }
 

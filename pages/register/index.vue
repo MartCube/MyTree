@@ -17,7 +17,12 @@
 			<inputItem name="Password" :rules="passwordRules" type="password" @getValue="getPass" />
 			<checkbox name="Register as a Coffee shop owner." @getValue="getSeller" />
 
-			<span v-if="authError !== null" class="authError">{{ authError }} <i class="icon icon-attention"></i></span>
+			<div v-if="authError !== null" class="authError">
+				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M15.1,18.9c0,1.7-1.4,3.1-3.1,3.1s-3.1-1.4-3.1-3.1s1.4-3.1,3.1-3.1S15.1,17.2,15.1,18.9z M9.2,3l0.5,10.6c0,0.5,0.4,0.9,0.9,0.9h2.6c0.5,0,0.9-0.4,0.9-0.9L14.8,3c0-0.5-0.4-1-0.9-1h-3.7C9.6,2,9.2,2.4,9.2,3z" />
+				</svg>
+				{{ authError }}
+			</div>
 			<input type="submit" class="submit" value="Sign Up" />
 		</ValidationObserver>
 
@@ -186,16 +191,30 @@ export default {
 			font-size: 1.4em;
 		}
 	}
+
 	.authError {
 		width: 100%;
-		align-self: center;
-		color: #ff1461;
-		background-color: rgba(255, 255, 255, 0.9);
 		border-radius: 5px;
-		margin-top: 15px;
 		padding: 5px;
-		text-align: center;
+		color: #ff1461;
 		user-select: none;
+
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		align-content: center;
+
+		.icon {
+			path {
+				fill: $bg;
+			}
+			width: 1em;
+			padding: 1px;
+			margin-right: 5px;
+			background: $error;
+			border-radius: 50px;
+		}
 	}
 }
 

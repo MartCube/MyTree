@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="menu_title">
 			<div class="line"></div>
-			<span>My Shop</span>
+			<span>QRcode</span>
 		</div>
 
 		<vue-qrcode v-if="user.isSeller" ref="qrcode" class="qrcode" :value="user.email" :color="qrCodeOptions.color" :width="qrCodeOptions.width" :error-correction-level="qrCodeOptions.errorCorrectionLevel" />
@@ -67,6 +67,7 @@ export default {
 	max-width: 500px;
 	width: 50%;
 	margin: 5% 0;
+	border-radius: 25px;
 }
 
 .btn {

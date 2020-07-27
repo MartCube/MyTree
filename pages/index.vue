@@ -1,6 +1,6 @@
 <template>
 	<div class="container home-page">
-		<div class="top-container" :class="{ open: toggleClass }" @click="toggleBar">
+		<div class="top-container">
 			<div class="user-card">
 				<span>Welcome {{ user.email }}</span>
 				<div class="info">
