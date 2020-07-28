@@ -1,9 +1,11 @@
 <template>
-	<qrcode-stream class="QRcontainer" :track="track" :camera="camera" @decode="onDecode" @init="onInit">
-		<div v-if="loading" class="loading-indicator">
-			<spinner />
-		</div>
-	</qrcode-stream>
+	<div class="container">
+		<qrcode-stream class="QRcontainer" :track="track" :camera="camera" @decode="onDecode" @init="onInit">
+			<div v-if="loading" class="loading-indicator">
+				<spinner />
+			</div>
+		</qrcode-stream>
+	</div>
 </template>
 
 <script>
@@ -49,12 +51,8 @@ export default {
 
 <style lang="scss" scoped>
 .QRcontainer {
-	position: fixed;
-
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
+	width: 100%;
+	height: 100%;
 }
 .loading-indicator {
 	height: 100vh;

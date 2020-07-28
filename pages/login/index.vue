@@ -206,6 +206,7 @@ export default {
 				fill: #4267b2;
 			}
 			width: 2em;
+			height: 2em;
 			padding: 5px;
 			margin: 5px 10px;
 			background: $bg;

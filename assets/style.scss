@@ -6,6 +6,8 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	-webkit-tap-highlight-color: transparent;
+	outline-color: $primary;
 }
 ::-webkit-scrollbar {
 	display: none;
@@ -25,17 +27,92 @@ body{
 }
 
 .container{
-	min-height: 100vh;
+	height: calc(100vh - 70px);
 	overflow: hidden;
 	position: relative;
 	background: $bg;
 	color: $text;
-
+	
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
 	align-content: center;
+
+	.menu_title {
+		width: 100%;
+		height: 70px;
+		margin-bottom: 10%;
+		box-shadow: 0px 0px 25px -18px rgba(76, 81, 87, 1);
+	
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	
+		span {
+			user-select: none;
+			text-decoration: none;
+			font-size: 1.5em;
+			color: $text;
+			margin: 0 5%;
+		}
+	
+		.line {
+			width: 4px;
+			border-radius: 15px;
+			margin-left: 5%;
+			height: 50%;
+			background: $primary;
+		}
+	
+		
+	}
+	
+	.menu_links {
+		width: 80%;
+		flex-grow: 1;
+	
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		align-content: center;
+		.item {
+			width: 100%;
+			margin: 10px 0;
+			user-select: none;
+			border-radius: 15px;
+	
+			display: flex;
+			align-items: center;
+			align-content: center;
+			&:last-child {
+				justify-self: flex-end;
+			}
+	
+			text-decoration: none;
+			color: $text;
+			font-size: 1.2em;
+			
+			transition: all 0.15s cubic-bezier(0.37, 0, 0.63, 1);
+			&:active {
+				background: rgba($primary, 0.3);
+			}
+	
+			.icon {
+				width: 50px;
+				padding: 10px;
+				border-radius: 15px;
+	
+				fill: $secondary;
+				background: $primary;
+			}
+	
+			span {
+				margin: 0 5%;
+			}
+		}
+	}
 }
 
 
@@ -65,13 +142,3 @@ body{
 }
 
 
-// ##### modal Transition #####
-.modal-enter-active, .modal-leave-active {
-	transition: all 0.2s ease;
-	opacity: 1;
-	transform: scale(1);
-}
-.modal-enter, .modal-leave-active {
-	opacity: 0;
-	transform: scale(0.75);
-}

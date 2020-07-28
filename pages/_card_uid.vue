@@ -1,11 +1,11 @@
 <template>
 	<div class="container shop">
 		<div class="image">
-			<img ref="image" class="lazyload" :data-src="shopList.image" alt="" />
+			<img ref="image" class="lazyload" :data-src="shop.image" alt />
 		</div>
 		<div class="content">
 			<div class="title">
-				<h2>{{ shopList.title }}</h2>
+				<h2>{{ shop.title }}</h2>
 			</div>
 			<div class="info">
 				<div class="item rating">
@@ -28,7 +28,7 @@
 				</div>
 			</div>
 			<div class="description">
-				<p>{{ shopList.description }}</p>
+				<p>{{ shop.description }}</p>
 			</div>
 		</div>
 	</div>
@@ -36,15 +36,15 @@
 
 <script>
 export default {
-	async fetch() {
-		const shopDetail = await this.$fireStore
+	async asyncData({ app, params }) {
+		var shop
+		await app.$fireStore
 			.collection('shops')
-			.doc($nuxt.$route.params.card_uid)
+			.doc(params.card_uid)
 			.get()
 			.then((doc) => {
 				if (doc.exists) {
-					doc.data()
-					this.shopList = {
+					shop = {
 						image: doc.data().image,
 						title: doc.data().title,
 						description: doc.data().description,
@@ -53,20 +53,12 @@ export default {
 					console.log('No such document!')
 				}
 			})
+
+		return {
+			shop: shop,
+		}
 	},
-	data: () => ({
-		shopList: {
-			title: {
-				type: String,
-			},
-			description: {
-				type: String,
-			},
-			image: {
-				type: String,
-			},
-		},
-	}),
+	data: () => ({}),
 	methods: {},
 }
 </script>

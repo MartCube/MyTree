@@ -82,10 +82,6 @@ export default {
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
 
-.container {
-	height: 100vh;
-}
-
 .icon_my_location {
 	position: absolute;
 	bottom: 100px;

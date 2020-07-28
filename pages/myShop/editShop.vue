@@ -202,24 +202,21 @@ export default {
 	background: $text;
 	position: relative;
 
-	&.edit_mode {
-		overflow: visible;
-		.content {
-			height: 100vh;
-			.description {
-				height: -webkit-fill-available;
-			}
-			textarea {
-				min-height: 5rem;
-				&:focus {
-					height: 10rem !important;
-				}
-			}
-		}
-		~ .bar {
-			display: none !important;
-		}
-	}
+	// &.edit_mode {
+	// 	overflow: visible;
+	// 	.content {
+	// 		height: 100vh;
+	// 		.description {
+	// 			height: -webkit-fill-available;
+	// 		}
+	// 		textarea {
+	// 			min-height: 5rem;
+	// 			&:focus {
+	// 				height: 10rem !important;
+	// 			}
+	// 		}
+	// 	}
+	// }
 	&.map_mode {
 		overflow: hidden;
 	}
@@ -255,7 +252,7 @@ export default {
 		position: absolute;
 		top: 0;
 		color: #fff;
-		transition: all 1s cubic-bezier(0.65, 0, 0.35, 1);
+		// transition: all 1s cubic-bezier(0.65, 0, 0.35, 1);
 
 		display: flex;
 		justify-content: center;
@@ -316,7 +313,7 @@ export default {
 		align-items: center;
 		align-content: center;
 		filter: drop-shadow(2px 4px 14px rgba(0, 0, 0, 0.6));
-		transition: all 0.6s cubic-bezier(0.5, 0, 0.75, 0);
+		// transition: all 0.6s cubic-bezier(0.5, 0, 0.75, 0);
 		&::after {
 			content: '';
 			position: absolute;

@@ -67,13 +67,13 @@ export function modalAnim(content, overlay) {
 		targets: content,
 		opacity: [0, 1],
 		scale: [0.7, 1],
-		easing: 'easeInOutQuad',
+		easing: 'easeInOutSine',
 		duration: 250,
 	})
 	anime({
 		targets: overlay,
 		opacity: [0, 1],
-		easing: 'easeInOutQuad',
+		easing: 'easeInOutSine',
 		duration: 250,
 	})
 }

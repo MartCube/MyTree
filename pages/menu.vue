@@ -18,12 +18,12 @@
 				</svg>
 				<span>My Shop</span>
 			</nuxt-link>
-			<nuxt-link to="/menu" class="item">
+			<div class="item">
 				<svg class="icon" viewBox="0 0 24 24">
 					<path d="M21.65,4.1,12.85.44a2.16,2.16,0,0,0-1.69,0L2.36,4.1A2.2,2.2,0,0,0,1,6.13c0,9.1,5.25,15.39,10.15,17.43a2.16,2.16,0,0,0,1.69,0C16.77,21.93,23,16.28,23,6.13A2.21,2.21,0,0,0,21.65,4.1ZM12,20.72V3.26l8.06,3.36c-.15,6.94-3.76,12-8.06,14.1Z" />
 				</svg>
 				<span>Privacy Policy </span>
-			</nuxt-link>
+			</div>
 			<div class="item">
 				<svg class="icon" viewBox="0 0 24 24">
 					<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,4.88a1.86,1.86,0,1,1-1.86,1.86A1.86,1.86,0,0,1,12,5.88Zm2.48,11.27a.53.53,0,0,1-.53.53h-3.9a.53.53,0,0,1-.53-.53V16.08a.53.53,0,0,1,.53-.53h.53V12.71h-.53a.53.53,0,0,1-.53-.53V11.11a.53.53,0,0,1,.53-.53h2.84a.53.53,0,0,1,.53.53v4.44H14a.53.53,0,0,1,.53.53Z" />
@@ -78,100 +78,4 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
-
-.menu_title {
-	width: 100%;
-	height: 70px;
-	margin-bottom: 10%;
-	box-shadow: 0px 0px 25px -18px rgba(76, 81, 87, 1);
-
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-
-	span {
-		user-select: none;
-		text-decoration: none;
-		font-size: 1.5em;
-		color: $text;
-		margin: 0 5%;
-	}
-
-	.line {
-		width: 4px;
-		border-radius: 15px;
-		margin-left: 5%;
-		height: 50%;
-		background: $primary;
-	}
-
-	.go_back {
-		position: absolute;
-		right: 5%;
-		width: 40px;
-		height: 40px;
-		fill: $secondary_dark;
-		padding: 10px;
-		border-radius: 100%;
-
-		transition: all 0.15s cubic-bezier(0.37, 0, 0.63, 1);
-
-		&:active {
-			background: rgba(14, 227, 177, 0.2);
-			fill: $primary_dark;
-		}
-	}
-}
-
-.menu_links {
-	width: 80%;
-	flex-grow: 1;
-	padding-bottom: 70px;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	align-content: center;
-	.item {
-		width: 100%;
-		margin: 10px 0;
-		user-select: none;
-		border-radius: 15px;
-
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-start;
-		align-items: center;
-		align-content: center;
-		&:last-child {
-			position: absolute;
-			width: 80%;
-			bottom: 100px;
-			left: 10%;
-		}
-
-		text-decoration: none;
-		color: $text;
-		font-size: 1.2em;
-
-		transition: all 0.15s cubic-bezier(0.37, 0, 0.63, 1);
-		&:active {
-			background: rgba($primary, 0.3);
-		}
-
-		.icon {
-			width: 50px;
-			padding: 10px;
-			border-radius: 15px;
-
-			fill: $secondary;
-			background: $primary;
-		}
-
-		span {
-			margin: 0 5%;
-		}
-	}
-}
 </style>

@@ -68,7 +68,6 @@ export default {
 	data: () => ({
 		menuActive: false,
 	}),
-
 	methods: {
 		menuAnim() {
 			var top = document.querySelector('.menu .top')
@@ -98,8 +97,9 @@ export default {
 .bar {
 	width: 100%;
 	height: 70px;
-	position: fixed;
-	bottom: 0;
+	position: relative;
+	// position: fixed;
+	// bottom: 0;
 	z-index: 90;
 
 	background: #fff;
