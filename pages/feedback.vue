@@ -3,6 +3,11 @@
 		<div class="menu_title">
 			<div class="line"></div>
 			<span>Feedback</span>
+			<nuxt-link to="/menu" class="go_back">
+				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M7.38,14.05h15.5a.61.61,0,0,0,.62-.61V10.56a.61.61,0,0,0-.62-.61H7.38V7.58a1.23,1.23,0,0,0-2.1-.87L.86,11.13a1.23,1.23,0,0,0,0,1.74l4.42,4.42a1.23,1.23,0,0,0,2.1-.87V14.05Z" />
+				</svg>
+			</nuxt-link>
 		</div>
 
 		<ValidationObserver ref="feedback" tag="form" class="form" name="feedback" data-netlify="true" netlify-honeypot="bot-field" method="POST" autocomplete="off" netlify @submit.prevent="feedback()">

@@ -111,7 +111,7 @@ export default {
 	},
 	methods: {
 		fakeScan() {
-			this.$store.dispatch('StoreQRscan', 'mart@shop.com')
+			this.$store.dispatch('StoreQRscan', 'marya_shop@gmail.com')
 		},
 		toggleBar() {
 			this.toggleClass = !this.toggleClass

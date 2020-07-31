@@ -3,6 +3,11 @@
 		<div class="menu_title">
 			<div class="line"></div>
 			<span>My Shop</span>
+			<nuxt-link to="/menu" class="go_back">
+				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M7.38,14.05h15.5a.61.61,0,0,0,.62-.61V10.56a.61.61,0,0,0-.62-.61H7.38V7.58a1.23,1.23,0,0,0-2.1-.87L.86,11.13a1.23,1.23,0,0,0,0,1.74l4.42,4.42a1.23,1.23,0,0,0,2.1-.87V14.05Z" />
+				</svg>
+			</nuxt-link>
 		</div>
 
 		<div class="menu_links">
@@ -23,13 +28,6 @@
 					<path d="M1,10.43h9.43V1H1ZM4.14,4.14H7.29V7.29H4.14ZM13.57,1v9.43H23V1Zm6.29,6.29H16.71V4.14h3.15ZM1,23h9.43V13.57H1Zm3.14-6.29H7.29v3.15H4.14Zm17.29-3.14H23v6.29H18.29V18.29H16.71V23H13.57V13.57h4.72v1.57h3.14Zm0,7.86H23V23H21.43Zm-3.14,0h1.57V23H18.29Z" />
 				</svg>
 				<span>Download QRcode</span>
-			</nuxt-link>
-
-			<nuxt-link to="/menu" class="item go_back">
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M7.38,14.05h15.5a.61.61,0,0,0,.62-.61V10.56a.61.61,0,0,0-.62-.61H7.38V7.58a1.23,1.23,0,0,0-2.1-.87L.86,11.13a1.23,1.23,0,0,0,0,1.74l4.42,4.42a1.23,1.23,0,0,0,2.1-.87V14.05Z" />
-				</svg>
-				<span>Go Back</span>
 			</nuxt-link>
 		</div>
 	</div>
