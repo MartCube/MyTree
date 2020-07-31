@@ -10,7 +10,15 @@ export const state = () => ({
 		description: 'This is short description about the coffee shop.',
 		position: { lat: 0, lng: 0 },
 		shopScans: 0,
-		scanLogs: [],
+		scanLogs: [
+			{
+				date: {
+					date: '0',
+					time: '00:00:00',
+				},
+				users: 0,
+			},
+		],
 	},
 	authError: null,
 	isAuth: false,
@@ -56,16 +64,23 @@ export const actions = {
 
 		// create Scan log DateTime
 		var date = new Date()
-		var options = {
+		var optionsDate = {
 			year: 'numeric',
 			month: 'numeric',
 			day: 'numeric',
+			hour12: false,
+		}
+		var optionsTime = {
 			hour: 'numeric',
 			minute: 'numeric',
 			second: 'numeric',
 			hour12: false,
 		}
-		date = new Intl.DateTimeFormat('default', options).format(date)
+
+		var dateObject = {
+			date: new Intl.DateTimeFormat('default', optionsDate).format(date),
+			time: new Intl.DateTimeFormat('default', optionsTime).format(date),
+		}
 		// create scanLog
 		var scanLog = {
 			user: state.user.email,
