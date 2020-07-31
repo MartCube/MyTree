@@ -61,13 +61,17 @@ export default {
 			}
 		},
 	},
-	mounted() {},
 	methods: {
 		async getModal(value) {
 			if (value) {
-				console.log('accept scan and increment user scans')
-				//	update scanned shop in firabase
-				const increment = this.$fireStoreObj.FieldValue.increment(1)
+				console.log('accept scan: increment user and shop scans')
+
+				//	update shop in firabase
+				var increment = this.$fireStoreObj.FieldValue.increment(1)
+				await this.$fireStore.collection('shops').doc(this.user.email).update({ shopScans: increment })
+
+				//	update user in firabase
+				increment = this.$fireStoreObj.FieldValue.increment(1)
 				await this.$fireStore.collection('users').doc(this.scanLogs[0].user).update({ scans: increment })
 			} else {
 				console.log('decline scan and make timeout')

@@ -1,7 +1,4 @@
 export const state = () => ({
-	QRscan: 'no scan',
-	authError: null,
-	isAuth: false,
 	user: {
 		email: '',
 		isSeller: false,
@@ -15,34 +12,22 @@ export const state = () => ({
 		shopScans: 0,
 		scanLogs: [],
 	},
+	authError: null,
+	isAuth: false,
 })
 
 // Functions that return back data contained in the state.
 export const getters = {
-	QRscan: (state) => state.QRscan,
 	user: (state) => state.user,
+	shop: (state) => state.shop,
 	authError: (state) => state.authError,
 	isAuth: (state) => state.isAuth,
-	shop: (state) => state.shop,
-	modal: (state) => state.modal,
 }
 
 // Functions that directly mutate the state.
 export const mutations = {
-	setQRscan(state, result) {
-		state.QRscan = result
-	},
 	setUser(state, user) {
 		state.user = user
-	},
-	setError(state, error) {
-		state.authError = error
-	},
-	setAuth(state, value) {
-		state.isAuth = value
-	},
-	setModal(state, payload) {
-		state.modal = Object.assign(payload)
 	},
 	setShop(state, payload) {
 		const scanLogsArray = []
@@ -54,20 +39,22 @@ export const mutations = {
 		payload.scanLogs = scanLogsArray
 		state.shop = Object.assign(payload)
 	},
+	setError(state, error) {
+		state.authError = error
+	},
+	setAuth(state, value) {
+		state.isAuth = value
+	},
 }
 
 // Functions that call mutations on the state. They can call multiple mutations, can call other actions, and they support asynchronous operations.
 export const actions = {
 	async StoreQRscan({ commit, state }, result) {
-		//	update store
-		await commit('setQRscan', result)
+		// ##### this will be deleted from here since its not related with store
+
 		console.log('scanned shop: ', result)
 
-		//	update scanned shop in firabase
-		const increment = this.$fireStoreObj.FieldValue.increment(1)
-		await this.$fireStore.collection('shops').doc(result).update({ shopScans: increment })
-
-		// create Scan DateTime
+		// create Scan log DateTime
 		var date = new Date()
 		var options = {
 			year: 'numeric',

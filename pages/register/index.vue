@@ -54,7 +54,7 @@ export default {
 			isSeller: false,
 		},
 		emailRules: { required: true, email: true },
-		passwordRules: { required: true, min: 8, regexNumber: /^(?=.*[0-9])/, regexSpecialSign: /^(?=.*[!@#\$%\^&\*])/ },
+		passwordRules: { required: true, min: 8, regexNumber: /^(?=.*[0-9])/, regexCapital: /^(?=.*[A-Z])/ }, // regexSpecialSign: /^(?=.*[!@#\$%\^&\*])/
 	}),
 	computed: {
 		authError() {
@@ -90,6 +90,7 @@ export default {
 @import '~/assets/colors.scss';
 
 .container {
+	height: 100vh;
 	justify-content: space-between;
 	color: $bg;
 	background: none;

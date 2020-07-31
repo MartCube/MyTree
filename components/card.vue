@@ -6,13 +6,13 @@
 			</div>
 			<div class="info">
 				<h2>{{ title }}</h2>
-				<div class="rating">
+				<!-- <div class="rating">
 					<span v-for="r in rate" :key="r.id">
 						<img src="/index/star.svg" alt="" />
 					</span>
-				</div>
+				</div> -->
 				<div class="description">
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, impedit.</p>
+					<p>{{ description }}</p>
 				</div>
 			</div>
 		</n-link>
@@ -35,8 +35,8 @@ export default {
 			type: String,
 			required: true,
 		},
-		rate: {
-			type: Number,
+		description: {
+			type: String,
 			required: true,
 		},
 	},

@@ -95,6 +95,7 @@ export default {
 @import '~/assets/colors.scss';
 
 .container {
+	height: 100vh;
 	justify-content: space-between;
 	color: $bg;
 	background: none;

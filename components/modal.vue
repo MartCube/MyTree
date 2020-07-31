@@ -1,20 +1,25 @@
 <template>
 	<div class="modal">
-		<div v-if="type == 'YesNo'" class="content">
-			<div class="text">
-				<slot>Slot Text</slot>
+		<template v-if="type == 'YesNo'">
+			<div class="content">
+				<div class="text">
+					<slot>Slot Text</slot>
+				</div>
+				<div class="buttons-wrapper">
+					<btn fill class="ok" @click.native="emitValue(true)">Yes</btn>
+					<btn class="cancel" @click.native="emitValue(false)">No</btn>
+				</div>
 			</div>
-			<div class="buttons-wrapper">
-				<btn fill class="ok" @click.native="emitValue(true)">Yes</btn>
-				<btn class="cancel" @click.native="emitValue(false)">No</btn>
+			<div class="overlay"></div>
+		</template>
+		<template v-if="type == 'success'">
+			<div class="content" @click="emitValue(true)">
+				<div class="text">
+					<slot>Slot Text</slot>
+				</div>
 			</div>
-		</div>
-		<div v-if="type == 'success'" class="content" @click="emitValue(false)">
-			<div class="text">
-				<slot>Slot Text</slot>
-			</div>
-		</div>
-		<div class="overlay"></div>
+			<div class="overlay" @click="emitValue(true)"></div>
+		</template>
 	</div>
 </template>
 

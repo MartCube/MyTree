@@ -24,13 +24,39 @@ export default {
 		}
 	},
 	computed: {
-		QRscan() {
-			return this.$store.getters.QRscan
+		user() {
+			return this.$store.getters.user
 		},
 	},
 	methods: {
-		onDecode(result) {
-			this.$store.dispatch('StoreQRscan', result)
+		async onDecode(result) {
+			console.log('scanned shop: ', result)
+
+			// create DateTime
+			var date = new Date()
+			var options = {
+				year: 'numeric',
+				month: 'numeric',
+				day: 'numeric',
+				hour: 'numeric',
+				minute: 'numeric',
+				second: 'numeric',
+				hour12: false,
+			}
+			date = new Intl.DateTimeFormat('default', options).format(date)
+
+			// create scanLog
+			var scanLog = {
+				user: this.user.email,
+				date: date,
+			}
+
+			// update shop scanLogs array
+			await this.$fireStore
+				.collection('shops')
+				.doc(result)
+				.update({ scanLogs: this.$fireStoreObj.FieldValue.arrayUnion(scanLog) })
+
 			this.$router.push('/')
 		},
 

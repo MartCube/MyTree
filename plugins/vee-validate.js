@@ -21,6 +21,11 @@ extend('regexNumber', {
 	message: 'include number',
 })
 
+extend('regexCapital', {
+	...regex,
+	message: 'include capital letter',
+})
+
 extend('regexSpecialSign', {
 	...regex,
 	message: 'include special sign',
