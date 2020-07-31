@@ -11,7 +11,7 @@
 			</svg>
 			<span class="title">My Tree</span>
 		</div>
-
+		<div class="title-page">Sign up</div>
 		<ValidationObserver ref="signup" tag="form" class="auth" @submit.prevent="Submit('signIn')">
 			<inputItem name="Email" :rules="emailRules" @getValue="getEmail" />
 			<inputItem name="Password" :rules="passwordRules" type="password" @getValue="getPass" />
@@ -128,7 +128,7 @@ export default {
 	svg {
 		width: 30%;
 		height: auto;
-		margin: 5% 0;
+		margin:3% 0 3%;
 		.primary {
 			transition: fill 0.25s cubic-bezier(0.37, 0, 0.63, 1);
 			fill: $primary;
@@ -141,10 +141,16 @@ export default {
 		}
 	}
 }
-
+.title-page{
+	display: flex;
+	width: 80%;
+	justify-content: center;
+	font-size: 1.5em;
+	margin: 2rem 0;
+}
 .auth {
 	width: 80%;
-	margin: 10% 0;
+	margin: 0 0 10%;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
