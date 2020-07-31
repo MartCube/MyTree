@@ -84,7 +84,7 @@ export const actions = {
 		// create scanLog
 		var scanLog = {
 			user: state.user.email,
-			date: date,
+			date: dateObject,
 		}
 
 		// update shop scanLogs array

@@ -68,7 +68,8 @@ export default {
 			return this.$store.getters.shop.shopScans
 		},
 		chartData() {
-			let shopScansStrore = this.$store.getters.shop.scanLogs
+			let shopScansStrore = this.$store.getters.shop.scanLogs;
+			console.log(shopScansStrore);
 			// create an array of unique dates
 			let uniqueDatesArray = [...new Set(shopScansStrore.map((x) => x.date.date))]
 			let temp = []
