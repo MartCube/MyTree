@@ -135,6 +135,7 @@ export default {
 
 .auth {
 	width: 80%;
+	margin-bottom: 10%;
 
 	display: flex;
 	flex-direction: row;
@@ -143,10 +144,6 @@ export default {
 	align-content: center;
 	flex-wrap: wrap;
 
-	p {
-		color: $text;
-		font-size: 1.1em;
-	}
 	.submit {
 		width: 100%;
 		padding: 10px 20px;
