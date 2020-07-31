@@ -8,8 +8,8 @@
 		<ValidationObserver ref="feedback" tag="form" class="form" name="feedback" data-netlify="true" netlify-honeypot="bot-field" method="POST" autocomplete="off" netlify @submit.prevent="feedback()">
 			<!-- Netlify Honneypot -->
 			<input type="hidden" name="bot-field" value="feedback" />
+			<input type="hidden" name="Email" :value="feedback" />
 
-			<inputItem dark name="Email" :rules="'email|required'" @getValue="getEmail" />
 			<inputItem dark name="Subject" :rules="'required'" @getValue="getSubject" />
 			<inputItem dark name="Message" :rules="'required'" @getValue="getMessage" />
 
@@ -64,7 +64,8 @@ export default {
 			this.modal = true
 		},
 		getModal(value) {
-			this.$router.push('/')
+			// document.querySelector('.form').reset()
+			this.modal = false
 		},
 	},
 }
