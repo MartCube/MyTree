@@ -5,7 +5,7 @@
 			<span>Feedback</span>
 		</div>
 
-		<ValidationObserver ref="feedback" tag="form" class="form" name="feedback" data-netlify="true" netlify-honeypot="bot-field" method="POST" autocomplete="off" @submit.prevent="feedback()">
+		<ValidationObserver ref="feedback" tag="form" class="form" name="feedback" data-netlify="true" netlify-honeypot="bot-field" method="POST" autocomplete="off" netlify @submit.prevent="feedback()">
 			<!-- Netlify Honneypot -->
 			<input type="hidden" name="bot-field" value="feedback" />
 			<input type="hidden" name="Email" :value="feedback" />
@@ -30,7 +30,6 @@
 import modal from '~/components/modal'
 import inputItem from '~/components/inputItem.vue'
 import { ValidationObserver } from 'vee-validate'
-
 export default {
 	components: { modal, inputItem, ValidationObserver },
 	data: () => ({
@@ -47,6 +46,9 @@ export default {
 		},
 	},
 	methods: {
+		getEmail(value) {
+			this.form.email = value
+		},
 		getSubject(value) {
 			this.form.pass = value
 		},
@@ -56,7 +58,6 @@ export default {
 		async feedback() {
 			const isValid = await this.$refs.feedback.validate()
 			if (!isValid) return
-
 			document.querySelector('.form').submit()
 			this.modal = true
 		},
@@ -70,18 +71,15 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
-
 .form {
 	width: 80%;
 	margin-bottom: 10%;
-
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 	align-content: center;
 	flex-wrap: wrap;
-
 	.submit {
 		width: 100%;
 		padding: 10px 20px;
@@ -89,13 +87,11 @@ export default {
 		border: none;
 		border-radius: 25px;
 		background-color: $secondary;
-
 		color: $bg;
 		font-size: 1.2em;
 		font-family: 'config';
 		text-align: center;
 		transition: all 0.2s ease;
-
 		cursor: pointer;
 		user-select: none;
 		text-decoration: none;
