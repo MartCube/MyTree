@@ -57,13 +57,13 @@ export default {
 @import '~/assets/mixins.scss';
 
 .modal {
-	will-change: transform, opacity;
 	position: fixed;
 	@include d-flex();
 	height: 100vh;
 	z-index: 100;
 
 	.overlay {
+		will-change: transform, opacity;
 		position: fixed;
 		background-color: rgba(0, 0, 0, 0.5);
 		z-index: 1;

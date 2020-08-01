@@ -1,24 +1,17 @@
 <template>
 	<div class="container">
-		<div class="menu_title">
-			<div class="line"></div>
-			<span>Change Password</span>
-			<nuxt-link to="/menu" class="go_back">
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M7.38,14.05h15.5a.61.61,0,0,0,.62-.61V10.56a.61.61,0,0,0-.62-.61H7.38V7.58a1.23,1.23,0,0,0-2.1-.87L.86,11.13a1.23,1.23,0,0,0,0,1.74l4.42,4.42a1.23,1.23,0,0,0,2.1-.87V14.05Z" />
-				</svg>
-			</nuxt-link>
-		</div>
+		<titleBar link="/account">
+			Change Password
+		</titleBar>
 
 		<ValidationObserver v-show="!reAuth" ref="SignIn" tag="form" class="auth" @submit.prevent="SignIn()">
-			<inputItem dark name="Email" :rules="'email|required'" @getValue="getEmail" />
 			<inputItem dark name="Password" :rules="'required'" type="password" @getValue="getPass" />
 
-			<div v-if="error !== null" class="authError">
+			<div v-if="authError !== null" class="authError">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path d="M15.1,18.9c0,1.7-1.4,3.1-3.1,3.1s-3.1-1.4-3.1-3.1s1.4-3.1,3.1-3.1S15.1,17.2,15.1,18.9z M9.2,3l0.5,10.6c0,0.5,0.4,0.9,0.9,0.9h2.6c0.5,0,0.9-0.4,0.9-0.9L14.8,3c0-0.5-0.4-1-0.9-1h-3.7C9.6,2,9.2,2.4,9.2,3z" />
 				</svg>
-				{{ error }}
+				{{ authError }}
 			</div>
 			<input type="submit" class="submit" value="Sign In" />
 		</ValidationObserver>
@@ -48,22 +41,23 @@
 
 <script>
 import modal from '~/components/modal'
+import titleBar from '~/components/titleBar'
 import inputItem from '~/components/inputItem.vue'
 import { ValidationObserver } from 'vee-validate'
 
 export default {
-	components: { modal, inputItem, ValidationObserver },
+	components: { modal, titleBar, inputItem, ValidationObserver },
 	data: () => ({
 		modal: false,
 		reAuth: false,
 		passwordRules: { required: true, min: 8, regexNumber: /^(?=.*[0-9])/, regexSpecialSign: /^(?=.*[!@#\$%\^&\*])/ },
 		form: {
-			email: '',
 			pass: '',
 			newPass: '',
 			confirmNewPass: '',
 		},
 		error: null,
+		authError: null,
 	}),
 	computed: {
 		user() {
@@ -71,9 +65,6 @@ export default {
 		},
 	},
 	methods: {
-		getEmail(value) {
-			this.form.email = value
-		},
 		getPass(value) {
 			this.form.pass = value
 		},
@@ -119,6 +110,7 @@ export default {
 			const credential = this.$fireAuthObj.EmailAuthProvider.credential(user.email, this.form.pass)
 
 			var reAuth = false
+			var authError
 			await user
 				.reauthenticateWithCredential(credential)
 				.then(function () {
@@ -127,8 +119,10 @@ export default {
 				})
 				.catch(function (error) {
 					console.log(error)
+					authError = error.code
 				})
 			this.reAuth = reAuth
+			this.authError = authError
 			this.$refs.SignIn.reset()
 		},
 	},
