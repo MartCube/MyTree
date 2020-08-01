@@ -163,16 +163,16 @@ export default {
 				.trees,
 				.coins {
 					@include d-flex(row, center, center, 40%);
-					.radial-chart{
+					.radial-chart {
 						position: relative;
 						@include d-flex(row, center, center, initial);
-						.icon{
+						.icon {
 							top: 19%;
 						}
-						.number{
+						.number {
 							top: 57%;
 						}
-						.number, .icon{
+						.number, .icon {
 							position: absolute;
 							margin: 0;
 						}
