@@ -93,37 +93,23 @@ export default {
 
 <style lang="scss">
 @import '~/assets/colors.scss';
+@import '~/assets/mixins.scss';
 
 .bar {
-	width: 100%;
 	height: 70px;
 	position: relative;
-	// position: fixed;
-	// bottom: 0;
 	z-index: 90;
-
 	background: #fff;
 	box-shadow: 0px 0px 25px -18px rgba(76, 81, 87, 1);
-	display: flex;
-	justify-content: space-around;
-
+	@include d-flex(row, space-around);
 	.link {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		align-content: center;
-		width: 100%;
-
+		@include d-flex(column);
 		user-select: none;
 		-webkit-tap-highlight-color: rgba(14, 227, 177, 0.2);
-
 		text-decoration: none;
-		color: $text;
 		color: $secondary_dark;
 		letter-spacing: 2px;
 		font-size: 0.9em;
-
 		svg {
 			.primary,
 			.mid {
@@ -136,13 +122,11 @@ export default {
 				transition: fill 0.25s cubic-bezier(0.37, 0, 0.63, 1);
 				fill: $secondary_dark;
 			}
-
 			.triangles .primary {
 				opacity: 0.8;
 			}
 			.scannerLine {
 				fill: #9298a0;
-
 				opacity: 0;
 			}
 			width: 45px;

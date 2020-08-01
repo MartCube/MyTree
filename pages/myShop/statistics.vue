@@ -128,7 +128,6 @@ export default {
 	width: 100%;
 }
 .inner-container {
-	// height: 63vh;
 	overflow-y: auto;
 }
 </style>

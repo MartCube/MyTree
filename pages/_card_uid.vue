@@ -65,24 +65,18 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
-
+@import '~/assets/mixins.scss';
 .shop {
 	background: $text;
 	position: relative;
-
 	.image {
-		width: 100%;
 		height: 40vh;
 		z-index: 2;
 		position: absolute;
 		top: 0;
 		color: #fff;
 		transition: all 1s cubic-bezier(0.65, 0, 0.35, 1);
-
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		align-content: center;
+		@include d-flex();
 		img {
 			height: 50vh;
 			width: 100%;
@@ -100,7 +94,7 @@ export default {
 		}
 	}
 	.content {
-		width: 100%;
+		@include d-flex(column, flex-start);
 		height: 70vh;
 		flex-grow: 1;
 		top: 35vh;
@@ -109,11 +103,6 @@ export default {
 		z-index: 3;
 		background-color: $bg;
 		border-radius: 30px 30px 0 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
-		align-items: center;
-		align-content: center;
 		filter: drop-shadow(2px 4px 14px rgba(0, 0, 0, 0.6));
 		transition: all 0.6s cubic-bezier(0.5, 0, 0.75, 0);
 		&::after {
@@ -126,11 +115,9 @@ export default {
 		}
 		.title {
 			position: relative;
-			width: 70%;
 			margin: 10% 0 5% 0;
 			z-index: 3;
-			display: flex;
-			align-items: center;
+			@include d-flex(row, null, center, 70%);
 			h2 {
 				width: 100%;
 				height: 40px;
@@ -139,17 +126,10 @@ export default {
 			}
 		}
 		.info {
-			width: 70%;
-			display: flex;
-			flex-direction: column;
+			@include d-flex(column, null, null, 70%);
 			.item {
-				width: 100%;
 				margin-bottom: 5%;
-				display: flex;
-				justify-content: flex-start;
-				align-items: center;
-				align-content: center;
-
+				@include d-flex(null, flex-start );
 				p {
 					margin: 0 10px;
 				}

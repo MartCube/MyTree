@@ -24,17 +24,6 @@
 			</div>
 			<input type="submit" class="submit" value="Sign In" />
 
-			<div class="SMedias">
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path class="yellow" d="M22.3,9.9h-0.8v0H12v4.2h5.9c-0.9,2.4-3.2,4.2-5.9,4.2c-3.5,0-6.3-2.8-6.3-6.3S8.5,5.7,12,5.7c1.6,0,3.1,0.6,4.2,1.6l3-3c-1.9-1.7-4.4-2.8-7.1-2.8C6.2,1.5,1.5,6.2,1.5,12S6.2,22.5,12,22.5S22.5,17.8,22.5,12C22.5,11.3,22.4,10.6,22.3,9.9z" />
-					<path class="red" d="M2.7,7.1l3.4,2.5C7.1,7.3,9.4,5.7,12,5.7c1.6,0,3.1,0.6,4.2,1.6l3-3c-1.9-1.7-4.4-2.8-7.1-2.8C8,1.5,4.5,3.8,2.7,7.1z" />
-					<path class="green" d="M12,22.5c2.7,0,5.2-1,7-2.7L15.8,17c-1.1,0.8-2.4,1.3-3.8,1.3c-2.7,0-5-1.7-5.9-4.2l-3.4,2.6C4.4,20.2,7.9,22.5,12,22.5z" />
-					<path class="blue" d="M22.3,9.9h-0.8v0H12v4.2h5.9c-0.4,1.2-1.2,2.2-2.1,2.9c0,0,0,0,0,0l3.2,2.7c-0.2,0.2,3.5-2.5,3.5-7.8C22.5,11.3,22.4,10.6,22.3,9.9z" />
-				</svg>
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path class="fb" d="M17,13.4l0.6-3.9h-3.8V6.9c0-1.1,0.5-2.1,2.2-2.1h1.7V1.4c0,0-1.6-0.3-3-0.3c-3.1,0-5.1,1.9-5.1,5.3v3H6.2v3.9h3.4v9.5h4.2v-9.5H17z" />
-				</svg>
-			</div>
 		</ValidationObserver>
 
 		<div class="links">
@@ -93,7 +82,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
-
+@import '~/assets/mixins.scss';
 .container {
 	height: 100vh;
 	justify-content: flex-start;
@@ -120,13 +109,7 @@ export default {
 }
 
 .logo {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-
-	width: 100%;
+	@include d-flex(column);
 	.title {
 		font-size: 2.5em;
 	}
@@ -147,36 +130,29 @@ export default {
 	}
 }
 .title-page{
-	display: flex;
-	width: 80%;
-	justify-content: center;
+	@include d-flex(null, center, center, 80%);
 	font-size: 1.5em;
 	margin: 2rem 0;
+	text-transform: capitalize;
 }
 .auth {
-	width: 80%;
 	margin:0 0 10%;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: flex-start;
-	align-content: center;
+	@include d-flex(row, flex-start, flex-start, 80%);
 	flex-wrap: wrap;
 	color: text;
 	.submit {
 		width: 50%;
 		padding: 10px 20px;
+		line-height: 1;
 		margin-top: 25px;
 		border: none;
 		border-radius: 25px;
 		background-color: $secondary;
-
 		color: $bg;
 		font-size: 1.2em;
 		font-family: 'config';
 		text-align: center;
 		transition: all 0.2s ease;
-
 		cursor: pointer;
 		user-select: none;
 		text-decoration: none;
@@ -189,50 +165,12 @@ export default {
 		}
 	}
 
-	.SMedias {
-		width: 50%;
-		margin-top: 25px;
-
-		display: flex;
-		justify-content: flex-end;
-
-		.icon {
-			.yellow {
-				fill: #ffc107;
-			}
-			.red {
-				fill: #ff3d00;
-			}
-			.green {
-				fill: #4caf50;
-			}
-			.blue {
-				fill: #1976d2;
-			}
-			.fb {
-				fill: #4267b2;
-			}
-			width: 2em;
-			height: 2em;
-			padding: 5px;
-			margin: 5px 10px;
-			background: $bg;
-			border-radius: 50px;
-		}
-	}
 	.authError {
-		width: 100%;
+		@include d-flex(row, flex-start, center);
 		border-radius: 5px;
 		padding: 5px;
 		color: #ff1461;
 		user-select: none;
-
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-start;
-		align-items: center;
-		align-content: center;
-
 		.icon {
 			path {
 				fill: $bg;
@@ -247,15 +185,12 @@ export default {
 }
 
 .links {
-	width: 80%;
+	@include d-flex(column, null, null, 80%);
 	margin: 5% 0;
-	display: flex;
-	flex-direction: column;
 	color: $bg;
 	a {
 		width: fit-content;
 		margin: 5px 0;
-
 		font-size: 1.2em;
 		text-decoration: underline;
 		color: $bg;

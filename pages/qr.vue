@@ -76,17 +76,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/mixins.scss';
+
 .QRcontainer {
 	width: 100%;
 	height: 100%;
 }
 .loading-indicator {
 	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
+	@include d-flex(column);
 	svg {
 		margin: 10px 0;
 	}

@@ -76,14 +76,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
+@import '~/assets/mixins.scss';
+
 .form {
-	width: 80%;
 	margin-bottom: 10%;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
+	@include d-flex(row, center, center, 80%);
 	flex-wrap: wrap;
 	.submit {
 		width: 100%;

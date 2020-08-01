@@ -87,7 +87,6 @@ export default {
 	bottom: 100px;
 	right: 30px;
 	z-index: 2;
-
 	width: 50px;
 	padding: 10px;
 	background: $bg;

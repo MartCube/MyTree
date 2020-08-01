@@ -49,6 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
+@import '~/assets/mixins.scss';
 
 .card {
 	width: 80vw;
@@ -56,16 +57,15 @@ export default {
 	height: 30vw;
 	overflow: hidden;
 	a {
-		// color: #fff;
 		text-decoration: none;
 		display: flex;
 		align-items: stretch;
 		height: 100%;
 	}
+
 	.image {
 		width: 100%;
 		height: 100%;
-
 		overflow: hidden;
 		border-radius: 5px 0 0 5px;
 		position: relative;
@@ -73,7 +73,6 @@ export default {
 		img {
 			width: 100%;
 			height: 100%;
-
 			object-fit: cover;
 			object-position: center;
 			&.lazyload,
@@ -89,11 +88,7 @@ export default {
 	.info {
 		font-weight: 600;
 		font-size: 1.1rem;
-		display: flex;
-		width: 100%;
-		justify-content: flex-start;
-		flex-direction: column;
-		align-items: flex-start;
+		@include d-flex(column, flex-start, flex-start);
 		color: #191919;
 		padding: 5px 10px 0;
 		background: rgba(255, 255, 255, 0.32);
@@ -110,6 +105,7 @@ export default {
 		h2 {
 			font-size: 1em;
 			line-height: 1;
+			margin-bottom: 1rem;
 		}
 		.description {
 			font-weight: 400;

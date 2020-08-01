@@ -54,13 +54,13 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
+@import '~/assets/mixins.scss';
 
 .form_group {
 	position: relative;
 	padding: 25px 0 0;
 	margin: 10px 0;
 	width: 100%;
-
 	.form_field {
 		font-family: inherit;
 		width: 100%;
@@ -87,7 +87,6 @@ export default {
 			cursor: text;
 			top: 20px;
 		}
-
 		&:focus {
 			~ .form_label {
 				position: absolute;
@@ -105,7 +104,6 @@ export default {
 			border-image-slice: 1;
 		}
 	}
-
 	.form_label {
 		position: absolute;
 		top: 0;
@@ -114,7 +112,6 @@ export default {
 		font-size: 1rem;
 		color: $bg;
 	}
-
 	.error {
 		position: absolute;
 		top: 0;
@@ -122,11 +119,7 @@ export default {
 		margin: 5px 0;
 		font-size: 0.8em;
 		color: $error;
-
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		align-content: center;
+		@include d-flex(row, center, center, initial);
 		.icon {
 			path {
 				fill: $bg;
@@ -141,7 +134,6 @@ export default {
 			display: flex;
 		}
 	}
-
 	&.dark {
 		.form_field {
 			color: $secondary;
@@ -160,9 +152,6 @@ export default {
 			}
 		}
 		.form_label {
-			color: $secondary;
-		}
-		.error {
 			color: $secondary;
 		}
 	}
