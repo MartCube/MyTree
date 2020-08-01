@@ -15,7 +15,7 @@
 							<polygon style="fill: #00ccad;" points="274.7,429.9 308,370.7 292.4,369.5 317.4,330.8 301.8,329.6 335.1,286.1 320.5,284.9 352.8,229.4 353.1,230.8 353.1,228.9 385.4,284.5 370.8,285.7 404.1,329.2 388.5,330.4 413.5,369 397.9,370.3 431.1,429.4 403.8,429.1 403.8,429.2" />
 							<rect x="347" y="415.3" width="11.9" height="43.8" />
 						</svg>
-						<span class="number">{{ shopScans }}</span>
+						<span class="number">{{ Math.floor(user.scans / 10) }}</span>
 					</div>
 					<div class="coins" @click="fakeScan()">
 						<svg class="icon" viewBox="0 0 512 512">

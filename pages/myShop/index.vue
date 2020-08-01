@@ -1,14 +1,8 @@
 <template>
 	<div class="container">
-		<div class="menu_title">
-			<div class="line"></div>
-			<span>My Shop</span>
-			<nuxt-link to="/menu" class="go_back">
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M7.38,14.05h15.5a.61.61,0,0,0,.62-.61V10.56a.61.61,0,0,0-.62-.61H7.38V7.58a1.23,1.23,0,0,0-2.1-.87L.86,11.13a1.23,1.23,0,0,0,0,1.74l4.42,4.42a1.23,1.23,0,0,0,2.1-.87V14.05Z" />
-				</svg>
-			</nuxt-link>
-		</div>
+		<titleBar>
+			My Shop
+		</titleBar>
 
 		<div class="menu_links">
 			<nuxt-link class="item" to="/myShop/editShop">
@@ -34,15 +28,13 @@
 </template>
 
 <script>
+import titleBar from '~/components/titleBar'
+
 export default {
 	middleware: 'auth',
-	components: {},
+	components: { titleBar },
 	data: () => ({}),
 	computed: {},
 	methods: {},
 }
 </script>
-
-<style lang="scss" scoped>
-@import '~/assets/colors.scss';
-</style>

@@ -1,14 +1,9 @@
 <template>
 	<div class="container">
-		<div class="menu_title">
-			<div class="line"></div>
-			<span>Statistcs</span>
-			<nuxt-link to="/menu" class="go_back">
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M7.38,14.05h15.5a.61.61,0,0,0,.62-.61V10.56a.61.61,0,0,0-.62-.61H7.38V7.58a1.23,1.23,0,0,0-2.1-.87L.86,11.13a1.23,1.23,0,0,0,0,1.74l4.42,4.42a1.23,1.23,0,0,0,2.1-.87V14.05Z" />
-				</svg>
-			</nuxt-link>
-		</div>
+		<titleBar link="/myShop">
+			Statistics
+		</titleBar>
+
 		<div class="inner-container">
 			<div class="item">
 				<h2>shop scans</h2>
@@ -50,12 +45,15 @@
 
 <script>
 import modal from '~/components/modal'
+import titleBar from '~/components/titleBar'
 import { Cartesian, Line } from 'laue'
+
 export default {
 	name: 'Statistics',
 	components: {
 		modal,
 		LaCartesian: Cartesian,
+		titleBar,
 	},
 	data: () => ({
 		modal: false,
@@ -68,8 +66,8 @@ export default {
 			return this.$store.getters.shop.shopScans
 		},
 		chartData() {
-			let shopScansStrore = this.$store.getters.shop.scanLogs;
-			console.log(shopScansStrore);
+			let shopScansStrore = this.$store.getters.shop.scanLogs
+			console.log(shopScansStrore)
 			// create an array of unique dates
 			let uniqueDatesArray = [...new Set(shopScansStrore.map((x) => x.date.date))]
 			let temp = []
