@@ -52,14 +52,14 @@ module.exports = {
 		},
 	},
 
+	generate: {
+		fallback: true,
+	},
 	// Build configuration
 	build: {
 		// You can extend webpack config here
 		transpile: ['x5gMaps'],
-		generate: {
-			fallback: true,
-		},
-		target: 'static',
+
 		extend(config, { isClient, loaders: { vue } }) {
 			if (isClient) {
 				vue.transformAssetUrls.img = ['data-src', 'src']
