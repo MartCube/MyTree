@@ -4,6 +4,12 @@
 			Feedback
 		</titleBar>
 
+		<form name="test" method="POST" netlify data-netlify="true">
+			<input type="email" name="email" />
+			<button type="submit">
+				Send
+			</button>
+		</form>
 		<ValidationObserver ref="feedback" tag="form" class="form" name="feedback" data-netlify="true" netlify-honeypot="bot-field" method="POST" autocomplete="off" netlify @submit.prevent="feedback()">
 			<!-- Netlify Honneypot -->
 			<input type="hidden" name="bot-field" value="feedback" />
