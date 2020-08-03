@@ -1,7 +1,7 @@
 const pkg = require('./package')
 
 module.exports = {
-	mode: 'universal',
+	mode: 'spa',
 	head: {
 		title: 'My Tree App',
 		meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, height=device-height, initial-scale=1' }, { name: 'keywords', content: 'mart, cube, portfolio, site, web, developer' }, { hid: 'description', name: 'description', content: pkg.description }],
@@ -56,7 +56,10 @@ module.exports = {
 	build: {
 		// You can extend webpack config here
 		transpile: ['x5gMaps'],
-
+		generate: {
+			fallback: true,
+		},
+		target: 'static',
 		extend(config, { isClient, loaders: { vue } }) {
 			if (isClient) {
 				vue.transformAssetUrls.img = ['data-src', 'src']
