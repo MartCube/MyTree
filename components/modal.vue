@@ -73,8 +73,7 @@ export default {
 		opacity: 1;
 	}
 	.content {
-		will-change: transform, opacity;
-		@include d-flex(center, center, 75vw);
+		@include d-flex(column, center, center, 75vw);
 		opacity: 1;
 		z-index: 4;
 
@@ -92,7 +91,7 @@ export default {
 		}
 
 		.buttons-wrapper {
-			@include d-flex(space-around, center);
+			@include d-flex(row, space-around, center);
 			.ok {
 				background-color: $secondary;
 				color: $primary;

@@ -131,18 +131,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
-
+@import '~/assets/mixins.scss';
 .auth {
-	width: 80%;
+	@include d-flex(row, center, center, 80%);
 	margin-bottom: 10%;
-
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
 	flex-wrap: wrap;
-
 	.submit {
 		width: 100%;
 		padding: 10px 20px;
@@ -150,13 +143,11 @@ export default {
 		border: none;
 		border-radius: 25px;
 		background-color: $secondary;
-
 		color: $bg;
 		font-size: 1.2em;
 		font-family: 'config';
 		text-align: center;
 		transition: all 0.2s ease;
-
 		cursor: pointer;
 		user-select: none;
 		text-decoration: none;
@@ -170,18 +161,11 @@ export default {
 	}
 
 	.authError {
-		width: 100%;
+		@include d-flex(row, flex-start);
 		border-radius: 5px;
 		padding: 5px;
 		color: #ff1461;
 		user-select: none;
-
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-start;
-		align-items: center;
-		align-content: center;
-
 		.icon {
 			path {
 				fill: $bg;

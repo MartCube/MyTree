@@ -15,13 +15,15 @@
 							<polygon style="fill: #00ccad;" points="274.7,429.9 308,370.7 292.4,369.5 317.4,330.8 301.8,329.6 335.1,286.1 320.5,284.9 352.8,229.4 353.1,230.8 353.1,228.9 385.4,284.5 370.8,285.7 404.1,329.2 388.5,330.4 413.5,369 397.9,370.3 431.1,429.4 403.8,429.1 403.8,429.2" />
 							<rect x="347" y="415.3" width="11.9" height="43.8" />
 						</svg>
-						<span class="number">{{ Math.floor(user.scans / 10) }}</span>
+						<DoughnutChart :percent="10" backgroundColor="rgba(255,255,255, .1)" foregroundColor="#6fffe9" :strokeWidth="20" :width="120" :height="120" />
+						<span class="number">{{ shopScans }}</span>
 					</div>
 					<div class="coins" @click="fakeScan()">
 						<svg class="icon" viewBox="0 0 512 512">
 							<path d="M52,272v31.13c0,16.19,34,34.29,79.43,34.29a158,158,0,0,0,32.39-3.27V292.32a173.37,173.37,0,0,1-32.39,3C97,295.34,68.19,286.2,52,272Zm0-58.54V244.6c0,16.18,34,34.27,79.43,34.27a158.06,158.06,0,0,0,32.39-3.26V233.8a173.37,173.37,0,0,1-32.39,3c-34.43,0-63.24-9.13-79.43-23.35ZM460,244.6c0-16.18-34-34.29-79.44-34.29a157.9,157.9,0,0,0-32.38,3.27v62a158.6,158.6,0,0,0,32.38,3.27C426,278.89,460,260.8,460,244.6ZM52,186.05c0,16.19,34,34.29,79.43,34.29a158.06,158.06,0,0,0,32.39-3.26V155a158.07,158.07,0,0,0-32.39-3.27C86,151.77,52,169.87,52,186.05Zm0,144.47v31.15C52,377.84,86,396,131.43,396a157.32,157.32,0,0,0,32.39-3.28V350.86a173.37,173.37,0,0,1-32.39,3c-34.43,0-63.24-9.12-79.43-23.34Zm296.18,20.35v41.82A158.64,158.64,0,0,0,380.56,396C426,396,460,377.86,460,361.67V330.52c-16.19,14.23-45,23.37-79.44,23.37a175.07,175.07,0,0,1-32.38-3Zm0-58.53v41.81a159.3,159.3,0,0,0,32.38,3.26c45.47,0,79.44-18.1,79.44-34.27V272c-16.19,14.23-45,23.36-79.44,23.36a173.36,173.36,0,0,1-32.38-3ZM176.57,137.06v31.15c0,16.16,34,34.26,79.42,34.26s79.44-18.1,79.44-34.26V137.06c-16.19,14.22-45,23.35-79.44,23.35S192.76,151.28,176.57,137.06ZM256,75.37c-45.45,0-79.42,18.11-79.42,34.29S210.54,144,256,144s79.44-18.1,79.44-34.29S301.46,75.37,256,75.37ZM176.57,254.13v31.14c0,16.2,34,34.29,79.42,34.29s79.44-18.09,79.44-34.29V254.13c-16.19,14.23-45,23.35-79.44,23.35S192.76,268.36,176.57,254.13Zm0-58.55v31.15c0,16.2,34,34.29,79.42,34.29s79.44-18.09,79.44-34.29V195.58C319.24,209.82,290.39,219,256,219S192.76,209.83,176.57,195.58Zm0,117.08v31.15c0,16.17,34,34.29,79.42,34.29s79.44-18.12,79.44-34.29V312.66C319.24,326.87,290.39,336,256,336S192.76,326.88,176.57,312.66Zm0,58.53v31.16c0,16.17,34,34.28,79.42,34.28s79.44-18.11,79.44-34.28V371.19c-16.19,14.24-45,23.36-79.44,23.36S192.76,385.44,176.57,371.19Z" />
 						</svg>
-						<span class="number">{{ user.scans }}</span>
+						<DoughnutChart :percent="10" backgroundColor="rgba(255,255,255, .1)" foregroundColor="#6fffe9" :strokeWidth="20" :width="120" :height="120" />
+						<span class="number">{{ user.scans  }}</span>
 					</div>
 				</div>
 			</div>
@@ -56,12 +58,13 @@
 <script>
 import card from '~/components/card'
 import modal from '~/components/modal'
-
+import DoughnutChart from 'vue-doughnut-chart'
 export default {
 	middleware: 'auth',
 	components: {
 		card,
 		modal,
+		DoughnutChart,
 	},
 	async asyncData({ app }) {
 		var shopList = []
@@ -111,7 +114,7 @@ export default {
 	},
 	methods: {
 		fakeScan() {
-			this.$store.dispatch('StoreQRscan', 'marya_shop@gmail.com')
+			this.$store.dispatch('StoreQRscan', 'marya_shop1@gmail.com')
 		},
 		toggleBar() {
 			this.toggleClass = !this.toggleClass
@@ -130,6 +133,7 @@ export default {
 
 <style lang="scss">
 @import '~/assets/colors.scss';
+@import '~/assets/mixins.scss';
 
 .container.home-page {
 	position: relative;
@@ -141,47 +145,38 @@ export default {
 		height: 50vh;
 		padding: 10vh 5%;
 		overflow: hidden;
-
 		transition: padding 0.4s linear;
-
 		.user-card {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			align-content: center;
-
-			width: 100%;
+			@include d-flex(column);
 			height: 100%;
 			border-radius: 40px;
 			background: linear-gradient(145deg, #344860, #3e5672);
 			box-shadow: 10px 10px 40px #31445b, -10px -10px 40px #435c7b;
 			color: white;
 			.info {
-				width: 100%;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				align-content: center;
+				@include d-flex(row, space-evenly);
+				margin-top: 1rem;
 				.trees,
 				.coins {
-					width: 40%;
-
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					align-content: center;
+					@include d-flex(row, center, center, 40%);
+					position: relative;
+					.icon {
+						top: 20%;
+					}
+					.number {
+						top: 58%;
+					}
+					.number,
+					.icon {
+						position: absolute;
+						margin: 0;
+					}
 					.icon {
 						width: 50px;
-						margin: 10px;
-
 						fill: $primary;
 						rect {
 							fill: #1d2228;
 						}
-					}
-					.number {
-						margin: 10px;
 					}
 				}
 			}
@@ -193,21 +188,14 @@ export default {
 		background-color: #fff;
 		border-radius: 30px 30px 0 0;
 		overflow: hidden;
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-		// top: 50vh;
+		@include d-flex(column, null, null);
 		transform: translateY(50vh);
-
 		position: absolute;
 		height: 90vh;
-		// filter: drop-shadow(2px 4px 14px rgba(0, 0, 0, 0.6));
 		transition: transform 0.6s cubic-bezier(0, 0.55, 0.45, 1);
 		will-change: transform;
-
 		&.open {
 			transform: translateY(10vh);
-			// filter: drop-shadow(0 0 4rem rgba(0, 0, 0, 1));
 			.arrow {
 				svg {
 					animation: bottomBarArrow 1.5s linear 0.5s infinite;
@@ -215,29 +203,20 @@ export default {
 			}
 		}
 		.arrow {
-			width: 100%;
-			display: flex;
-			justify-content: center;
+			@include d-flex();
 			svg {
 				margin: 10px;
 				fill: $secondary;
 				transform: rotateX(180deg);
-				// animation: bottomBarArrowReverse 1.5s linear 0.5s infinite;
 			}
 		}
 		.title-container {
-			width: 100%;
-			display: flex;
-			align-items: center;
-			background-color: #fff;
-			z-index: 3;
+			@include d-flex();
 			margin: 10px 0;
-			position: relative;
 			padding: 0 1.5rem;
 			h2.title {
-				width: 100%;
-				display: flex;
-				position: relative;
+				width: inherit;
+				display: inherit;
 				color: #191919;
 				padding-left: 1rem;
 				border-left: 5px solid $primary;
@@ -246,14 +225,8 @@ export default {
 		.bottom-content {
 			margin-bottom: 4rem;
 			overflow-y: auto;
-			width: 100%;
-			height: 100%;
 			.slider-container {
-				display: flex;
-				justify-content: center;
-				width: 100%;
-				align-items: center;
-				flex-direction: column;
+				@include d-flex(column);
 			}
 		}
 	}

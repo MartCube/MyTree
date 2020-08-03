@@ -55,25 +55,20 @@ export default {
 
 <style lang="scss">
 @import '~/assets/colors.scss';
+@import '~/assets/mixins.scss';
 
 .form_group {
 	position: relative;
 	width: 100%;
 	height: 100%;
-
 	.error {
 		position: absolute;
 		top: 0;
 		right: 0;
 		margin: 5px 0;
 		font-size: 0.8em;
-		display: none;
 		color: $text;
-
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		align-content: center;
+		@include d-flex(row, center, center, initial);
 		.icon {
 			path {
 				fill: $bg;
@@ -91,11 +86,9 @@ export default {
 	.input {
 		width: 100%;
 		height: 40px;
-
 		outline: 0;
 		border: none;
 		border-bottom: 1px solid $text;
-
 		font-size: 1.5em;
 		&:focus {
 			border-color: $primary;

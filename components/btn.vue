@@ -21,31 +21,23 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
+@import '~/assets/mixins.scss';
 
 .btn {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-
+	@include d-flex(row, center, center, initial);
 	cursor: pointer;
 	user-select: none;
 	text-decoration: none;
 	-webkit-tap-highlight-color: transparent;
-
 	border: 2px solid #fff;
-
 	border-radius: 25px;
 	padding: 10px 20px;
 	margin: 10px 0;
-
 	color: $text;
 	font-size: 1.2em;
-	text-align: center;
 	text-transform: uppercase;
-
+	line-height: 1;
 	transition: all 0.3s ease;
-
 	&:active {
 		box-shadow: 0px 0px 15px -5px $secondary;
 	}

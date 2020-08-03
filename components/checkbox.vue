@@ -33,18 +33,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/mixins.scss';
+
 .checkbox {
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	align-content: center;
-	width: 100%;
+	@include d-flex(row, flex-start);
 	padding: 0 10px;
 	span {
 		font-size: 0.9em;
-
 		margin: 20px;
-
 		user-select: none;
 	}
 }
