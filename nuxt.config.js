@@ -1,7 +1,7 @@
 const pkg = require('./package')
 
 module.exports = {
-	mode: 'spa',
+	mode: 'universal',
 	head: {
 		title: 'My Tree App',
 		meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, height=device-height, initial-scale=1' }, { name: 'keywords', content: 'mart, cube, portfolio, site, web, developer' }, { hid: 'description', name: 'description', content: pkg.description }],
