@@ -55,6 +55,8 @@ module.exports = {
 	generate: {
 		fallback: true,
 	},
+	target: 'static',
+
 	// Build configuration
 	build: {
 		// You can extend webpack config here
