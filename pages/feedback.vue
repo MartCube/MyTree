@@ -9,7 +9,9 @@
 			<input type="hidden" name="bot-field" value="feedback" />
 			<input type="hidden" name="form-name" value="feedback" />
 
-			<input type="hidden" name="Email" :value="user.email" />
+			<input type="email" name="Email" />
+			<input type="text" name="Subject" />
+			<input type="text" name="Message" />
 			<inputItem dark name="Subject" :rules="'required'" @getValue="getSubject" />
 			<inputItem dark name="Message" :rules="'required'" @getValue="getMessage" />
 
