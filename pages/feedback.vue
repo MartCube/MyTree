@@ -4,7 +4,7 @@
 			Feedback
 		</titleBar>
 
-		<ValidationObserver ref="feedback" tag="form" class="form" autocomplete="off" method="POST" @submit.prevent="feedback()">
+		<ValidationObserver ref="feedback" tag="form" class="form" name="feedback" method="POST" @submit.prevent="feedback()">
 			<!-- Netlify Honneypot -->
 			<input type="hidden" name="bot-field" value="feedback" />
 			<input type="hidden" name="form-name" value="feedback" />
