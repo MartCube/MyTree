@@ -4,28 +4,16 @@
 			Feedback
 		</titleBar>
 
-		<form name="test" method="post">
-			<!-- Netlify Honneypot -->
-			<input type="hidden" name="form-name" value="test" />
-			<input type="hidden" name="bot-field" value="test" />
-			<input type="hidden" name="Email" :value="user.email" />
-
-			<input type="text" name="Subject" />
-			<inputItem dark name="Message" :rules="'required'" @getValue="getMessage" />
-
-			<button type="submit">
-				send
-			</button>
-		</form>
-
-		<ValidationObserver ref="feedback" tag="form" class="form" name="feedback" method="POST" @submit.prevent="feedback()">
+		<ValidationObserver ref="feedback" tag="form" class="form" name="feedback" method="post" @submit.prevent="feedback()">
 			<!-- Netlify Honneypot -->
 			<input type="hidden" name="bot-field" value="feedback" />
 			<input type="hidden" name="form-name" value="feedback" />
+			<input type="hidden" name="Email" :value="user.email" />
+			<input v-model="form.subject" type="text" name="Subject" />
+			<input v-model="form.message" type="text" name="Message" />
 
 			<inputItem dark name="Subject" :rules="'required'" @getValue="getSubject" />
 			<inputItem dark name="Message" :rules="'required'" @getValue="getMessage" />
-
 			<input type="submit" class="submit" value="Submit" />
 		</ValidationObserver>
 
@@ -65,10 +53,10 @@ export default {
 			this.form.email = value
 		},
 		getSubject(value) {
-			this.form.pass = value
+			this.form.subject = value
 		},
 		getMessage(value) {
-			this.form.newPass = value
+			this.form.message = value
 		},
 		async feedback() {
 			const isValid = await this.$refs.feedback.validate()
