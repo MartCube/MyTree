@@ -11,7 +11,8 @@
 			<input type="hidden" name="Email" :value="user.email" />
 
 			<input type="text" name="Subject" />
-			<input type="text" name="Message" />
+			<inputItem dark name="Message" :rules="'required'" @getValue="getMessage" />
+
 			<button type="submit">
 				send
 			</button>
