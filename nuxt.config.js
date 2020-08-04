@@ -55,7 +55,6 @@ module.exports = {
 	generate: {
 		fallback: true,
 	},
-	target: 'static',
 
 	// Build configuration
 	build: {
