@@ -4,18 +4,12 @@
 			Feedback
 		</titleBar>
 
-		<form name="MYFORM" method="post">
-			<input type="hidden" name="form-name" value="MYFORM" />
-			<!-- form controls here -->
-			<input type="text" name="name" />
-			<button type="submit">
-				Send
-			</button>
-		</form>
-		<ValidationObserver ref="feedback" tag="form" class="form" name="feedback" data-netlify="true" netlify-honeypot="bot-field" method="POST" autocomplete="off" netlify @submit.prevent="feedback()">
+		<ValidationObserver ref="feedback" tag="form" class="form" autocomplete="off" netlify @submit.prevent="feedback()">
 			<!-- Netlify Honneypot -->
 			<input type="hidden" name="bot-field" value="feedback" />
-			<input type="hidden" name="Email" :value="user.email" />
+			<input type="hidden" name="form-name" value="feedback" />
+
+			<input name="Email" :value="user.email" />
 
 			<inputItem dark name="Subject" :rules="'required'" @getValue="getSubject" />
 			<inputItem dark name="Message" :rules="'required'" @getValue="getMessage" />

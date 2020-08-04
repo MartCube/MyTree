@@ -1,4 +1,6 @@
-<form name="MYFORM" action="/form/success" netlify>
+<form name="feedback" data-netlify="true" netlify-honeypot="bot-field" method="POST">
 	<!-- form controls here -->
 	<input type="text" name="name" />
+	<!-- Netlify Honneypot -->
+	<input type="hidden" name="bot-field" value="feedback" />
 </form>
