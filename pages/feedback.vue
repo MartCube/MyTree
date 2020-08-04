@@ -4,8 +4,10 @@
 			Feedback
 		</titleBar>
 
-		<form name="test" method="POST" netlify data-netlify="true">
-			<input type="email" name="email" />
+		<form name="MYFORM" method="post">
+			<input type="hidden" name="form-name" value="MYFORM" />
+			<!-- form controls here -->
+			<input type="text" name="name" />
 			<button type="submit">
 				Send
 			</button>
@@ -79,11 +81,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
-@import '~/assets/mixins.scss';
-
 .form {
+	width: 80%;
 	margin-bottom: 10%;
-	@include d-flex(row, center, center, 80%);
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
 	flex-wrap: wrap;
 	.submit {
 		width: 100%;
