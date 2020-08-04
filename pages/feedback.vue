@@ -5,7 +5,9 @@
 		</titleBar>
 
 		<form name="test" method="post">
+			<!-- Netlify Honneypot -->
 			<input type="hidden" name="form-name" value="test" />
+			<input type="hidden" name="bot-field" value="test" />
 			<input type="hidden" name="Email" :value="user.email" />
 
 			<input type="text" name="Subject" />
