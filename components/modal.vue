@@ -1,7 +1,7 @@
 <template>
 	<div class="modal">
 		<template v-if="type == 'YesNo'">
-			<div class="content">
+			<div class="content YesNo">
 				<div class="text">
 					<slot>Slot Text</slot>
 				</div>
@@ -43,7 +43,6 @@ export default {
 		var overlay = document.querySelector('.modal .overlay')
 		modalAnim(content, overlay)
 	},
-
 	methods: {
 		emitValue(value) {
 			this.$emit('getValue', value)
@@ -73,10 +72,10 @@ export default {
 		opacity: 1;
 	}
 	.content {
-		@include d-flex(column, center, center, 75vw);
+		@include d-flex(column, center, center, fit-content);
+
 		opacity: 1;
 		z-index: 4;
-
 		padding: 15px;
 		border-radius: 10px;
 		box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.2);
@@ -85,9 +84,14 @@ export default {
 		.text {
 			flex: 1 1;
 			@include d-flex();
-			margin: 15px 0;
 			text-align: center;
 			font-size: 1.2em;
+			color: $text;
+
+			.icon {
+				width: 1.5em;
+				margin-right: 15px;
+			}
 		}
 
 		.buttons-wrapper {
@@ -106,9 +110,11 @@ export default {
 			}
 		}
 
-		.icon {
-			width: 1.5em;
-			margin-right: 1.5em;
+		&.YesNo {
+			width: 75vw;
+			.text {
+				margin: 15px 0;
+			}
 		}
 	}
 }

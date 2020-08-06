@@ -11,7 +11,10 @@
 			</svg>
 			<span class="title">My Tree</span>
 		</div>
-		<div class="title-page">Sign in</div>
+		<div class="title_page">
+			Sign in
+		</div>
+
 		<ValidationObserver ref="signin" tag="form" class="auth" @submit.prevent="Submit('signIn')">
 			<inputItem name="Email" :rules="'email|required'" @getValue="getEmail" />
 			<inputItem name="Password" :rules="'required'" type="password" @getValue="getPass" />
@@ -22,14 +25,18 @@
 				</svg>
 				{{ authError }}
 			</div>
-			<input type="submit" class="submit" value="Sign In" />
 
+			<input type="submit" class="submit" value="Sign In" />
 		</ValidationObserver>
 
 		<div class="links">
 			<p>Don't have an account ?</p>
+
 			<nuxt-link to="/register">
 				Sign Up
+			</nuxt-link>
+			<nuxt-link class="forgot_password" to="/login/password_reset">
+				Forgot Password
 			</nuxt-link>
 		</div>
 	</div>
@@ -129,14 +136,14 @@ export default {
 		}
 	}
 }
-.title-page{
+.title_page {
 	@include d-flex(null, center, center, 80%);
 	font-size: 1.5em;
 	margin: 2rem 0;
 	text-transform: capitalize;
 }
 .auth {
-	margin:0 0 10%;
+	margin: 0 0 10%;
 	@include d-flex(row, flex-start, flex-start, 80%);
 	flex-wrap: wrap;
 	color: text;
@@ -186,14 +193,21 @@ export default {
 
 .links {
 	@include d-flex(column, null, null, 80%);
+	flex-wrap: wrap;
 	margin: 5% 0;
 	color: $bg;
+
 	a {
 		width: fit-content;
 		margin: 5px 0;
 		font-size: 1.2em;
 		text-decoration: underline;
+		text-decoration-color: $primary;
 		color: $bg;
+	}
+	.forgot_password {
+		color: $secondary_dark;
+		font-size: 1em;
 	}
 }
 </style>

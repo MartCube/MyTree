@@ -20,16 +20,18 @@ export const state = () => ({
 			},
 		],
 	},
-	authError: null,
 	isAuth: false,
+	authError: null,
+	loading: true,
 })
 
 // Functions that return back data contained in the state.
 export const getters = {
 	user: (state) => state.user,
 	shop: (state) => state.shop,
-	authError: (state) => state.authError,
 	isAuth: (state) => state.isAuth,
+	authError: (state) => state.authError,
+	loading: (state) => state.loading,
 }
 
 // Functions that directly mutate the state.
@@ -47,11 +49,14 @@ export const mutations = {
 		payload.scanLogs = scanLogsArray
 		state.shop = Object.assign(payload)
 	},
+	setAuth(state, value) {
+		state.isAuth = value
+	},
 	setError(state, error) {
 		state.authError = error
 	},
-	setAuth(state, value) {
-		state.isAuth = value
+	loading(state, value) {
+		state.loading = value
 	},
 }
 
@@ -180,21 +185,5 @@ export const actions = {
 					// After an error, the listener will not receive any events and there is no need to detach listener
 				},
 			)
-
-		// var ref = this.$fireStore.collection('shops').doc(userPayload)
-		// await ref
-		// 	.get()
-		// 	.then(function (doc) {
-		// 		if (doc.exists) {
-		// 			// update store
-		// 			commit('setShop', doc.data())
-		// 		} else {
-		// 			// doc.data() will be undefined in this case
-		// 			console.log('No such document!')
-		// 		}
-		// 	})
-		// 	.catch(function (error) {
-		// 		console.log('Error getting document:', error)
-		// 	})
 	},
 }
