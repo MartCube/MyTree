@@ -9,22 +9,31 @@
 				</g>
 			</svg>
 			<span class="title">My Tree</span>
-		</div>
-		<div class="title_page">
-			Password Reset
+			<h2>Password Reset</h2>
 		</div>
 
-		<ValidationObserver ref="password_reset" tag="form" class="auth" @submit.prevent="password_reset()">
-			<inputItem name="Email" :rules="'email|required'" @getValue="getEmail" />
+		<div v-if="actionCodeError != null">
+			<span>Link has expired or it's invalid</span>
+			<btn fill @click.native="showEmailForm">send email again</btn>
+		</div>
+		<template v-else>
+			<ValidationObserver v-if="!$fetchState.pending && showResetForm" ref="resetPassword" tag="form" class="form" @submit.prevent="resetPassword()">
+				<inputItem name="New Password" type="password" :rules="passwordRules" @getValue="getNewPass" />
+				<input type="submit" class="submit" value="Reset Password" />
+			</ValidationObserver>
 
-			<div v-if="errorMsg !== null" class="authError">
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M15.1,18.9c0,1.7-1.4,3.1-3.1,3.1s-3.1-1.4-3.1-3.1s1.4-3.1,3.1-3.1S15.1,17.2,15.1,18.9z M9.2,3l0.5,10.6c0,0.5,0.4,0.9,0.9,0.9h2.6c0.5,0,0.9-0.4,0.9-0.9L14.8,3c0-0.5-0.4-1-0.9-1h-3.7C9.6,2,9.2,2.4,9.2,3z" />
-				</svg>
-				{{ errorMsg }}
-			</div>
-			<input type="submit" class="submit" value="Reset Password" />
-		</ValidationObserver>
+			<ValidationObserver v-if="!$fetchState.pending && !showResetForm" ref="sendEmail" tag="form" class="form" @submit.prevent="sendEmail()">
+				<inputItem name="Email" :rules="'email|required'" @getValue="getEmail" />
+
+				<div v-if="sendEmail_error !== null" class="authError">
+					<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+						<path d="M15.1,18.9c0,1.7-1.4,3.1-3.1,3.1s-3.1-1.4-3.1-3.1s1.4-3.1,3.1-3.1S15.1,17.2,15.1,18.9z M9.2,3l0.5,10.6c0,0.5,0.4,0.9,0.9,0.9h2.6c0.5,0,0.9-0.4,0.9-0.9L14.8,3c0-0.5-0.4-1-0.9-1h-3.7C9.6,2,9.2,2.4,9.2,3z" />
+					</svg>
+					{{ sendEmail_error }}
+				</div>
+				<input type="submit" class="submit" value="Send Mail" />
+			</ValidationObserver>
+		</template>
 
 		<div class="links">
 			<p>Don't have an account ?</p>
@@ -38,12 +47,19 @@
 			</nuxt-link>
 		</div>
 
-		<modal v-if="modal" type="success" @getValue="getModal">
+		<modal v-if="modalEmail" type="success" @getValue="getModal">
 			<svg class="icon" viewBox="0 0 24 24">
 				<circle cx="12" cy="12" r="11.5" style="fill: #3a506b;" />
 				<path d="M9.59,18.37,4.72,13.5a.75.75,0,0,1,0-1.06l1.06-1.06a.74.74,0,0,1,1.06,0l3.28,3.28,7-7a.74.74,0,0,1,1.06,0l1.06,1.06a.75.75,0,0,1,0,1.06l-8.62,8.62a.75.75,0,0,1-1.07,0Z" style="fill: #6fffe9;" />
 			</svg>
 			<span>Email Send</span>
+		</modal>
+		<modal v-if="modalPassword" type="success" @getValue="getModal">
+			<svg class="icon" viewBox="0 0 24 24">
+				<circle cx="12" cy="12" r="11.5" style="fill: #3a506b;" />
+				<path d="M9.59,18.37,4.72,13.5a.75.75,0,0,1,0-1.06l1.06-1.06a.74.74,0,0,1,1.06,0l3.28,3.28,7-7a.74.74,0,0,1,1.06,0l1.06,1.06a.75.75,0,0,1,0,1.06l-8.62,8.62a.75.75,0,0,1-1.07,0Z" style="fill: #6fffe9;" />
+			</svg>
+			<span>Password Updated</span>
 		</modal>
 	</div>
 </template>
@@ -52,6 +68,7 @@
 import inputItem from '~/components/inputItem.vue'
 import checkbox from '~/components/checkbox.vue'
 import modal from '~/components/modal'
+import btn from '~/components/btn'
 import { ValidationObserver } from 'vee-validate'
 
 export default {
@@ -59,43 +76,57 @@ export default {
 		inputItem,
 		ValidationObserver,
 		modal,
+		btn,
+	},
+	async fetch() {
+		this.$nextTick().then(() => document.body.classList.add('dark'))
+
+		console.log(this.$route.query)
+		var mode = this.$route.query.mode
+		this.actionCode = this.$route.query.oobCode
+		var lang = this.$route.query.lang
+
+		if (mode == 'resetPassword') {
+			// Verify the password reset code
+			await this.$fireAuth
+				.verifyPasswordResetCode(this.actionCode)
+				.then((email) => {
+					console.log(email)
+					// show form for new password.
+					this.showResetForm = true
+				})
+				.catch((error) => {
+					// Invalid or expired action code. Ask user to try to reset the password
+					console.log(error)
+					this.actionCodeError = error.code
+				})
+		}
 	},
 	data: () => ({
 		form: {
-			action: 'signIn',
-			email: '',
-			password: '',
-			isSeller: false,
+			email: null,
+			newPass: null,
 		},
-		errorMsg: null,
-		modal: false,
+		showResetForm: false,
+		actionCode: null,
+		sendEmail_error: null,
+		actionCodeError: null,
+		modalEmail: false,
+		modalPassword: false,
+		passwordRules: { required: true, min: 8, regexNumber: /^(?=.*[0-9])/, regexSpecialSign: /^(?=.*[!@#\$%\^&\*])/ },
 	}),
-	mounted() {
-		this.$nextTick().then(() => document.body.classList.add('dark'))
-	},
 	methods: {
+		showEmailForm() {
+			console.log('showEmailForm')
+			this.$router.push('/login/password_reset')
+			this.actionCodeError = null
+			this.showResetForm = false
+		},
 		getEmail(value) {
 			this.form.email = value
 		},
-		async password_reset() {
-			this.$refs.password_reset.reset()
-
-			const isValid = await this.$refs.password_reset.validate()
-			if (!isValid) return
-
-			var modal
-			var errorMsg = null
-			await this.$fireAuth
-				.sendPasswordResetEmail(this.form.email)
-				.then(function () {
-					modal = true
-				})
-				.catch(function (error) {
-					if (error.code === 'auth/user-not-found') errorMsg = 'User not found'
-				})
-
-			this.modal = modal
-			this.errorMsg = errorMsg
+		getNewPass(value) {
+			this.form.newPass = value
 		},
 		async getModal(value) {
 			if (value) {
@@ -104,7 +135,35 @@ export default {
 			} else {
 				console.log('decline')
 			}
-			this.modal = false
+			this.modalEmail = false
+			this.modalPassword = false
+		},
+		async sendEmail() {
+			const isValid = await this.$refs.sendEmail.validate()
+			if (!isValid) return
+
+			await this.$fireAuth
+				.sendPasswordResetEmail(this.form.email)
+				.then(() => {
+					this.modalEmail = true
+				})
+				.catch((error) => {
+					if (error.code === 'auth/user-not-found') sendEmail_error = 'User not found'
+				})
+		},
+		async resetPassword() {
+			const isValid = await this.$refs.resetPassword.validate()
+			if (!isValid) return
+
+			await this.$fireAuth
+				.confirmPasswordReset(this.actionCode, this.form.newPass)
+				.then((resp) => {
+					console.log('password updated', resp)
+					this.modalPassword = true
+				})
+				.catch(function (error) {
+					console.log(error)
+				})
 		},
 	},
 }
@@ -115,7 +174,7 @@ export default {
 @import '~/assets/mixins.scss';
 .container {
 	height: 100vh;
-	justify-content: flex-start;
+	justify-content: space-between;
 	color: $bg;
 	background: none;
 }
@@ -142,11 +201,13 @@ export default {
 	@include d-flex(column);
 	.title {
 		font-size: 2.5em;
+		margin-bottom: 20px;
 	}
+
 	svg {
 		width: 30%;
 		height: auto;
-		margin: 3% 0 3%;
+		margin-top: 10%;
 		.primary {
 			transition: fill 0.25s cubic-bezier(0.37, 0, 0.63, 1);
 			fill: $primary;
@@ -160,16 +221,9 @@ export default {
 	}
 }
 
-.title_page {
-	@include d-flex(null, center, center, 80%);
-	font-size: 1.5em;
-	margin: 2rem 0;
-	text-transform: capitalize;
-}
-
-.auth {
+.form {
 	margin: 0 0 10%;
-	@include d-flex(row, flex-start, flex-start, 80%);
+	@include d-flex(column, flex-start, flex-start, 80%);
 	flex-wrap: wrap;
 	color: text;
 	.submit {

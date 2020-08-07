@@ -67,7 +67,7 @@ export default {
 		right: 0;
 		margin: 5px 0;
 		font-size: 0.8em;
-		color: $text;
+		color: $error;
 		@include d-flex(row, center, center, initial);
 		.icon {
 			path {

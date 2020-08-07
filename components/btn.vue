@@ -35,7 +35,7 @@ export default {
 	margin: 10px 0;
 	color: $text;
 	font-size: 1.2em;
-	text-transform: uppercase;
+	text-transform: capitalize;
 	line-height: 1;
 	transition: all 0.3s ease;
 	&:active {
