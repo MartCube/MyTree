@@ -1,13 +1,36 @@
 <template>
-	<div class="spinner looping-rhombuses-spinner">
-		<div class="rhombus"></div>
-		<div class="rhombus"></div>
-		<div class="rhombus"></div>
+	<div class="overlay">
+		<div class="spinner looping-rhombuses-spinner">
+			<div class="rhombus"></div>
+			<div class="rhombus"></div>
+			<div class="rhombus"></div>
+		</div>
 	</div>
 </template>
 
+<script>
+import btn from '~/components/btn'
+import { spinnerAnim } from '~/assets/animate'
+
+export default {
+	name: 'Spinner',
+	mounted() {
+		var overlay = document.querySelector('.overlay')
+		spinnerAnim(overlay)
+	},
+}
+</script>
+
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
+
+.overlay {
+	will-change: opacity;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+}
 
 .spinner {
 	display: flex;

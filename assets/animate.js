@@ -77,3 +77,12 @@ export function modalAnim(content, overlay) {
 		duration: 250,
 	})
 }
+
+export function spinnerAnim(overlay) {
+	anime({
+		targets: overlay,
+		opacity: [0, 1],
+		easing: 'easeInOutSine',
+		duration: 250,
+	})
+}

@@ -39,18 +39,22 @@
 				Forgot Password
 			</nuxt-link>
 		</div>
+
+		<spinner v-if="loading" />
 	</div>
 </template>
 
 <script>
 import inputItem from '~/components/inputItem.vue'
 import checkbox from '~/components/checkbox.vue'
+import spinner from '~/components/spinner.vue'
 import { ValidationObserver } from 'vee-validate'
 
 export default {
 	components: {
 		inputItem,
 		ValidationObserver,
+		spinner,
 	},
 	data: () => ({
 		form: {
@@ -63,6 +67,9 @@ export default {
 	computed: {
 		authError() {
 			return this.$store.getters.authError
+		},
+		loading() {
+			return this.$store.getters.loading
 		},
 	},
 	mounted() {

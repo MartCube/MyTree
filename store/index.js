@@ -22,7 +22,7 @@ export const state = () => ({
 	},
 	isAuth: false,
 	authError: null,
-	loading: true,
+	loading: false,
 })
 
 // Functions that return back data contained in the state.
@@ -55,7 +55,7 @@ export const mutations = {
 	setError(state, error) {
 		state.authError = error
 	},
-	loading(state, value) {
+	setLoading(state, value) {
 		state.loading = value
 	},
 }
@@ -106,6 +106,7 @@ export const actions = {
 			scans: 0,
 		}
 
+		await commit('setLoading', true)
 		try {
 			if (userPayload.action == 'signUp') {
 				await this.$fireAuth
