@@ -1,9 +1,7 @@
 <template>
 	<div>
 		<nuxt />
-		<transition name="bar" mode="out-in">
-			<bar v-if="isAuth" />
-		</transition>
+		<bar v-if="isAuth" />
 	</div>
 </template>
 

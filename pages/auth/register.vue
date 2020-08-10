@@ -1,7 +1,6 @@
 <template>
 	<div class="container">
 		<img class="bg lazyload" :data-srcset="'/login/bg.jpg'" />
-
 		<div class="logo">
 			<svg class="logo" viewBox="0 0 512 512">
 				<g class="triangles">
@@ -10,14 +9,12 @@
 				</g>
 			</svg>
 			<span class="title">My Tree</span>
-		</div>
-		<div class="title_page">
-			Sign in
+			<h2>Register</h2>
 		</div>
 
-		<ValidationObserver ref="signin" tag="form" class="auth" @submit.prevent="Submit('signIn')">
-			<inputItem name="Email" :rules="'email|required'" @getValue="getEmail" />
-			<inputItem name="Password" :rules="'required'" type="password" @getValue="getPass" />
+		<ValidationObserver v-if="showForm" ref="signup" tag="form" class="auth" @submit.prevent="Submit('signIn')">
+			<inputItem name="Email" :rules="emailRules" @getValue="getEmail" />
+			<inputItem name="Password" :rules="passwordRules" type="password" @getValue="getPass" />
 
 			<div v-if="authError !== null" class="authError">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -25,51 +22,55 @@
 				</svg>
 				{{ authError }}
 			</div>
-
-			<input type="submit" class="submit" value="Sign In" />
+			<input type="submit" class="submit" value="Sign Up" />
+			<div class="SMedias">
+				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path class="yellow" d="M22.3,9.9h-0.8v0H12v4.2h5.9c-0.9,2.4-3.2,4.2-5.9,4.2c-3.5,0-6.3-2.8-6.3-6.3S8.5,5.7,12,5.7c1.6,0,3.1,0.6,4.2,1.6l3-3c-1.9-1.7-4.4-2.8-7.1-2.8C6.2,1.5,1.5,6.2,1.5,12S6.2,22.5,12,22.5S22.5,17.8,22.5,12C22.5,11.3,22.4,10.6,22.3,9.9z" />
+					<path class="red" d="M2.7,7.1l3.4,2.5C7.1,7.3,9.4,5.7,12,5.7c1.6,0,3.1,0.6,4.2,1.6l3-3c-1.9-1.7-4.4-2.8-7.1-2.8C8,1.5,4.5,3.8,2.7,7.1z" />
+					<path class="green" d="M12,22.5c2.7,0,5.2-1,7-2.7L15.8,17c-1.1,0.8-2.4,1.3-3.8,1.3c-2.7,0-5-1.7-5.9-4.2l-3.4,2.6C4.4,20.2,7.9,22.5,12,22.5z" />
+					<path class="blue" d="M22.3,9.9h-0.8v0H12v4.2h5.9c-0.4,1.2-1.2,2.2-2.1,2.9c0,0,0,0,0,0l3.2,2.7c-0.2,0.2,3.5-2.5,3.5-7.8C22.5,11.3,22.4,10.6,22.3,9.9z" />
+				</svg>
+				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path class="fb" d="M17,13.4l0.6-3.9h-3.8V6.9c0-1.1,0.5-2.1,2.2-2.1h1.7V1.4c0,0-1.6-0.3-3-0.3c-3.1,0-5.1,1.9-5.1,5.3v3H6.2v3.9h3.4v9.5h4.2v-9.5H17z" />
+				</svg>
+			</div>
 		</ValidationObserver>
-
-		<div class="links">
-			<p>Don't have an account ?</p>
-
-			<nuxt-link to="/register">
-				Sign Up
-			</nuxt-link>
-			<nuxt-link class="forgot_password" to="/login/password_reset">
-				Forgot Password
-			</nuxt-link>
+		<div v-else>
+			<span>Verification email successfully sent</span>
+			<span>check your email adress</span>
 		</div>
 
-		<spinner v-if="loading" />
+		<div class="links">
+			<p>Already have an account ?</p>
+			<nuxt-link to="/auth/login">
+				Sign In
+			</nuxt-link>
+		</div>
 	</div>
 </template>
 
 <script>
 import inputItem from '~/components/inputItem.vue'
-import checkbox from '~/components/checkbox.vue'
-import spinner from '~/components/spinner.vue'
 import { ValidationObserver } from 'vee-validate'
 
 export default {
 	components: {
 		inputItem,
 		ValidationObserver,
-		spinner,
 	},
 	data: () => ({
 		form: {
-			action: 'signIn',
+			action: 'signUp',
 			email: '',
 			password: '',
-			isSeller: false,
 		},
+		emailRules: { required: true, email: true },
+		passwordRules: { required: true, min: 8, regexNumber: /^(?=.*[0-9])/, regexCapital: /^(?=.*[A-Z])/ }, // regexSpecialSign: /^(?=.*[!@#\$%\^&\*])/
+		showForm: true,
 	}),
 	computed: {
 		authError() {
 			return this.$store.getters.authError
-		},
-		loading() {
-			return this.$store.getters.loading
 		},
 	},
 	mounted() {
@@ -86,9 +87,23 @@ export default {
 			this.form.password = value
 		},
 		async Submit() {
-			const isValid = await this.$refs.signin.validate()
+			const isValid = await this.$refs.signup.validate()
 			if (!isValid) return
+
+			// authenticateUser Sign Up
 			await this.$store.dispatch('authenticateUser', this.form)
+
+			// Send a user a verification email
+			await this.$fireAuth.currentUser
+				.sendEmailVerification()
+				.then(() => {
+					console.log('sentEmailVerification')
+					this.showForm = false
+					this.$store.commit('setLoading', false)
+				})
+				.catch((error) => {
+					console.log(error)
+				})
 		},
 	},
 }
@@ -99,7 +114,7 @@ export default {
 @import '~/assets/mixins.scss';
 .container {
 	height: 100vh;
-	justify-content: flex-start;
+	justify-content: space-between;
 	color: $bg;
 	background: none;
 }
@@ -107,7 +122,7 @@ export default {
 .bg {
 	width: 100%;
 	height: 100%;
-	position: absolute;
+	position: fixed;
 	z-index: -1;
 	object-fit: cover;
 	object-position: center;
@@ -126,11 +141,13 @@ export default {
 	@include d-flex(column);
 	.title {
 		font-size: 2.5em;
+		margin-bottom: 20px;
 	}
+
 	svg {
 		width: 30%;
 		height: auto;
-		margin: 3% 0 3%;
+		margin-top: 10%;
 		.primary {
 			transition: fill 0.25s cubic-bezier(0.37, 0, 0.63, 1);
 			fill: $primary;
@@ -143,12 +160,7 @@ export default {
 		}
 	}
 }
-.title_page {
-	@include d-flex(null, center, center, 80%);
-	font-size: 1.5em;
-	margin: 2rem 0;
-	text-transform: capitalize;
-}
+
 .auth {
 	margin: 0 0 10%;
 	@include d-flex(row, flex-start, flex-start, 80%);
@@ -178,7 +190,33 @@ export default {
 			outline: none;
 		}
 	}
-
+	.SMedias {
+		margin-top: 25px;
+		@include d-flex(row, flex-end, null, 50%);
+		.icon {
+			.yellow {
+				fill: #ffc107;
+			}
+			.red {
+				fill: #ff3d00;
+			}
+			.green {
+				fill: #4caf50;
+			}
+			.blue {
+				fill: #1976d2;
+			}
+			.fb {
+				fill: #4267b2;
+			}
+			width: 2em;
+			height: 2em;
+			padding: 5px;
+			margin: 5px 10px;
+			background: $bg;
+			border-radius: 50px;
+		}
+	}
 	.authError {
 		@include d-flex(row, flex-start, center);
 		border-radius: 5px;
@@ -200,10 +238,8 @@ export default {
 
 .links {
 	@include d-flex(column, null, null, 80%);
-	flex-wrap: wrap;
 	margin: 5% 0;
 	color: $bg;
-
 	a {
 		width: fit-content;
 		margin: 5px 0;
@@ -211,10 +247,6 @@ export default {
 		text-decoration: underline;
 		text-decoration-color: $primary;
 		color: $bg;
-	}
-	.forgot_password {
-		color: $secondary_dark;
-		font-size: 1em;
 	}
 }
 </style>

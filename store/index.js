@@ -102,32 +102,17 @@ export const actions = {
 		// create user
 		var user = {
 			email: userPayload.email,
-			isSeller: userPayload.isSeller,
+			isSeller: false,
 			scans: 0,
 		}
 
 		await commit('setLoading', true)
-		try {
-			if (userPayload.action == 'signUp') {
-				await this.$fireAuth
-					.createUserWithEmailAndPassword(userPayload.email, userPayload.password)
-					.then(async (cred) => {
-						if (cred != null) {
-							//	create new user in db
-							await this.$fireStore.collection('users').doc(userPayload.email).set(user)
-							//	update store
-							await commit('setUser', user)
-						}
-					})
-					.catch(function (error) {
-						if (error.code === 'auth/email-already-in-use') commit('setError', 'Email already in use')
-					})
-			}
-			if (userPayload.action == 'signIn') {
-				await this.$fireAuth
-					.signInWithEmailAndPassword(userPayload.email, userPayload.password)
-					.then(async (cred) => {
-						if (cred != null) {
+		if (userPayload.action == 'signIn') {
+			await this.$fireAuth
+				.signInWithEmailAndPassword(userPayload.email, userPayload.password)
+				.then(async (cred) => {
+					if (cred != null) {
+						if (cred.user.emailVerified) {
 							//	get user from db
 							var ref = this.$fireStore.collection('users').doc(userPayload.email)
 							user = await ref.get()
@@ -135,20 +120,46 @@ export const actions = {
 							ref = this.$fireStore.collection('shops').doc(userPayload.email)
 							var shop = await ref.get()
 							//	update store
-							await commit('setUser', user.data())
-							await commit('setShop', shop.data())
-							await commit('setAuth', true)
+							commit('setUser', user.data())
+							commit('setShop', shop.data())
+							commit('setAuth', true)
+						} else {
+							commit('setError', 'Email is not verified')
+							commit('setLoading', false)
 						}
-					})
-					.catch(function (error) {
-						if (error.code === 'auth/user-not-found') commit('setError', 'User not found')
-						if (error.code === 'auth/wrong-password') commit('setError', 'Wrong password')
-					})
-			}
-		} catch (err) {
-			console.error(err)
+					}
+				})
+				.catch(function (error) {
+					if (error.code == 'auth/user-not-found') {
+						commit('setError', 'User not found')
+						commit('setLoading', false)
+					}
+					if (error.code == 'auth/wrong-password') {
+						commit('setError', 'Wrong password')
+						commit('setLoading', false)
+					}
+				})
+			this.$router.push('/')
 		}
-		this.$router.push('/')
+		if (userPayload.action == 'signUp') {
+			await this.$fireAuth
+				.createUserWithEmailAndPassword(userPayload.email, userPayload.password)
+				.then(async (cred) => {
+					if (cred != null) {
+						console.log(cred)
+						//	create new user in db
+						await this.$fireStore.collection('users').doc(userPayload.email).set(user)
+						//	update store
+						commit('setUser', user)
+					}
+				})
+				.catch(function (error) {
+					if (error.code == 'auth/email-already-in-use') {
+						commit('setError', 'Email already in use')
+						commit('setLoading', false)
+					}
+				})
+		}
 	},
 	async setUser({ commit }, userPayload) {
 		commit('setAuth', true)

@@ -12,37 +12,26 @@
 			<h2>Password Reset</h2>
 		</div>
 
-		<div v-if="actionCodeError != null">
-			<span>Link has expired or it's invalid</span>
-			<btn fill @click.native="showEmailForm">send email again</btn>
-		</div>
-		<template v-else>
-			<ValidationObserver v-if="!$fetchState.pending && showResetForm" ref="resetPassword" tag="form" class="form" @submit.prevent="resetPassword()">
-				<inputItem name="New Password" type="password" :rules="passwordRules" @getValue="getNewPass" />
-				<input type="submit" class="submit" value="Reset Password" />
-			</ValidationObserver>
+		<ValidationObserver ref="sendEmail" tag="form" class="form" @submit.prevent="sendEmail()">
+			<inputItem name="Email" :rules="'email|required'" @getValue="getEmail" />
 
-			<ValidationObserver v-if="!$fetchState.pending && !showResetForm" ref="sendEmail" tag="form" class="form" @submit.prevent="sendEmail()">
-				<inputItem name="Email" :rules="'email|required'" @getValue="getEmail" />
-
-				<div v-if="sendEmail_error !== null" class="authError">
-					<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-						<path d="M15.1,18.9c0,1.7-1.4,3.1-3.1,3.1s-3.1-1.4-3.1-3.1s1.4-3.1,3.1-3.1S15.1,17.2,15.1,18.9z M9.2,3l0.5,10.6c0,0.5,0.4,0.9,0.9,0.9h2.6c0.5,0,0.9-0.4,0.9-0.9L14.8,3c0-0.5-0.4-1-0.9-1h-3.7C9.6,2,9.2,2.4,9.2,3z" />
-					</svg>
-					{{ sendEmail_error }}
-				</div>
-				<input type="submit" class="submit" value="Send Mail" />
-			</ValidationObserver>
-		</template>
+			<div v-if="sendEmail_error !== null" class="authError">
+				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M15.1,18.9c0,1.7-1.4,3.1-3.1,3.1s-3.1-1.4-3.1-3.1s1.4-3.1,3.1-3.1S15.1,17.2,15.1,18.9z M9.2,3l0.5,10.6c0,0.5,0.4,0.9,0.9,0.9h2.6c0.5,0,0.9-0.4,0.9-0.9L14.8,3c0-0.5-0.4-1-0.9-1h-3.7C9.6,2,9.2,2.4,9.2,3z" />
+				</svg>
+				{{ sendEmail_error }}
+			</div>
+			<input type="submit" class="submit" value="Send Mail" />
+		</ValidationObserver>
 
 		<div class="links">
 			<p>Don't have an account ?</p>
-			<nuxt-link to="/register">
+			<nuxt-link to="/auth/register">
 				Sign Up
 			</nuxt-link>
 			<br />
 			<p>Already have an account ?</p>
-			<nuxt-link to="/login">
+			<nuxt-link to="/auth/login">
 				Sign In
 			</nuxt-link>
 		</div>
@@ -54,13 +43,6 @@
 			</svg>
 			<span>Email Send</span>
 		</modal>
-		<modal v-if="modalPassword" type="success" @getValue="getModal">
-			<svg class="icon" viewBox="0 0 24 24">
-				<circle cx="12" cy="12" r="11.5" style="fill: #3a506b;" />
-				<path d="M9.59,18.37,4.72,13.5a.75.75,0,0,1,0-1.06l1.06-1.06a.74.74,0,0,1,1.06,0l3.28,3.28,7-7a.74.74,0,0,1,1.06,0l1.06,1.06a.75.75,0,0,1,0,1.06l-8.62,8.62a.75.75,0,0,1-1.07,0Z" style="fill: #6fffe9;" />
-			</svg>
-			<span>Password Updated</span>
-		</modal>
 	</div>
 </template>
 
@@ -68,7 +50,6 @@
 import inputItem from '~/components/inputItem.vue'
 import checkbox from '~/components/checkbox.vue'
 import modal from '~/components/modal'
-import btn from '~/components/btn'
 import { ValidationObserver } from 'vee-validate'
 
 export default {
@@ -76,57 +57,21 @@ export default {
 		inputItem,
 		ValidationObserver,
 		modal,
-		btn,
-	},
-	async fetch() {
-		this.$nextTick().then(() => document.body.classList.add('dark'))
-
-		console.log(this.$route.query)
-		var mode = this.$route.query.mode
-		this.actionCode = this.$route.query.oobCode
-		var lang = this.$route.query.lang
-
-		if (mode == 'resetPassword') {
-			// Verify the password reset code
-			await this.$fireAuth
-				.verifyPasswordResetCode(this.actionCode)
-				.then((email) => {
-					console.log(email)
-					// show form for new password.
-					this.showResetForm = true
-				})
-				.catch((error) => {
-					// Invalid or expired action code. Ask user to try to reset the password
-					console.log(error)
-					this.actionCodeError = error.code
-				})
-		}
 	},
 	data: () => ({
 		form: {
 			email: null,
 			newPass: null,
 		},
-		showResetForm: false,
-		actionCode: null,
 		sendEmail_error: null,
-		actionCodeError: null,
 		modalEmail: false,
-		modalPassword: false,
-		passwordRules: { required: true, min: 8, regexNumber: /^(?=.*[0-9])/, regexSpecialSign: /^(?=.*[!@#\$%\^&\*])/ },
 	}),
+	mounted() {
+		this.$nextTick().then(() => document.body.classList.add('dark'))
+	},
 	methods: {
-		showEmailForm() {
-			console.log('showEmailForm')
-			this.$router.push('/login/password_reset')
-			this.actionCodeError = null
-			this.showResetForm = false
-		},
 		getEmail(value) {
 			this.form.email = value
-		},
-		getNewPass(value) {
-			this.form.newPass = value
 		},
 		async getModal(value) {
 			if (value) {
@@ -136,7 +81,6 @@ export default {
 				console.log('decline')
 			}
 			this.modalEmail = false
-			this.modalPassword = false
 		},
 		async sendEmail() {
 			const isValid = await this.$refs.sendEmail.validate()
@@ -149,20 +93,6 @@ export default {
 				})
 				.catch((error) => {
 					if (error.code === 'auth/user-not-found') sendEmail_error = 'User not found'
-				})
-		},
-		async resetPassword() {
-			const isValid = await this.$refs.resetPassword.validate()
-			if (!isValid) return
-
-			await this.$fireAuth
-				.confirmPasswordReset(this.actionCode, this.form.newPass)
-				.then((resp) => {
-					console.log('password updated', resp)
-					this.modalPassword = true
-				})
-				.catch(function (error) {
-					console.log(error)
 				})
 		},
 	},
@@ -182,7 +112,7 @@ export default {
 .bg {
 	width: 100%;
 	height: 100%;
-	position: absolute;
+	position: fixed;
 	z-index: -1;
 	object-fit: cover;
 	object-position: center;

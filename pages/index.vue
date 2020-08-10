@@ -110,9 +110,10 @@ export default {
 		},
 	},
 	mounted() {
-		this.$nextTick().then(() => document.body.classList.remove('dark'))
 		this.$store.commit('setLoading', false)
+		this.$nextTick().then(() => document.body.classList.remove('dark'))
 	},
+
 	methods: {
 		fakeScan() {
 			this.$store.dispatch('StoreQRscan', 'marya_shop1@gmail.com')

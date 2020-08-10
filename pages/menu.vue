@@ -73,7 +73,7 @@ export default {
 			if (value) {
 				this.$fireAuth.signOut()
 				this.$store.commit('setAuth', false)
-				this.$router.push('/login')
+				this.$router.push('/auth/login')
 			} else this.modalSignOut = false
 		},
 	},

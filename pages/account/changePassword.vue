@@ -50,7 +50,7 @@ export default {
 	data: () => ({
 		modal: false,
 		reAuth: false,
-		passwordRules: { required: true, min: 8, regexNumber: /^(?=.*[0-9])/, regexSpecialSign: /^(?=.*[!@#\$%\^&\*])/ },
+		passwordRules: { required: true, min: 8, regexNumber: /^(?=.*[0-9])/, regexCapital: /^(?=.*[A-Z])/ }, // regexSpecialSign: /^(?=.*[!@#\$%\^&\*])/
 		form: {
 			pass: '',
 			newPass: '',

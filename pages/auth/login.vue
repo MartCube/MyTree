@@ -10,14 +10,12 @@
 				</g>
 			</svg>
 			<span class="title">My Tree</span>
+			<h2>Login</h2>
 		</div>
-		<div class="title_page">
-			Sign up
-		</div>
-		<ValidationObserver ref="signup" tag="form" class="auth" @submit.prevent="Submit('signIn')">
-			<inputItem name="Email" :rules="emailRules" @getValue="getEmail" />
-			<inputItem name="Password" :rules="passwordRules" type="password" @getValue="getPass" />
-			<checkbox name="Register as a Coffee shop owner." @getValue="getSeller" />
+
+		<ValidationObserver ref="signin" tag="form" class="auth" @submit.prevent="Submit('signIn')">
+			<inputItem name="Email" :rules="'email|required'" @getValue="getEmail" />
+			<inputItem name="Password" :rules="'required'" type="password" @getValue="getPass" />
 
 			<div v-if="authError !== null" class="authError">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -25,7 +23,8 @@
 				</svg>
 				{{ authError }}
 			</div>
-			<input type="submit" class="submit" value="Sign Up" />
+
+			<input type="submit" class="submit" value="Sign In" />
 			<div class="SMedias">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path class="yellow" d="M22.3,9.9h-0.8v0H12v4.2h5.9c-0.9,2.4-3.2,4.2-5.9,4.2c-3.5,0-6.3-2.8-6.3-6.3S8.5,5.7,12,5.7c1.6,0,3.1,0.6,4.2,1.6l3-3c-1.9-1.7-4.4-2.8-7.1-2.8C6.2,1.5,1.5,6.2,1.5,12S6.2,22.5,12,22.5S22.5,17.8,22.5,12C22.5,11.3,22.4,10.6,22.3,9.9z" />
@@ -40,38 +39,45 @@
 		</ValidationObserver>
 
 		<div class="links">
-			<p>Already have an account ?</p>
-			<nuxt-link to="/login">
-				Sign In
+			<p>Don't have an account ?</p>
+
+			<nuxt-link to="/auth/register">
+				Sign Up
+			</nuxt-link>
+			<nuxt-link to="/auth/password_reset" class="forgot_password">
+				Forgot Password
 			</nuxt-link>
 		</div>
+
+		<spinner v-if="loading" />
 	</div>
 </template>
 
 <script>
 import inputItem from '~/components/inputItem.vue'
 import checkbox from '~/components/checkbox.vue'
+import spinner from '~/components/spinner.vue'
 import { ValidationObserver } from 'vee-validate'
 
 export default {
 	components: {
 		inputItem,
-		checkbox,
 		ValidationObserver,
+		spinner,
 	},
 	data: () => ({
 		form: {
-			action: 'signUp',
+			action: 'signIn',
 			email: '',
 			password: '',
-			isSeller: false,
 		},
-		emailRules: { required: true, email: true },
-		passwordRules: { required: true, min: 8, regexNumber: /^(?=.*[0-9])/, regexCapital: /^(?=.*[A-Z])/ }, // regexSpecialSign: /^(?=.*[!@#\$%\^&\*])/
 	}),
 	computed: {
 		authError() {
 			return this.$store.getters.authError
+		},
+		loading() {
+			return this.$store.getters.loading
 		},
 	},
 	mounted() {
@@ -87,11 +93,8 @@ export default {
 		getPass(value) {
 			this.form.password = value
 		},
-		getSeller(value) {
-			this.form.isSeller = value
-		},
 		async Submit() {
-			const isValid = await this.$refs.signup.validate()
+			const isValid = await this.$refs.signin.validate()
 			if (!isValid) return
 			await this.$store.dispatch('authenticateUser', this.form)
 		},
@@ -104,7 +107,7 @@ export default {
 @import '~/assets/mixins.scss';
 .container {
 	height: 100vh;
-	justify-content: flex-start;
+	justify-content: space-between;
 	color: $bg;
 	background: none;
 }
@@ -131,11 +134,13 @@ export default {
 	@include d-flex(column);
 	.title {
 		font-size: 2.5em;
+		margin-bottom: 20px;
 	}
+
 	svg {
 		width: 30%;
 		height: auto;
-		margin: 3% 0 3%;
+		margin-top: 10%;
 		.primary {
 			transition: fill 0.25s cubic-bezier(0.37, 0, 0.63, 1);
 			fill: $primary;
@@ -147,13 +152,6 @@ export default {
 			opacity: 0.8;
 		}
 	}
-}
-
-.title_page {
-	@include d-flex(null, center, center, 80%);
-	font-size: 1.5em;
-	margin: 2rem 0;
-	text-transform: capitalize;
 }
 
 .auth {
@@ -185,7 +183,6 @@ export default {
 			outline: none;
 		}
 	}
-
 	.SMedias {
 		margin-top: 25px;
 		@include d-flex(row, flex-end, null, 50%);
@@ -234,8 +231,10 @@ export default {
 
 .links {
 	@include d-flex(column, null, null, 80%);
+	flex-wrap: wrap;
 	margin: 5% 0;
 	color: $bg;
+
 	a {
 		width: fit-content;
 		margin: 5px 0;
@@ -243,6 +242,10 @@ export default {
 		text-decoration: underline;
 		text-decoration-color: $primary;
 		color: $bg;
+	}
+	.forgot_password {
+		color: $secondary_dark;
+		font-size: 1em;
 	}
 }
 </style>
