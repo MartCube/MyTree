@@ -22,7 +22,7 @@
 			</ValidationObserver>
 			<div v-if="!$fetchState.pending && showVerifyEmail" class="verifyEmail">
 				<span>Email Verification Successful</span>
-				<btn fill>Continue</btn>
+				<btn fill link="/auth/login">Continue</btn>
 			</div>
 		</template>
 

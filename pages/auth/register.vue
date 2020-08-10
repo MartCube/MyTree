@@ -37,7 +37,6 @@
 		</ValidationObserver>
 		<div v-else>
 			<span>Verification email successfully sent</span>
-			<span>check your email adress</span>
 		</div>
 
 		<div class="links">
@@ -99,6 +98,7 @@ export default {
 				.then(() => {
 					console.log('sentEmailVerification')
 					this.showForm = false
+					this.$fireAuth.signOut()
 					this.$store.commit('setLoading', false)
 				})
 				.catch((error) => {

@@ -20,6 +20,8 @@ export const state = () => ({
 			},
 		],
 	},
+
+	// store about auth should be separated
 	isAuth: false,
 	authError: null,
 	loading: false,
@@ -107,6 +109,7 @@ export const actions = {
 		}
 
 		await commit('setLoading', true)
+
 		if (userPayload.action == 'signIn') {
 			await this.$fireAuth
 				.signInWithEmailAndPassword(userPayload.email, userPayload.password)
@@ -120,9 +123,9 @@ export const actions = {
 							ref = this.$fireStore.collection('shops').doc(userPayload.email)
 							var shop = await ref.get()
 							//	update store
-							commit('setUser', user.data())
-							commit('setShop', shop.data())
-							commit('setAuth', true)
+							await commit('setUser', user.data())
+							await commit('setShop', shop.data())
+							await commit('setAuth', true)
 						} else {
 							commit('setError', 'Email is not verified')
 							commit('setLoading', false)
@@ -147,10 +150,8 @@ export const actions = {
 				.then(async (cred) => {
 					if (cred != null) {
 						console.log(cred)
-						//	create new user in db
+						//	create new user in DB
 						await this.$fireStore.collection('users').doc(userPayload.email).set(user)
-						//	update store
-						commit('setUser', user)
 					}
 				})
 				.catch(function (error) {
