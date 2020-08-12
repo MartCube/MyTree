@@ -20,7 +20,6 @@ export const state = () => ({
 			},
 		],
 	},
-
 	// store about auth should be separated
 	isAuth: false,
 	authError: null,

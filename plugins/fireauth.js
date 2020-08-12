@@ -5,7 +5,6 @@ export default (context) => {
 		app.$fireAuth.onAuthStateChanged((user) => {
 			if (user)
 				if (user.emailVerified) {
-					console.log('logged in', user)
 					return resolve(store.dispatch('setUser', user.email))
 				}
 			console.log('logged out')

@@ -5,7 +5,7 @@ module.exports = {
 	head: {
 		title: 'My Tree App',
 		meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, height=device-height, initial-scale=1' }, { name: 'keywords', content: 'mart, cube, portfolio, site, web, developer' }, { hid: 'description', name: 'description', content: pkg.description }],
-		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon/favicon.ico' }],
 	},
 
 	// Customize the progress-bar color
@@ -49,6 +49,25 @@ module.exports = {
 			short_name: 'My Tree',
 			// display: 'Fullscreen',
 			theme_color: '#3a506b',
+			background_color: '#ffffff',
+			start_url: 'https://d483dc8b5804.eu.ngrok.io',
+			icons: [
+				{
+					src: '/favicon/android-chrome192.png',
+					sizes: '192x192',
+					type: 'image/png',
+				},
+				{
+					src: '/favicon/android-chrome512.png',
+					sizes: '512x512',
+					type: 'image/png',
+				},
+			],
+		},
+		workbox: {
+			dev: true,
+			swURL: 'installApp.js',
+			offline: true,
 		},
 	},
 
