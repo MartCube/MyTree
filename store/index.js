@@ -20,7 +20,6 @@ export const state = () => ({
 			},
 		],
 	},
-	// store about auth should be separated
 	isAuth: false,
 	authError: null,
 	loading: false,
@@ -63,42 +62,6 @@ export const mutations = {
 
 // Functions that call mutations on the state. They can call multiple mutations, can call other actions, and they support asynchronous operations.
 export const actions = {
-	async StoreQRscan({ commit, state }, result) {
-		// ##### this will be deleted from here since its not related with store
-
-		console.log('scanned shop: ', result)
-
-		// create Scan log DateTime
-		var date = new Date()
-		var optionsDate = {
-			year: 'numeric',
-			month: 'numeric',
-			day: 'numeric',
-			hour12: false,
-		}
-		var optionsTime = {
-			hour: 'numeric',
-			minute: 'numeric',
-			second: 'numeric',
-			hour12: false,
-		}
-
-		var dateObject = {
-			date: new Intl.DateTimeFormat('default', optionsDate).format(date),
-			time: new Intl.DateTimeFormat('default', optionsTime).format(date),
-		}
-		// create scanLog
-		var scanLog = {
-			user: state.user.email,
-			date: dateObject,
-		}
-
-		// update shop scanLogs array
-		await this.$fireStore
-			.collection('shops')
-			.doc(result)
-			.update({ scanLogs: this.$fireStoreObj.FieldValue.arrayUnion(scanLog) })
-	},
 	async authenticateUser({ commit }, userPayload) {
 		// create user
 		var user = {
