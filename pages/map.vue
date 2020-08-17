@@ -42,8 +42,8 @@ export default {
 	},
 	data: () => ({
 		mapOptions: {
-			center: { lat: 41.3663232, lng: 21.253324799999998 },
-			zoom: 12,
+			center: { lat: 50.45158, lng: 30.527538 },
+			zoom: 10,
 			rotateControl: true,
 			fullscreenControl: false,
 			mapTypeControl: false,
@@ -84,7 +84,7 @@ export default {
 
 .icon_my_location {
 	position: absolute;
-	bottom: 100px;
+	bottom: 30px;
 	right: 30px;
 	z-index: 2;
 	width: 50px;

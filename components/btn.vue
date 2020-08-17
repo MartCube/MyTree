@@ -29,11 +29,11 @@ export default {
 	user-select: none;
 	text-decoration: none;
 	-webkit-tap-highlight-color: transparent;
-	border: 2px solid #fff;
+	border: 2px solid $secondary;
 	border-radius: 25px;
 	padding: 10px 20px;
 	margin: 10px 0;
-	color: $text;
+	color: $secondary;
 	font-size: 1.2em;
 	text-transform: capitalize;
 	line-height: 1;

@@ -22,6 +22,7 @@ import titleBar from '~/components/titleBar'
 
 export default {
 	name: 'QRcode',
+	middleware: ['auth', 'shop'],
 	components: {
 		VueQrcode,
 		btn,

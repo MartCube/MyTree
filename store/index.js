@@ -20,6 +20,8 @@ export const state = () => ({
 			},
 		],
 	},
+
+	// auth state needs to be separated
 	isAuth: false,
 	authError: null,
 	loading: false,

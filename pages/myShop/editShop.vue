@@ -79,7 +79,7 @@ import { gmapsMap, gmapsMarker } from 'x5-gmaps'
 import btn from '~/components/btn'
 
 export default {
-	middleware: 'auth',
+	middleware: ['auth', 'shop'],
 	components: { gmapsMap, gmapsMarker },
 	data: () => ({
 		file: null,
@@ -117,7 +117,7 @@ export default {
 			var storageRef = this.$fireStorage.ref()
 			console.log(storageRef)
 
-			var imageRef = storageRef.child(`shop/${this.file.name}`)
+			var imageRef = storageRef.child(`shop/${this.user.email}`)
 			console.log(imageRef.location.path_)
 
 			await imageRef.put(this.file)
@@ -126,7 +126,7 @@ export default {
 
 			var ImgUrl
 			await storageRef
-				.child(`shop/${this.file.name}`)
+				.child(`shop/${this.user.email}`)
 				.getDownloadURL()
 				.then(function (url) {
 					ImgUrl = url
@@ -209,7 +209,7 @@ export default {
 		top: 5%;
 		right: 5%;
 		z-index: 5;
-		@include d-flex(row, center,center, initial);
+		@include d-flex(row, center, center, initial);
 		span {
 			color: white;
 			margin: 0 10px;

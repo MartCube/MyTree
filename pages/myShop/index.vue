@@ -31,7 +31,7 @@
 import titleBar from '~/components/titleBar'
 
 export default {
-	middleware: 'auth',
+	middleware: ['auth', 'shop'],
 	components: { titleBar },
 	data: () => ({}),
 	computed: {},

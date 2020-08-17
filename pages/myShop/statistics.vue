@@ -50,6 +50,7 @@ import { Cartesian, Line } from 'laue'
 
 export default {
 	name: 'Statistics',
+	middleware: ['auth', 'shop'],
 	components: {
 		modal,
 		LaCartesian: Cartesian,
