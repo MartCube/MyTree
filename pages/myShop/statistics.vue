@@ -4,7 +4,7 @@
 			Statistics
 		</titleBar>
 
-		<div class="inner-container">
+		<div v-if="shopScans > 0" class="inner-container">
 			<div class="item">
 				<h2>shop scans</h2>
 				<p>{{ shopScans }}</p>
@@ -68,7 +68,7 @@ export default {
 		},
 		chartData() {
 			let shopScansStrore = this.$store.getters.shop.scanLogs
-			console.log(shopScansStrore)
+
 			// create an array of unique dates
 			let uniqueDatesArray = [...new Set(shopScansStrore.map((x) => x.date.date))]
 			let temp = []

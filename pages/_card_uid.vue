@@ -129,7 +129,7 @@ export default {
 			@include d-flex(column, null, null, 70%);
 			.item {
 				margin-bottom: 5%;
-				@include d-flex(null, flex-start );
+				@include d-flex(null, flex-start);
 				p {
 					margin: 0 10px;
 				}

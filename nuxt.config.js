@@ -50,7 +50,7 @@ module.exports = {
 			// display: 'Fullscreen',
 			theme_color: '#3a506b',
 			background_color: '#ffffff',
-			start_url: 'https://d483dc8b5804.eu.ngrok.io',
+			start_url: 'https://mytreeapp.netlify.app',
 			icons: [
 				{
 					src: '/favicon/android-chrome192.png',
@@ -65,9 +65,9 @@ module.exports = {
 			],
 		},
 		workbox: {
-			dev: true,
+			// dev: true,
 			swURL: 'installApp.js',
-			offline: true,
+			// offline: true,
 		},
 	},
 

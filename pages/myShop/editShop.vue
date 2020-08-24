@@ -1,5 +1,12 @@
 <template>
 	<div class="container shop" :class="{ edit_mode: edit, map_mode: showMap }">
+		<modal v-if="modal" type="success" @getValue="getModal">
+			<svg class="icon" viewBox="0 0 24 24">
+				<circle cx="12" cy="12" r="11.5" style="fill: #3a506b;" />
+				<path d="M9.59,18.37,4.72,13.5a.75.75,0,0,1,0-1.06l1.06-1.06a.74.74,0,0,1,1.06,0l3.28,3.28,7-7a.74.74,0,0,1,1.06,0l1.06,1.06a.75.75,0,0,1,0,1.06l-8.62,8.62a.75.75,0,0,1-1.07,0Z" style="fill: #6fffe9;" />
+			</svg>
+			<span>Image to big</span>
+		</modal>
 		<div class="edit">
 			<svg v-if="!edit" class="icon" viewBox="0 0 24 24" @click="editOn">
 				<path d="M16.58,5.1l3.6,3.6a.39.39,0,0,1,0,.55L11.46,18l-3.71.41a.78.78,0,0,1-.86-.86l.41-3.7L16,5.1a.4.4,0,0,1,.56,0ZM23,4.18,21.1,2.23a1.58,1.58,0,0,0-2.21,0L17.48,3.65a.39.39,0,0,0,0,.55l3.6,3.6a.39.39,0,0,0,.55,0L23,6.39A1.56,1.56,0,0,0,23,4.18ZM15.83,15.6v4.06H3.06V6.89h9.17a.52.52,0,0,0,.34-.14l1.6-1.6a.48.48,0,0,0-.34-.82H2.42A1.92,1.92,0,0,0,.5,6.25V20.3a1.92,1.92,0,0,0,1.92,1.92H16.47a1.92,1.92,0,0,0,1.92-1.92V14a.48.48,0,0,0-.82-.34L16,15.26A.52.52,0,0,0,15.83,15.6Z" />
@@ -30,7 +37,7 @@
 		</div>
 
 		<div class="image" @click="Upload">
-			<img ref="image" class="lazyload" :data-src="shop.image" alt="" />
+			<img ref="image" class="lazyload" :data-src="shop.image" />
 
 			<template v-if="edit">
 				<div class="color_overlay"></div>
@@ -77,11 +84,13 @@
 <script>
 import { gmapsMap, gmapsMarker } from 'x5-gmaps'
 import btn from '~/components/btn'
+import modal from '~/components/modal'
 
 export default {
-	middleware: ['auth', 'shop'],
-	components: { gmapsMap, gmapsMarker },
+	middleware: ['auth'], //'shop'
+	components: { gmapsMap, gmapsMarker, modal },
 	data: () => ({
+		modal: false,
 		file: null,
 		edit: false,
 		showMap: false,
@@ -120,8 +129,11 @@ export default {
 			var imageRef = storageRef.child(`shop/${this.user.email}`)
 			console.log(imageRef.location.path_)
 
+			if (this.file.size > 300000) {
+				this.modal = true
+				return
+			}
 			await imageRef.put(this.file)
-
 			console.log(' Uploaded!')
 
 			var ImgUrl
@@ -190,6 +202,10 @@ export default {
 			console.log('savePosition')
 			this.shopOptions.position = this.$refs.shop.marker.position.toJSON()
 			this.showMap = false
+		},
+
+		getModal(value) {
+			this.modal = false
 		},
 	},
 }
