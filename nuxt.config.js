@@ -31,7 +31,7 @@ module.exports = {
 
 	firebase: {
 		config: {
-			apiKey: firebaseApi,
+			apiKey: process.env.firebaseApi,
 			authDomain: 'my-tree-app.firebaseapp.com',
 			databaseURL: 'https://my-tree-app.firebaseio.com',
 			projectId: 'my-tree-app',
