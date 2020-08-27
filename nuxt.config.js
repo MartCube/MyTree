@@ -8,6 +8,10 @@ module.exports = {
 		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon/favicon.ico' }],
 	},
 
+	privateRuntimeConfig: {
+		firebaseApi: process.env.firebaseApi,
+	},
+
 	// Customize the progress-bar color
 	loading: false,
 	loadingIndicator: {
@@ -27,7 +31,7 @@ module.exports = {
 
 	firebase: {
 		config: {
-			apiKey: 'AIzaSyBneDIF1zbDHeEizyH_2WZTg8NRD8xWbvY',
+			apiKey: firebaseApi,
 			authDomain: 'my-tree-app.firebaseapp.com',
 			databaseURL: 'https://my-tree-app.firebaseio.com',
 			projectId: 'my-tree-app',
@@ -75,7 +79,6 @@ module.exports = {
 		fallback: true,
 	},
 
-	// Build configuration
 	build: {
 		// You can extend webpack config here
 		transpile: ['x5gMaps'],

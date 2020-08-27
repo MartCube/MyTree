@@ -1,19 +1,24 @@
 <template>
 	<div class="container shop" :class="{ edit_mode: edit, map_mode: showMap }">
-		<modal v-if="modal" type="success" @getValue="getModal">
-			<svg class="icon" viewBox="0 0 24 24">
-				<circle cx="12" cy="12" r="11.5" style="fill: #3a506b;" />
-				<path d="M9.59,18.37,4.72,13.5a.75.75,0,0,1,0-1.06l1.06-1.06a.74.74,0,0,1,1.06,0l3.28,3.28,7-7a.74.74,0,0,1,1.06,0l1.06,1.06a.75.75,0,0,1,0,1.06l-8.62,8.62a.75.75,0,0,1-1.07,0Z" style="fill: #6fffe9;" />
-			</svg>
-			<span>Image to big</span>
-		</modal>
-		<div class="edit">
-			<svg v-if="!edit" class="icon" viewBox="0 0 24 24" @click="editOn">
-				<path d="M16.58,5.1l3.6,3.6a.39.39,0,0,1,0,.55L11.46,18l-3.71.41a.78.78,0,0,1-.86-.86l.41-3.7L16,5.1a.4.4,0,0,1,.56,0ZM23,4.18,21.1,2.23a1.58,1.58,0,0,0-2.21,0L17.48,3.65a.39.39,0,0,0,0,.55l3.6,3.6a.39.39,0,0,0,.55,0L23,6.39A1.56,1.56,0,0,0,23,4.18ZM15.83,15.6v4.06H3.06V6.89h9.17a.52.52,0,0,0,.34-.14l1.6-1.6a.48.48,0,0,0-.34-.82H2.42A1.92,1.92,0,0,0,.5,6.25V20.3a1.92,1.92,0,0,0,1.92,1.92H16.47a1.92,1.92,0,0,0,1.92-1.92V14a.48.48,0,0,0-.82-.34L16,15.26A.52.52,0,0,0,15.83,15.6Z" />
-			</svg>
-			<svg v-if="edit" class="icon" viewBox="0 0 24 24" @click="save">
-				<path class="cls-1" d="M22.78,5.53,18.47,1.22A2.47,2.47,0,0,0,16.73.5H3A2.46,2.46,0,0,0,.5,3V21A2.46,2.46,0,0,0,3,23.5H21A2.46,2.46,0,0,0,23.5,21V7.27a2.47,2.47,0,0,0-.72-1.74ZM12,20.21a3.29,3.29,0,1,1,3.29-3.28A3.29,3.29,0,0,1,12,20.21ZM16.93,4.58V9.74a.62.62,0,0,1-.62.62H4.4a.61.61,0,0,1-.61-.62V4.4a.61.61,0,0,1,.61-.61H16.13a.6.6,0,0,1,.44.18l.18.17A.67.67,0,0,1,16.93,4.58Z" />
-			</svg>
+		<div class="btns">
+			<div class="edit">
+				<svg v-if="!edit" class="icon" viewBox="0 0 24 24" @click="editOn">
+					<path d="M16.58,5.1l3.6,3.6a.39.39,0,0,1,0,.55L11.46,18l-3.71.41a.78.78,0,0,1-.86-.86l.41-3.7L16,5.1a.4.4,0,0,1,.56,0ZM23,4.18,21.1,2.23a1.58,1.58,0,0,0-2.21,0L17.48,3.65a.39.39,0,0,0,0,.55l3.6,3.6a.39.39,0,0,0,.55,0L23,6.39A1.56,1.56,0,0,0,23,4.18ZM15.83,15.6v4.06H3.06V6.89h9.17a.52.52,0,0,0,.34-.14l1.6-1.6a.48.48,0,0,0-.34-.82H2.42A1.92,1.92,0,0,0,.5,6.25V20.3a1.92,1.92,0,0,0,1.92,1.92H16.47a1.92,1.92,0,0,0,1.92-1.92V14a.48.48,0,0,0-.82-.34L16,15.26A.52.52,0,0,0,15.83,15.6Z" />
+				</svg>
+				<svg v-if="edit" class="icon" viewBox="0 0 24 24" @click="save">
+					<path class="cls-1" d="M22.78,5.53,18.47,1.22A2.47,2.47,0,0,0,16.73.5H3A2.46,2.46,0,0,0,.5,3V21A2.46,2.46,0,0,0,3,23.5H21A2.46,2.46,0,0,0,23.5,21V7.27a2.47,2.47,0,0,0-.72-1.74ZM12,20.21a3.29,3.29,0,1,1,3.29-3.28A3.29,3.29,0,0,1,12,20.21ZM16.93,4.58V9.74a.62.62,0,0,1-.62.62H4.4a.61.61,0,0,1-.61-.62V4.4a.61.61,0,0,1,.61-.61H16.13a.6.6,0,0,1,.44.18l.18.17A.67.67,0,0,1,16.93,4.58Z" />
+				</svg>
+			</div>
+			<div class="delete">
+				<svg class="icon" viewBox="0 0 24 24" @click="editOn">
+					<path d="M3.38,21.34A2.16,2.16,0,0,0,5.53,23.5H18.47a2.16,2.16,0,0,0,2.15-2.16h0V6.25H3.38ZM15.59,9.84a.72.72,0,0,1,1.44,0V19.91a.72.72,0,0,1-1.44,0Zm-4.31,0a.72.72,0,0,1,1.44,0V19.91a.72.72,0,0,1-1.44,0ZM7,9.84a.72.72,0,0,1,1.44,0V19.91a.72.72,0,0,1-1.44,0Zm14.37-7.9H16l-.42-.84a1.07,1.07,0,0,0-1-.6H9.43a1.06,1.06,0,0,0-1,.6l-.42.84H2.66a.72.72,0,0,0-.72.72V4.09a.72.72,0,0,0,.72.72H21.34a.72.72,0,0,0,.72-.72V2.66A.72.72,0,0,0,21.34,1.94Z" />
+				</svg>
+			</div>
+			<n-link class="back" to="/myShop">
+				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M7.38,14.05h15.5a.61.61,0,0,0,.62-.61V10.56a.61.61,0,0,0-.62-.61H7.38V7.58a1.23,1.23,0,0,0-2.1-.87L.86,11.13a1.23,1.23,0,0,0,0,1.74l4.42,4.42a1.23,1.23,0,0,0,2.1-.87V14.05Z" />
+				</svg>
+			</n-link>
 		</div>
 
 		<div v-if="showMap" id="map">
@@ -36,8 +41,12 @@
 			</svg>
 		</div>
 
+		<modal v-if="modal" type="error" @getValue="getModal">
+			<span>Image to big</span>
+		</modal>
+
 		<div class="image" @click="Upload">
-			<img ref="image" class="lazyload" :data-src="shop.image" />
+			<img ref="image" class="lazyload" :src="shop.image" />
 
 			<template v-if="edit">
 				<div class="color_overlay"></div>
@@ -121,13 +130,10 @@ export default {
 	methods: {
 		async OnFileSelected(event) {
 			this.file = event.target.files[0]
-			console.log(this.file)
+			if (!this.file) return
 
 			var storageRef = this.$fireStorage.ref()
-			console.log(storageRef)
-
 			var imageRef = storageRef.child(`shop/${this.user.email}`)
-			console.log(imageRef.location.path_)
 
 			if (this.file.size > 300000) {
 				this.modal = true
@@ -211,7 +217,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~/assets/colors.scss';
 @import '~/assets/mixins.scss';
 .shop {
@@ -220,25 +226,27 @@ export default {
 	&.map_mode {
 		overflow: hidden;
 	}
-	.edit {
+
+	.btns {
 		position: absolute;
 		top: 5%;
 		right: 5%;
 		z-index: 5;
-		@include d-flex(row, center, center, initial);
-		span {
-			color: white;
-			margin: 0 10px;
-			font-size: 1.8em;
-		}
+		@include d-flex(column, center, center, initial);
+
 		.icon {
-			width: 50px;
+			width: 40px;
 			padding: 10px;
+			margin: 10px;
 			border-radius: 15px;
-			fill: $secondary;
-			background: $primary;
+			background: $secondary;
+			fill: $primary;
+		}
+		.delete > .icon {
+			fill: $error;
 		}
 	}
+
 	.image {
 		@include d-flex();
 		height: 40vh;
