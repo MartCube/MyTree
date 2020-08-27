@@ -116,7 +116,7 @@ export default {
 	mounted() {
 		this.$store.commit('setLoading', false)
 		this.$nextTick().then(() => document.body.classList.remove('dark'))
-
+		console.log('hello')
 		this.installApp()
 	},
 	methods: {
