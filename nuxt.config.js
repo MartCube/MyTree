@@ -7,7 +7,9 @@ module.exports = {
 		meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, height=device-height, initial-scale=1' }, { name: 'keywords', content: 'mart, cube, portfolio, site, web, developer' }, { hid: 'description', name: 'description', content: pkg.description }],
 		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon/favicon.ico' }],
 	},
-
+	publicRuntimeConfig: {
+		test: process.env.test,
+	},
 	privateRuntimeConfig: {
 		apiKey: process.env.apiKey,
 		authDomain: process.env.authDomain,

@@ -2,7 +2,7 @@
 	<div class="container home-page">
 		<div class="top-container">
 			<div class="user-card">
-				<span>Welcome {{ user.email }}</span>
+				<span>Welcome {{ $config.gmapKey }}</span>
 				<div class="info">
 					<div class="trees">
 						<svg class="icon" viewBox="0 0 512 512">
@@ -69,7 +69,7 @@ export default {
 		modal,
 		DoughnutChart,
 	},
-	async asyncData({ app, $config: { gmapKey } }) {
+	async asyncData({ app }) {
 		var shopList = []
 		await app.$fireStore
 			.collection('shops')
@@ -82,7 +82,7 @@ export default {
 					})
 				})
 			})
-		console.log(shopList, gmapKey)
+		console.log(shopList)
 
 		return {
 			shopList: shopList,
@@ -115,6 +115,7 @@ export default {
 		this.$store.commit('setLoading', false)
 		this.$nextTick().then(() => document.body.classList.remove('dark'))
 		this.installApp()
+		console.log(this.$config)
 	},
 	methods: {
 		testFunc(e, v) {
