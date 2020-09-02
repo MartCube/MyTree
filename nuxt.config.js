@@ -9,7 +9,15 @@ module.exports = {
 	},
 
 	privateRuntimeConfig: {
-		firebaseApi: process.env.firebaseApi,
+		apiKey: process.env.apiKey,
+		authDomain: process.env.authDomain,
+		databaseURL: process.env.databaseURL,
+		projectId: process.env.projectId,
+		storageBucket: process.env.storageBucket,
+		messagingSenderId: process.env.messagingSenderId,
+		appId: process.env.appId,
+		measurementId: process.env.measurementId,
+		gmapKey: process.env.gmapKey,
 	},
 
 	// Customize the progress-bar color
@@ -27,18 +35,24 @@ module.exports = {
 	plugins: [{ src: `@/plugins/x5gMap.js` }, { src: `@/plugins/lazysizes.client.js` }, { src: '@/plugins/qrReader.js', mode: 'client' }, { src: '@/plugins/qrGenerator.js' }, { src: '@/plugins/vee-validate.js' }, { src: '@/plugins/fireauth.js' }, { src: '@/plugins/charts.js' }],
 
 	// Nuxt.js modules
-	modules: ['@nuxtjs/pwa', '@nuxtjs/firebase'],
+	modules: ['@nuxtjs/pwa', '@nuxtjs/firebase', '@aceforth/nuxt-optimized-images'],
+
+	optimizedImages: {
+		inlineImageLimit: -1,
+		optimizeImages: true,
+		defaultImageLoader: 'img-loader',
+	},
 
 	firebase: {
 		config: {
-			apiKey: process.env.firebaseApi,
-			authDomain: 'my-tree-app.firebaseapp.com',
-			databaseURL: 'https://my-tree-app.firebaseio.com',
-			projectId: 'my-tree-app',
-			storageBucket: 'my-tree-app.appspot.com',
-			messagingSenderId: '168638748208',
-			appId: '1:168638748208:web:081771b6e6b37d2a7bfff5',
-			measurementId: 'G-E0EQY206SS',
+			apiKey: process.env.apiKey,
+			authDomain: process.env.authDomain,
+			databaseURL: process.env.databaseURL,
+			projectId: process.env.projectId,
+			storageBucket: process.env.storageBucket,
+			messagingSenderId: process.env.messagingSenderId,
+			appId: process.env.appId,
+			measurementId: process.env.measurementId,
 		},
 		services: {
 			firestore: true,

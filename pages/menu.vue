@@ -1,8 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar :back="false">
-			Menu
-		</titleBar>
+		<titleBar :back="false"> Menu </titleBar>
 
 		<div class="menu_links">
 			<nuxt-link class="item" to="/account">
@@ -50,9 +48,7 @@
 			</div>
 		</div>
 
-		<modal v-if="modalSignOut" @getValue="getModalSignOut">
-			Do you want to Sign Out ?
-		</modal>
+		<modal v-if="modalSignOut" @getValue="getModalSignOut"> Do you want to Sign Out ? </modal>
 	</div>
 </template>
 

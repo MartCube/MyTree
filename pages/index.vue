@@ -6,13 +6,13 @@
 				<div class="info">
 					<div class="trees">
 						<svg class="icon" viewBox="0 0 512 512">
-							<polygon style="fill: #00a38b;" points="133.6,383.9 188.5,286.4 162.8,284.4 203.9,220.8 178.2,218.8 233,147.1 209,145.2 262.1,53.7 262.7,55.9 262.8,53 315.9,144.5 291.9,146.5 346.7,218.1 321,220.1 362.1,283.7 336.4,285.7 391.3,383.2 346.2,382.6 346.3,382.8 " />
+							<polygon style="fill: #00a38b" points="133.6,383.9 188.5,286.4 162.8,284.4 203.9,220.8 178.2,218.8 233,147.1 209,145.2 262.1,53.7 262.7,55.9 262.8,53 315.9,144.5 291.9,146.5 346.7,218.1 321,220.1 362.1,283.7 336.4,285.7 391.3,383.2 346.2,382.6 346.3,382.8 " />
 							<rect x="252.6" y="370" width="19.6" height="89" />
 
-							<polygon style="fill: #00f5d0;" points="86.8,423.6 127.3,351.8 108.3,350.3 138.6,303.4 119.7,301.9 160.1,249.1 142.4,247.7 181.6,180.2 182,181.9 182,179.7 221.2,247.2 203.5,248.6 243.9,301.4 224.9,302.9 255.3,349.8 236.3,351.3 276.7,423.1 243.5,422.7 243.6,422.8" />
+							<polygon style="fill: #00f5d0" points="86.8,423.6 127.3,351.8 108.3,350.3 138.6,303.4 119.7,301.9 160.1,249.1 142.4,247.7 181.6,180.2 182,181.9 182,179.7 221.2,247.2 203.5,248.6 243.9,301.4 224.9,302.9 255.3,349.8 236.3,351.3 276.7,423.1 243.5,422.7 243.6,422.8" />
 							<rect x="174.6" y="410.7" width="14.5" height="48.3" />
 
-							<polygon style="fill: #00ccad;" points="274.7,429.9 308,370.7 292.4,369.5 317.4,330.8 301.8,329.6 335.1,286.1 320.5,284.9 352.8,229.4 353.1,230.8 353.1,228.9 385.4,284.5 370.8,285.7 404.1,329.2 388.5,330.4 413.5,369 397.9,370.3 431.1,429.4 403.8,429.1 403.8,429.2" />
+							<polygon style="fill: #00ccad" points="274.7,429.9 308,370.7 292.4,369.5 317.4,330.8 301.8,329.6 335.1,286.1 320.5,284.9 352.8,229.4 353.1,230.8 353.1,228.9 385.4,284.5 370.8,285.7 404.1,329.2 388.5,330.4 413.5,369 397.9,370.3 431.1,429.4 403.8,429.1 403.8,429.2" />
 							<rect x="347" y="415.3" width="11.9" height="43.8" />
 						</svg>
 						<DoughnutChart :percent="10" background-color="rgba(255,255,255, .1)" foreground-color="#6fffe9" :stroke-width="20" :width="120" :height="120" />
@@ -48,15 +48,13 @@
 
 		<modal v-if="modalScan" type="success" @getValue="getModal">
 			<svg class="icon" viewBox="0 0 24 24">
-				<circle cx="12" cy="12" r="11.5" style="fill: #3a506b;" />
-				<path d="M9.59,18.37,4.72,13.5a.75.75,0,0,1,0-1.06l1.06-1.06a.74.74,0,0,1,1.06,0l3.28,3.28,7-7a.74.74,0,0,1,1.06,0l1.06,1.06a.75.75,0,0,1,0,1.06l-8.62,8.62a.75.75,0,0,1-1.07,0Z" style="fill: #6fffe9;" />
+				<circle cx="12" cy="12" r="11.5" style="fill: #3a506b" />
+				<path d="M9.59,18.37,4.72,13.5a.75.75,0,0,1,0-1.06l1.06-1.06a.74.74,0,0,1,1.06,0l3.28,3.28,7-7a.74.74,0,0,1,1.06,0l1.06,1.06a.75.75,0,0,1,0,1.06l-8.62,8.62a.75.75,0,0,1-1.07,0Z" style="fill: #6fffe9" />
 			</svg>
 			<span>Successful Scan</span>
 		</modal>
 
-		<modal v-if="modalInstallApp" @getValue="getModal">
-			<span>Install MyTree App ?</span>
-		</modal>
+		<modal v-if="modalInstallApp" @getValue="getModal"><span>Install MyTree App ?</span></modal>
 	</div>
 </template>
 
@@ -71,7 +69,7 @@ export default {
 		modal,
 		DoughnutChart,
 	},
-	async asyncData({ app }) {
+	async asyncData({ app, $config: { gmapKey } }) {
 		var shopList = []
 		await app.$fireStore
 			.collection('shops')
@@ -84,7 +82,7 @@ export default {
 					})
 				})
 			})
-		console.log(shopList)
+		console.log(shopList, gmapKey)
 
 		return {
 			shopList: shopList,
@@ -116,7 +114,6 @@ export default {
 	mounted() {
 		this.$store.commit('setLoading', false)
 		this.$nextTick().then(() => document.body.classList.remove('dark'))
-		console.log('hello')
 		this.installApp()
 	},
 	methods: {

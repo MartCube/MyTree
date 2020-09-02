@@ -6,21 +6,17 @@ module.exports = {
 		es6: true,
 	},
 	parserOptions: {
-		parser: 'babel-eslint'
+		parser: 'babel-eslint',
 	},
 	extends: [
 		'plugin:vue/recommended',
 		'plugin:prettier/recommended',
 		'prettier',
-		'prettier/vue'
+		'prettier/vue',
 		//'@nuxtjs',
-    	//'plugin:nuxt/recommended'
-		
+		//'plugin:nuxt/recommended'
 	],
-	plugins: [
-		'vue',
-		'prettier'
-	],
+	plugins: ['vue', 'prettier'],
 	// add your custom rules here
 	rules: {
 		'prettier/prettier': [
@@ -34,7 +30,7 @@ module.exports = {
 				trailingComma: 'all',
 				jsxBracketSameLine: false,
 				bracketSpacing: true,
-				endOfLine:"auto"
+				endOfLine: 'auto',
 			},
 		],
 		'vue/html-indent': [
@@ -47,21 +43,30 @@ module.exports = {
 				ignores: [],
 			},
 		],
-		"vue/max-attributes-per-line": [2, {
-			"singleline": 15,
-			"multiline": {
-				"max": 5,
-				"allowFirstLine": true
-			}
-		}],
-		"vue/html-closing-bracket-newline": ["error", {
-			"singleline": "never",
-			"multiline": "never"
-		}],
-		"vue/singleline-html-element-content-newline": ["error", {
-			"ignoreWhenNoAttributes": true,
-			"ignoreWhenEmpty": true,
-			"ignores": ["pre", "textarea","n-link","nuxt-link","span","a","label","btn","h2","p"]
-		}]
-	}
+		'vue/max-attributes-per-line': [
+			2,
+			{
+				singleline: 15,
+				multiline: {
+					max: 5,
+					allowFirstLine: true,
+				},
+			},
+		],
+		'vue/html-closing-bracket-newline': [
+			'error',
+			{
+				singleline: 'never',
+				multiline: 'never',
+			},
+		],
+		'vue/singleline-html-element-content-newline': [
+			'error',
+			{
+				ignoreWhenNoAttributes: true,
+				ignoreWhenEmpty: true,
+				ignores: ['titlebar', 'modal', 'n-link', 'nuxt-link', 'span', 'a', 'label', 'btn', 'h2', 'p'],
+			},
+		],
+	},
 }
