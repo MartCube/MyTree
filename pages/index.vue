@@ -115,7 +115,7 @@ export default {
 		this.$store.commit('setLoading', false)
 		this.$nextTick().then(() => document.body.classList.remove('dark'))
 		this.installApp()
-		console.log(this.$config)
+		console.log(this.$config.gmapKey)
 	},
 	methods: {
 		testFunc(e, v) {
