@@ -1,8 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar link="/menu">
-			Register Shop
-		</titleBar>
+		<titleBar> Register Shop </titleBar>
 
 		<div class="policy">
 			<h2>Terms of Services</h2>

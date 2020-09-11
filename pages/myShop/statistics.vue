@@ -1,8 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar link="/myShop">
-			Statistics
-		</titleBar>
+		<titleBar> Statistics </titleBar>
 
 		<div v-if="shopScans > 0" class="inner-container">
 			<div class="item">
@@ -36,9 +34,7 @@
 		</div>
 
 		<transition name="modal">
-			<modal v-if="modal" @getValue="getModal">
-				Accept scan ?
-			</modal>
+			<modal v-if="modal" @getValue="getModal"> Accept scan ? </modal>
 		</transition>
 	</div>
 </template>

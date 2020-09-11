@@ -1,8 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar link="/myShop">
-			QRcode
-		</titleBar>
+		<titleBar> QRcode </titleBar>
 
 		<vue-qrcode v-if="user.isSeller" ref="qrcode" class="qrcode" :value="user.email" :color="qrCodeOptions.color" :width="qrCodeOptions.width" :error-correction-level="qrCodeOptions.errorCorrectionLevel" />
 

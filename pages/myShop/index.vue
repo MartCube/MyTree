@@ -1,8 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar>
-			My Shop
-		</titleBar>
+		<titleBar> My Shop </titleBar>
 
 		<div class="menu_links">
 			<nuxt-link class="item" to="/myShop/editShop">

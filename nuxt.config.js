@@ -7,9 +7,7 @@ module.exports = {
 		meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, height=device-height, initial-scale=1' }, { name: 'keywords', content: 'mart, cube, portfolio, site, web, developer' }, { hid: 'description', name: 'description', content: pkg.description }],
 		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon/favicon.ico' }],
 	},
-	publicRuntimeConfig: {
-		test: process.env.test,
-	},
+
 	privateRuntimeConfig: {
 		apiKey: process.env.apiKey,
 		authDomain: process.env.authDomain,
@@ -19,7 +17,7 @@ module.exports = {
 		messagingSenderId: process.env.messagingSenderId,
 		appId: process.env.appId,
 		measurementId: process.env.measurementId,
-		gmapKey: process.env.gmapKey,
+		gmapKey: process.env.NUXT_ENV_GMapKey,
 	},
 
 	// Customize the progress-bar color
@@ -37,31 +35,7 @@ module.exports = {
 	plugins: [{ src: `@/plugins/x5gMap.js` }, { src: `@/plugins/lazysizes.client.js` }, { src: '@/plugins/qrReader.js', mode: 'client' }, { src: '@/plugins/qrGenerator.js' }, { src: '@/plugins/vee-validate.js' }, { src: '@/plugins/fireauth.js' }, { src: '@/plugins/charts.js' }],
 
 	// Nuxt.js modules
-	modules: ['@nuxtjs/pwa', '@nuxtjs/firebase', '@aceforth/nuxt-optimized-images'],
-
-	optimizedImages: {
-		inlineImageLimit: -1,
-		optimizeImages: true,
-		defaultImageLoader: 'img-loader',
-	},
-
-	firebase: {
-		config: {
-			apiKey: process.env.apiKey,
-			authDomain: process.env.authDomain,
-			databaseURL: process.env.databaseURL,
-			projectId: process.env.projectId,
-			storageBucket: process.env.storageBucket,
-			messagingSenderId: process.env.messagingSenderId,
-			appId: process.env.appId,
-			measurementId: process.env.measurementId,
-		},
-		services: {
-			firestore: true,
-			auth: true,
-			storage: true,
-		},
-	},
+	modules: ['@nuxtjs/pwa', '@nuxtjs/firebase', 'nuxt-i18n'],
 
 	pwa: {
 		manifest: {
@@ -89,6 +63,43 @@ module.exports = {
 			swURL: 'installApp.js',
 			// offline: true,
 		},
+	},
+
+	firebase: {
+		config: {
+			apiKey: process.env.apiKey,
+			authDomain: process.env.authDomain,
+			databaseURL: process.env.databaseURL,
+			projectId: process.env.projectId,
+			storageBucket: process.env.storageBucket,
+			messagingSenderId: process.env.messagingSenderId,
+			appId: process.env.appId,
+			measurementId: process.env.measurementId,
+			gmapKey: process.env.gmapKey,
+		},
+		services: {
+			firestore: true,
+			auth: true,
+			storage: true,
+		},
+	},
+
+	i18n: {
+		defaultLocale: 'en',
+		lazy: true,
+		langDir: 'locales/',
+		locales: [
+			{
+				code: 'ua',
+				name: 'UA',
+				file: 'ua.js',
+			},
+			{
+				code: 'en',
+				name: 'EN',
+				file: 'en.js',
+			},
+		],
 	},
 
 	generate: {
