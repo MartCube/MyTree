@@ -19,6 +19,10 @@ export default {
 			type: Boolean,
 			default: true,
 		},
+		link: {
+			type: String,
+			default: '',
+		},
 	},
 }
 </script>
