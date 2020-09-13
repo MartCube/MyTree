@@ -26,20 +26,16 @@
 
 		<div class="links">
 			<p>Don't have an account ?</p>
-			<nuxt-link to="/auth/register">
-				Sign Up
-			</nuxt-link>
+			<nuxt-link :to="localePath('/auth/register')"> Sign Up </nuxt-link>
 			<br />
 			<p>Already have an account ?</p>
-			<nuxt-link to="/auth/login">
-				Sign In
-			</nuxt-link>
+			<nuxt-link :to="localePath('/auth/login')"> Sign In </nuxt-link>
 		</div>
 
 		<modal v-if="modalEmail" type="success" @getValue="getModal">
 			<svg class="icon" viewBox="0 0 24 24">
-				<circle cx="12" cy="12" r="11.5" style="fill: #3a506b;" />
-				<path d="M9.59,18.37,4.72,13.5a.75.75,0,0,1,0-1.06l1.06-1.06a.74.74,0,0,1,1.06,0l3.28,3.28,7-7a.74.74,0,0,1,1.06,0l1.06,1.06a.75.75,0,0,1,0,1.06l-8.62,8.62a.75.75,0,0,1-1.07,0Z" style="fill: #6fffe9;" />
+				<circle cx="12" cy="12" r="11.5" style="fill: #3a506b" />
+				<path d="M9.59,18.37,4.72,13.5a.75.75,0,0,1,0-1.06l1.06-1.06a.74.74,0,0,1,1.06,0l3.28,3.28,7-7a.74.74,0,0,1,1.06,0l1.06,1.06a.75.75,0,0,1,0,1.06l-8.62,8.62a.75.75,0,0,1-1.07,0Z" style="fill: #6fffe9" />
 			</svg>
 			<span>Email Send</span>
 		</modal>

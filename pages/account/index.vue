@@ -8,7 +8,7 @@
 				</svg>
 				<span> {{ user.email }}</span>
 			</div>
-			<nuxt-link class="item" to="/account/changePassword">
+			<nuxt-link class="item" :to="localePath('/account/changePassword')">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path d="M23.5,8.41a7.9,7.9,0,0,1-9.38,7.76L13,17.39a1.08,1.08,0,0,1-.81.36H10.56v1.8a1.08,1.08,0,0,1-1.08,1.08H7.69v1.79A1.08,1.08,0,0,1,6.61,23.5h-5A1.08,1.08,0,0,1,.5,22.42v-3.5a1.07,1.07,0,0,1,.32-.77l7.26-7.27a8.08,8.08,0,0,1-.39-2.47,7.91,7.91,0,1,1,15.81,0ZM15.59,6.25a2.16,2.16,0,1,0,2.16-2.16A2.16,2.16,0,0,0,15.59,6.25Z" />
 				</svg>

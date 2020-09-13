@@ -40,13 +40,8 @@
 
 		<div class="links">
 			<p>Don't have an account ?</p>
-
-			<nuxt-link to="/auth/register">
-				Sign Up
-			</nuxt-link>
-			<nuxt-link to="/auth/password_reset" class="forgot_password">
-				Forgot Password
-			</nuxt-link>
+			<nuxt-link :to="localePath('/auth/register')"> Sign Up </nuxt-link>
+			<nuxt-link :to="localePath('/auth/password_reset')" class="forgot_password"> Forgot Password </nuxt-link>
 		</div>
 
 		<spinner v-if="loading" />
@@ -55,7 +50,6 @@
 
 <script>
 import inputItem from '~/components/inputItem.vue'
-import checkbox from '~/components/checkbox.vue'
 import spinner from '~/components/spinner.vue'
 import { ValidationObserver } from 'vee-validate'
 
