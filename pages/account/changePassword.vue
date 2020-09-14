@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar> Change Password </titleBar>
+		<titleBar> {{ $t('menu.account.change_password') }} </titleBar>
 
 		<ValidationObserver v-show="!reAuth" ref="SignIn" tag="form" class="auth" @submit.prevent="SignIn()">
 			<inputItem dark name="Password" :rules="'required'" type="password" @getValue="getPass" />
@@ -24,7 +24,7 @@
 				</svg>
 				{{ error }}
 			</div>
-			<input type="submit" class="submit" value="Change Password" />
+			<input type="submit" class="submit" value=" $t('menu.account.change_password') " />
 		</ValidationObserver>
 
 		<modal v-if="modal" type="success" @getValue="getModal">
@@ -32,7 +32,7 @@
 				<circle cx="12" cy="12" r="11.5" style="fill: #3a506b" />
 				<path d="M9.59,18.37,4.72,13.5a.75.75,0,0,1,0-1.06l1.06-1.06a.74.74,0,0,1,1.06,0l3.28,3.28,7-7a.74.74,0,0,1,1.06,0l1.06,1.06a.75.75,0,0,1,0,1.06l-8.62,8.62a.75.75,0,0,1-1.07,0Z" style="fill: #6fffe9" />
 			</svg>
-			<span>Password Changed</span>
+			<span>{{ $t('system_messages.password_changed') }}</span>
 		</modal>
 	</div>
 </template>

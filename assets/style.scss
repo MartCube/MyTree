@@ -19,7 +19,7 @@ body{
 	color: $text;
 	background: white;
 	font-family: 'config';
-
+	font-size: 3.7vw;
 	-webkit-tap-highlight-color: transparent;
 	&.dark {
 		background: $text;
@@ -64,7 +64,7 @@ body{
 			}
 	
 			.icon {
-				width: 50px;
+				width: 11vw;
 				padding: 10px;
 				border-radius: 15px;
 	
