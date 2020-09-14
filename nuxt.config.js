@@ -90,14 +90,14 @@ module.exports = {
 		langDir: 'locales/',
 		locales: [
 			{
-				code: 'ua',
-				name: 'UA',
-				file: 'ua.js',
+				code: 'en',
+				name: 'English',
+				file: 'en.js',
 			},
 			{
-				code: 'en',
-				name: 'EN',
-				file: 'en.js',
+				code: 'ua',
+				name: 'Ukranian',
+				file: 'ua.js',
 			},
 		],
 	},

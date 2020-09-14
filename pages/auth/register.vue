@@ -41,9 +41,7 @@
 
 		<div class="links">
 			<p>Already have an account ?</p>
-			<nuxt-link to="/auth/login">
-				Sign In
-			</nuxt-link>
+			<nuxt-link :to="localePath('/auth/login')"> Sign In </nuxt-link>
 		</div>
 	</div>
 </template>

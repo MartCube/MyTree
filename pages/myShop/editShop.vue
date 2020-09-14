@@ -10,11 +10,11 @@
 				</svg>
 			</div>
 			<div class="delete">
-				<svg class="icon" viewBox="0 0 24 24" @click="editOn">
+				<svg class="icon" viewBox="0 0 24 24" @click="deleteShop()">
 					<path d="M3.38,21.34A2.16,2.16,0,0,0,5.53,23.5H18.47a2.16,2.16,0,0,0,2.15-2.16h0V6.25H3.38ZM15.59,9.84a.72.72,0,0,1,1.44,0V19.91a.72.72,0,0,1-1.44,0Zm-4.31,0a.72.72,0,0,1,1.44,0V19.91a.72.72,0,0,1-1.44,0ZM7,9.84a.72.72,0,0,1,1.44,0V19.91a.72.72,0,0,1-1.44,0Zm14.37-7.9H16l-.42-.84a1.07,1.07,0,0,0-1-.6H9.43a1.06,1.06,0,0,0-1,.6l-.42.84H2.66a.72.72,0,0,0-.72.72V4.09a.72.72,0,0,0,.72.72H21.34a.72.72,0,0,0,.72-.72V2.66A.72.72,0,0,0,21.34,1.94Z" />
 				</svg>
 			</div>
-			<n-link class="back" to="/myShop">
+			<n-link class="back" :to="localePath('/myShop')">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path d="M7.38,14.05h15.5a.61.61,0,0,0,.62-.61V10.56a.61.61,0,0,0-.62-.61H7.38V7.58a1.23,1.23,0,0,0-2.1-.87L.86,11.13a1.23,1.23,0,0,0,0,1.74l4.42,4.42a1.23,1.23,0,0,0,2.1-.87V14.05Z" />
 				</svg>
@@ -87,6 +87,13 @@
 				<textarea v-else ref="description" :value="shop.description" />
 			</div>
 		</div>
+
+		<modal v-if="imgModal" type="error" @getValue="getImgModal">
+			<span>Image to big</span>
+		</modal>
+		<modal v-if="deleteModal" @getValue="getDeleteModal">
+			<span>Delete this shop ?</span>
+		</modal>
 	</div>
 </template>
 
@@ -99,7 +106,8 @@ export default {
 	middleware: ['auth'], //'shop'
 	components: { gmapsMap, gmapsMarker, modal },
 	data: () => ({
-		modal: false,
+		imgModal: false,
+		deleteModal: false,
 		file: null,
 		edit: false,
 		showMap: false,
@@ -210,8 +218,18 @@ export default {
 			this.showMap = false
 		},
 
-		getModal(value) {
-			this.modal = false
+		getImgModal(value) {
+			this.imgModal = false
+		},
+		getDeleteModal(value) {
+			if (value) {
+				console.log('proceed to shop delete')
+			}
+			this.deleteModal = false
+		},
+
+		deleteShop() {
+			this.deleteModal = true
 		},
 	},
 }
@@ -239,8 +257,8 @@ export default {
 			padding: 10px;
 			margin: 10px;
 			border-radius: 15px;
-			background: $secondary;
-			fill: $primary;
+			background: white;
+			fill: $secondary;
 		}
 		.delete > .icon {
 			fill: $error;
