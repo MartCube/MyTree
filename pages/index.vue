@@ -127,7 +127,8 @@ export default {
 		installApp() {
 			console.log('installApp')
 			window.addEventListener('beforeinstallprompt', (e) => {
-				this.testFunc(e, 'enabled')
+				console.log(e);
+				this.testFunc(e, 'enabled');
 			})
 		},
 		getModal(value) {

@@ -22,6 +22,7 @@ export default {
 		register_shop: {
 			self_name: 'Register Shop',
 			
+			
 		},
 		privacy_policy: 'Privacy Policy',
 		about_my_tree: 'About My Tree',
