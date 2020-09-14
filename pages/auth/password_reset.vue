@@ -9,11 +9,11 @@
 				</g>
 			</svg>
 			<span class="title">My Tree</span>
-			<h2>Password Reset</h2>
+			<h2>{{ $t('system_messages.reset_pass') }}</h2>
 		</div>
 
 		<ValidationObserver ref="sendEmail" tag="form" class="form" @submit.prevent="sendEmail()">
-			<inputItem name="Email" :rules="'email|required'" @getValue="getEmail" />
+			<inputItem :name="email" :rules="'email|required'" @getValue="getEmail" />
 
 			<div v-if="sendEmail_error !== null" class="authError">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -21,15 +21,16 @@
 				</svg>
 				{{ sendEmail_error }}
 			</div>
-			<input type="submit" class="submit" value="Send Mail" />
+			<input type="submit" class="submit" :value="send_email" />
 		</ValidationObserver>
 
 		<div class="links">
-			<p>Don't have an account ?</p>
-			<nuxt-link :to="localePath('/auth/register')"> Sign Up </nuxt-link>
+			<p>{{ $t('system_messages.dont_have_account') }}  ?</p>
+			<nuxt-link :to="localePath('/auth/register')"> {{ $t('system_messages.sign_up') }}  </nuxt-link>
 			<br />
-			<p>Already have an account ?</p>
-			<nuxt-link :to="localePath('/auth/login')"> Sign In </nuxt-link>
+			<p>{{ $t('system_messages.already_have_account') }} ?</p>
+			<nuxt-link :to="localePath('/auth/login')"> {{ $t('system_messages.sign_in') }} </nuxt-link>
+
 		</div>
 
 		<modal v-if="modalEmail" type="success" @getValue="getModal">
@@ -37,7 +38,7 @@
 				<circle cx="12" cy="12" r="11.5" style="fill: #3a506b" />
 				<path d="M9.59,18.37,4.72,13.5a.75.75,0,0,1,0-1.06l1.06-1.06a.74.74,0,0,1,1.06,0l3.28,3.28,7-7a.74.74,0,0,1,1.06,0l1.06,1.06a.75.75,0,0,1,0,1.06l-8.62,8.62a.75.75,0,0,1-1.07,0Z" style="fill: #6fffe9" />
 			</svg>
-			<span>Email Send</span>
+			<span>{{ $t('system_messages.email_sent') }}</span>
 		</modal>
 	</div>
 </template>
@@ -62,6 +63,14 @@ export default {
 		sendEmail_error: null,
 		modalEmail: false,
 	}),
+	computed: {
+		email() {
+			return this.$t('system_messages.email')
+		},
+		send_email() {
+			return this.$t('system_messages.send_email')
+		},
+	},
 	mounted() {
 		this.$nextTick().then(() => document.body.classList.add('dark'))
 	},

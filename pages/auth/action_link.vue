@@ -9,29 +9,29 @@
 				</g>
 			</svg>
 			<span class="title">My Tree</span>
-			<h2>Action Link</h2>
+			<h2>{{ $t('menu.auth.action_link') }}</h2>
 		</div>
 
 		<div v-if="actionCodeError != null">
-			<span>Link has expired or already been used</span>
+			<span> {{ $t('system_messages.link_expired') }} </span>
 		</div>
 		<template v-else>
 			<ValidationObserver v-if="!$fetchState.pending && showResetForm" ref="resetPassword" tag="form" class="form" @submit.prevent="resetPassword()">
-				<inputItem name="New Password" type="password" :rules="passwordRules" @getValue="getNewPass" />
-				<input type="submit" class="submit" value="Reset Password" />
+				<inputItem :name="new_password" type="password" :rules="passwordRules" @getValue="getNewPass" />
+				<input type="submit" class="submit" :value="reset_pass" />
 			</ValidationObserver>
 			<div v-if="!$fetchState.pending && showVerifyEmail" class="verifyEmail">
-				<span>Email Verification Successful</span>
-				<btn fill link="/auth/login">Continue</btn>
+				<span>{{ $t('system_messages.email_verified') }}</span>
+				<btn fill link="/auth/login">{{ $t('system_messages.continue') }}</btn>
 			</div>
 		</template>
 
 		<div class="links">
-			<p>Don't have an account ?</p>
-			<nuxt-link :to="localePath('/auth/register')"> Sign Up </nuxt-link>
+			<p>{{ $t('system_messages.dont_have_account') }} ?</p>
+			<nuxt-link :to="localePath('/auth/register')"> {{ $t('system_messages.sign_up') }} </nuxt-link>
 			<br />
-			<p>Already have an account ?</p>
-			<nuxt-link :to="localePath('/auth/login')"> Sign In </nuxt-link>
+			<p>{{ $t('system_messages.already_have_account') }} ?</p>
+			<nuxt-link :to="localePath('/auth/login')"> {{ $t('system_messages.sign_in') }} </nuxt-link>
 		</div>
 
 		<modal v-if="modal" type="success" @getValue="getModal">
@@ -39,7 +39,7 @@
 				<circle cx="12" cy="12" r="11.5" style="fill: #3a506b" />
 				<path d="M9.59,18.37,4.72,13.5a.75.75,0,0,1,0-1.06l1.06-1.06a.74.74,0,0,1,1.06,0l3.28,3.28,7-7a.74.74,0,0,1,1.06,0l1.06,1.06a.75.75,0,0,1,0,1.06l-8.62,8.62a.75.75,0,0,1-1.07,0Z" style="fill: #6fffe9" />
 			</svg>
-			<span>password updated</span>
+			<span>{{ $t('system_messages.password_updated') }}</span>
 		</modal>
 	</div>
 </template>
@@ -113,6 +113,14 @@ export default {
 
 		modal: false,
 	}),
+	computed: {
+		new_password() {
+			return this.$t('system_messages.new_password')
+		},
+		reset_pass() {
+			return this.$t('system_messages.reset_pass')
+		},
+	},
 	methods: {
 		getNewPass(value) {
 			this.form.newPass = value

@@ -9,12 +9,12 @@
 				</g>
 			</svg>
 			<span class="title">My Tree</span>
-			<h2>Register</h2>
+			<h2>{{ $t('menu.auth.register') }}</h2>
 		</div>
 
 		<ValidationObserver v-if="showForm" ref="signup" tag="form" class="auth" @submit.prevent="Submit('signIn')">
-			<inputItem name="Email" :rules="emailRules" @getValue="getEmail" />
-			<inputItem name="Password" :rules="passwordRules" type="password" @getValue="getPass" />
+			<inputItem :name="email" :rules="emailRules" @getValue="getEmail" />
+			<inputItem :name="password" :rules="passwordRules" type="password" @getValue="getPass" />
 
 			<div v-if="authError !== null" class="authError">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -22,7 +22,7 @@
 				</svg>
 				{{ authError }}
 			</div>
-			<input type="submit" class="submit" value="Sign Up" />
+			<input type="submit" class="submit" :value="signup" />
 			<div class="SMedias">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path class="yellow" d="M22.3,9.9h-0.8v0H12v4.2h5.9c-0.9,2.4-3.2,4.2-5.9,4.2c-3.5,0-6.3-2.8-6.3-6.3S8.5,5.7,12,5.7c1.6,0,3.1,0.6,4.2,1.6l3-3c-1.9-1.7-4.4-2.8-7.1-2.8C6.2,1.5,1.5,6.2,1.5,12S6.2,22.5,12,22.5S22.5,17.8,22.5,12C22.5,11.3,22.4,10.6,22.3,9.9z" />
@@ -36,12 +36,12 @@
 			</div>
 		</ValidationObserver>
 		<div v-else>
-			<span>Verification email successfully sent</span>
+			<span>{{ $t('system_messages.verification_email_sent') }}</span>
 		</div>
 
 		<div class="links">
-			<p>Already have an account ?</p>
-			<nuxt-link :to="localePath('/auth/login')"> Sign In </nuxt-link>
+			<p>{{ $t('system_messages.already_have_account') }} ?</p>
+			<nuxt-link :to="localePath('/auth/login')"> {{ $t('system_messages.sign_in') }} </nuxt-link>
 		</div>
 	</div>
 </template>
@@ -66,6 +66,15 @@ export default {
 		showForm: true,
 	}),
 	computed: {
+		email() {
+			return this.$t('system_messages.email')
+		},
+		password() {
+			return this.$t('system_messages.password')
+		},
+		signup() {
+			return this.$t('system_messages.sign_up')
+		},
 		authError() {
 			return this.$store.getters.authError
 		},

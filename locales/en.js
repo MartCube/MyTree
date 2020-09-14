@@ -11,18 +11,20 @@ export default {
 			choose_language: 'Choose Language',
 
 		},
-		auth: {},
+		auth: {
+			action_link: 'Action Link',
+			register: 'Register',
+		},
 		my_shop: {
 			self_name: 'My shop',
 			statistics: 'Statistics',
+			shop_scans: 'Shop scans',
 			edit_shop: 'Edit Shop',
 			download_qr: 'Download QRcode',
 			qr: 'QRcode',
 		},
 		register_shop: {
 			self_name: 'Register Shop',
-			
-			
 		},
 		privacy_policy: 'Privacy Policy',
 		about_my_tree: 'About My Tree',
@@ -32,12 +34,27 @@ export default {
 	},
 	
 	system_messages: {
-		do_u_want_to_sign_out: 'Do you want to',
+		do_u_want_to_sign_out: 'Do you want to sign out',
+		dont_have_account: 'Don\'t have an account',
+		already_have_account: 'Don\'t have an account',
+		link_expired: 'Link has expired or already been used',
 		sign_out: 'Sign out',
 		sign_in: 'Sign in',
+		sign_up: 'Sign up',
+		continue: 'Continue',
+		verification_email_sent: 'Verification email successfully sent',
+		email_verified: 'Email Verification Successful',
+		email_sent: 'Email sent',
+		send_email: 'Send email',
+		email: 'Email',
 		password: 'Password',
+		reset_pass: 'Reset Password',
+		new_password: 'New Password',
+		confirm_new_password: 'Confirm new password',
 		password_changed: 'Password Changed',
-		dowload: 'download',
+		password_updated: 'Password updated',
+		forgot_pass: 'Forgot Password',
+		download: 'download',
 		upload_img: 'Upload Image',
 		view_on_map: 'View on map',
 		pick_position_on_map: 'Pick your position on map',

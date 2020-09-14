@@ -3,7 +3,7 @@
 		<titleBar> {{ $t('menu.account.change_password') }} </titleBar>
 
 		<ValidationObserver v-show="!reAuth" ref="SignIn" tag="form" class="auth" @submit.prevent="SignIn()">
-			<inputItem dark name="Password" :rules="'required'" type="password" @getValue="getPass" />
+			<inputItem dark :name="password" :rules="'required'" type="password" @getValue="getPass" />
 
 			<div v-if="authError !== null" class="authError">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -11,12 +11,12 @@
 				</svg>
 				{{ authError }}
 			</div>
-			<input type="submit" class="submit" value="Sign In" />
+			<input type="submit" class="submit" :value="signin" />
 		</ValidationObserver>
 
 		<ValidationObserver v-if="reAuth" ref="changePassword" tag="form" class="auth" @submit.prevent="changePassword()">
-			<inputItem dark name="New Password" :rules="passwordRules" type="password" @getValue="getNewPass" />
-			<inputItem dark name="Confirm New Password" :rules="'required'" type="password" @getValue="getConfirmNewPass" />
+			<inputItem dark :name="new_password" :rules="passwordRules" type="password" @getValue="getNewPass" />
+			<inputItem dark :name="confirm_new_password" :rules="'required'" type="password" @getValue="getConfirmNewPass" />
 
 			<div v-if="error !== null" class="authError">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -24,7 +24,7 @@
 				</svg>
 				{{ error }}
 			</div>
-			<input type="submit" class="submit" value=" $t('menu.account.change_password') " />
+			<input type="submit" class="submit" :value="change_password" />
 		</ValidationObserver>
 
 		<modal v-if="modal" type="success" @getValue="getModal">
@@ -60,6 +60,21 @@ export default {
 	computed: {
 		user() {
 			return this.$store.getters.user
+		},
+		password() {
+			return this.$t('system_messages.password')
+		},
+		new_password() {
+			return this.$t('system_messages.new_password')
+		},
+		confirm_new_password() {
+			return this.$t('system_messages.confirm_new_password')
+		},
+		change_password() {
+			return this.$t('menu.account.change_password')
+		},
+		signin() {
+			return this.$t('system_messages.sign_in')
 		},
 	},
 	methods: {

@@ -10,12 +10,12 @@
 				</g>
 			</svg>
 			<span class="title">My Tree</span>
-			<h2>Login</h2>
+			<h2>{{ $t('system_messages.sign_in') }}</h2>
 		</div>
 
 		<ValidationObserver ref="signin" tag="form" class="auth" @submit.prevent="Submit('signIn')">
-			<inputItem name="Email" :rules="'email|required'" @getValue="getEmail" />
-			<inputItem name="Password" :rules="'required'" type="password" @getValue="getPass" />
+			<inputItem :name="email" :rules="'email|required'" @getValue="getEmail" />
+			<inputItem :name="password" :rules="'required'" type="password" @getValue="getPass" />
 
 			<div v-if="authError !== null" class="authError">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -24,7 +24,7 @@
 				{{ authError }}
 			</div>
 
-			<input type="submit" class="submit" value="Sign In" />
+			<input type="submit" class="submit" :value="signin" />
 			<div class="SMedias">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path class="yellow" d="M22.3,9.9h-0.8v0H12v4.2h5.9c-0.9,2.4-3.2,4.2-5.9,4.2c-3.5,0-6.3-2.8-6.3-6.3S8.5,5.7,12,5.7c1.6,0,3.1,0.6,4.2,1.6l3-3c-1.9-1.7-4.4-2.8-7.1-2.8C6.2,1.5,1.5,6.2,1.5,12S6.2,22.5,12,22.5S22.5,17.8,22.5,12C22.5,11.3,22.4,10.6,22.3,9.9z" />
@@ -39,9 +39,9 @@
 		</ValidationObserver>
 
 		<div class="links">
-			<p>Don't have an account ?</p>
-			<nuxt-link :to="localePath('/auth/register')"> Sign Up </nuxt-link>
-			<nuxt-link :to="localePath('/auth/password_reset')" class="forgot_password"> Forgot Password </nuxt-link>
+				<p>{{ $t('system_messages.dont_have_account') }}  ?</p>
+			<nuxt-link :to="localePath('/auth/register')"> {{ $t('system_messages.sign_up') }}  </nuxt-link>
+			<nuxt-link :to="localePath('/auth/password_reset')" class="forgot_password"> {{ $t('system_messages.forgot_pass') }} </nuxt-link>
 		</div>
 
 		<spinner v-if="loading" />
@@ -66,7 +66,17 @@ export default {
 			password: '',
 		},
 	}),
+
 	computed: {
+		email() {
+			return this.$t('system_messages.email')
+		},
+		password() {
+			return this.$t('system_messages.password')
+		},
+		signin() {
+			return this.$t('system_messages.sign_in')
+		},
 		authError() {
 			return this.$store.getters.authError
 		},
