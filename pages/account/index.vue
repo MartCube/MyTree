@@ -1,7 +1,6 @@
 <template>
 	<div class="container">
 		<titleBar>{{ $t('menu.account.account_settings') }} </titleBar>
-		{{ $t('hello') }}
 		<div class="menu_links">
 			<div class="item">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

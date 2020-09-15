@@ -59,9 +59,9 @@ module.exports = {
 			],
 		},
 		workbox: {
-			// dev: true,
+			dev: true,
 			swURL: 'installApp.js',
-			// offline: true,
+			offline: true,
 		},
 	},
 
@@ -98,6 +98,11 @@ module.exports = {
 				code: 'ua',
 				name: 'Українська',
 				file: 'ua.js',
+			},
+			{
+				code: 'ru',
+				name: 'Русский',
+				file: 'ru.js',
 			},
 		],
 	},

@@ -36,7 +36,7 @@ export default {
 	system_messages: {
 		do_u_want_to_sign_out: 'Do you want to sign out',
 		dont_have_account: 'Don\'t have an account',
-		already_have_account: 'Don\'t have an account',
+		already_have_account: 'Already have an account',
 		link_expired: 'Link has expired or already been used',
 		sign_out: 'Sign out',
 		sign_in: 'Sign in',
@@ -65,9 +65,10 @@ export default {
 	},
 
 	languages: {
-		ua: 'Ukrainian',
+		ua: 'Українська',
 		en: 'English',
-		ru: 'Russian',
+		ru: 'Русский',
+
 	}
 
 }
