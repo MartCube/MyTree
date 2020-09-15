@@ -26,7 +26,10 @@ export default {
 		},
 		privacy_policy: 'Privacy Policy',
 		about_my_tree: 'Про My Tree',
-		feedback: 'Обратная связь',
+		feedback: {
+			self_name: 'Обратная связь',
+			text: 'Мы хотим улучшать наше приложение. Будем рады вашим отзывам и предложениям!'
+		},
 
 
 	},

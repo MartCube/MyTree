@@ -26,6 +26,10 @@ export default {
 		},
 		privacy_policy: 'Privacy Policy',
 		about_my_tree: 'Про My Tree',
+		feedback: {
+			self_name: 'Зворотній зв\'язок',
+			text: 'Мы хотим улучшать наше приложение. Будем рады вашим отзывам и предложениям!'
+		},
 		feedback: 'Зворотній зв\'язок',
 
 

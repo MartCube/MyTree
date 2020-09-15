@@ -28,12 +28,16 @@ export default {
 		},
 		privacy_policy: 'Privacy Policy',
 		about_my_tree: 'About My Tree',
-		feedback: 'Feedback',
+		feedback: {
+			self_name: 'Feedback',
+			text: 'We will be happy to improve our app. Write us if you have any ideas or propositions'
+		},
 		
 		
 	},
 	
 	system_messages: {
+
 		do_u_want_to_sign_out: 'Do you want to sign out',
 		dont_have_account: 'Don\'t have an account',
 		already_have_account: 'Already have an account',

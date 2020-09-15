@@ -1,9 +1,9 @@
 <template>
 	<div class="container">
-		<titleBar> Feedback </titleBar>
+		<titleBar> {{ $t('menu.feedback.self_name')}} </titleBar>
 
 		<div class="content">
-			<p>We will be happy to improve our app. Write us if you have any ideas or propositions</p>
+			<p>{{ $t('menu.feedback.text')}}</p>
 			<a href="mailto:mytree.feedback@gmail.com">mytree.feedback@gmail.com</a>
 		</div>
 
