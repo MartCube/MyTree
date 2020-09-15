@@ -122,7 +122,7 @@ export default {
 			this.deferredPrompt = e
 			this.modalInstallApp = true
 			console.log(this.deferredPrompt, v)
-			// return this.deferredPrompt
+			return this.deferredPrompt
 		},
 		installApp() {
 			console.log('installApp')
@@ -135,7 +135,6 @@ export default {
 				console.log('accept')
 				// Show the install prompt
 				this.deferredPrompt.prompt()
-				console.log()
 				this.deferredPrompt.userChoice.then((choiceResult) => {
 					if (choiceResult.outcome === 'accepted') {
 						console.log('User accepted the install prompt')

@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar> My Shop </titleBar>
+		<titleBar link="/menu"> My Shop </titleBar>
 
 		<div class="menu_links">
 			<nuxt-link class="item" :to="localePath('/myShop/editShop')">

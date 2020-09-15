@@ -21,7 +21,6 @@
 
 <script>
 import { gmapsMap, gmapsMarker } from 'x5-gmaps'
-import modal from '~/components/modal'
 
 export default {
 	components: { gmapsMap, gmapsMarker },
@@ -41,21 +40,11 @@ export default {
 		}
 	},
 	data: () => ({
-		mapOptions: {
-			center: { lat: 50.45158, lng: 30.527538 },
-			zoom: 10,
-			rotateControl: true,
-			fullscreenControl: false,
-			mapTypeControl: false,
-			scaleControl: false,
-			zoomControl: false,
-			streetViewControl: false,
-		},
 		icon: require('~/static/icons/location.svg'),
 	}),
 	computed: {
-		modal() {
-			return this.$store.getters.modal
+		mapOptions() {
+			return this.$store.getters.mapOptions
 		},
 	},
 	methods: {
@@ -64,16 +53,13 @@ export default {
 			else alert('Geolocation is not supported by this browser.')
 		},
 		setLocation(pos) {
-			this.mapOptions = { ...this.mapOptions, center: { lat: pos.coords.latitude, lng: pos.coords.longitude } }
+			this.$store.commit('setMapOptions', { lat: pos.coords.latitude, lng: pos.coords.longitude })
 		},
 		locationError(error) {
 			if (error.PERMISSION_DENIED) alert('User denied the request for Geolocation.')
 			else if (error.POSITION_UNAVAILABLE) alert('Location information is unavailable.')
 			else if (error.TIMEOUT) alert('The request to get user location timed out.')
 			else alert('An unknown error occurred.')
-		},
-		show(value) {
-			console.log('clicked', value)
 		},
 	},
 }

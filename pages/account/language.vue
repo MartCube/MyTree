@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar> Choose Language </titleBar>
+		<titleBar link="/account"> Choose Language </titleBar>
 
 		<div class="menu_links">
 			<nuxt-link v-for="locale in availableLocales" :key="locale.code" :class="{ active: locale.code == currentLocale }" class="item" :to="switchLocalePath(locale.code)">
@@ -30,11 +30,5 @@ export default {
 			return this.$i18n.locale
 		},
 	},
-	watch: {
-		currentLocale(newValue, oldValue) {
-			this.$router.push(this.localePath('/account'))
-		},
-	},
-	methods: {},
 }
 </script>

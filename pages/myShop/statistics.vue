@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar> Statistics </titleBar>
+		<titleBar link="/myShop"> Statistics </titleBar>
 
 		<div v-if="shopScans > 0" class="inner-container">
 			<div class="item">

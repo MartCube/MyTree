@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar> Account settings </titleBar>
+		<titleBar link="/menu"> Account settings </titleBar>
 		<div class="menu_links">
 			<div class="item">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

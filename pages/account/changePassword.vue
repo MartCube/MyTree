@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar> Change Password </titleBar>
+		<titleBar link="/account"> Change Password </titleBar>
 
 		<ValidationObserver v-show="!reAuth" ref="SignIn" tag="form" class="auth" @submit.prevent="SignIn()">
 			<inputItem dark name="Password" :rules="'required'" type="password" @getValue="getPass" />

@@ -18,13 +18,13 @@
 					<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 						<path d="M22.84,16.75l-5-2.15a1.07,1.07,0,0,0-1.26.31l-2.22,2.72a16.64,16.64,0,0,1-8-8L9.09,7.44A1.08,1.08,0,0,0,9.4,6.18l-2.16-5A1.07,1.07,0,0,0,6,.53L1.34,1.61A1.07,1.07,0,0,0,.5,2.66,20.84,20.84,0,0,0,21.34,23.5a1.09,1.09,0,0,0,1.06-.84L23.47,18a1.09,1.09,0,0,0-.63-1.24Z" />
 					</svg>
-					<p>+380 723 245</p>
+					<p>{{ shop.phone }}</p>
 				</div>
 				<div class="item map">
 					<svg class="icon" viewBox="0 0 24 24">
 						<path d="M11.13,23C4.59,13.62,3.41,12.64,3.41,9.09a8.59,8.59,0,0,1,17.18,0c0,3.45-1.18,4.38-7.72,14a1.06,1.06,0,0,1-1.74,0ZM12,12.75a3.6,3.6,0,0,0,3.65-3.66A3.51,3.51,0,0,0,12,5.54,3.58,3.58,0,0,0,8.35,9.09,3.67,3.67,0,0,0,12,12.75Z" />
 					</svg>
-					<p>View on map</p>
+					<p @click="showPosition">View on map</p>
 				</div>
 			</div>
 			<div class="description">
@@ -44,11 +44,8 @@ export default {
 			.get()
 			.then((doc) => {
 				if (doc.exists) {
-					shop = {
-						image: doc.data().image,
-						title: doc.data().title,
-						description: doc.data().description,
-					}
+					shop = doc.data()
+					console.log(shop)
 				} else {
 					console.log('No such document!')
 				}
@@ -59,7 +56,12 @@ export default {
 		}
 	},
 	data: () => ({}),
-	methods: {},
+	methods: {
+		async showPosition() {
+			await this.$store.commit('setMapOptions', { lat: this.shop.position.lat, lng: this.shop.position.lng })
+			this.$router.push('/map')
+		},
+	},
 }
 </script>
 
