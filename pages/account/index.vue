@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar link="/menu"> {{ $t('menu.account.account_settings') }} </titleBar>
+		<TitleBar link="/menu"> {{ $t('menu.account.account_settings') }} </TitleBar>
 		<div class="menu_links">
 			<div class="item">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -25,11 +25,11 @@
 </template>
 
 <script>
-import titleBar from '~/components/titleBar'
+import TitleBar from '~/components/TitleBar'
 
 export default {
 	middleware: 'auth',
-	components: { titleBar },
+	components: { TitleBar },
 	data: () => ({}),
 	computed: {
 		user() {

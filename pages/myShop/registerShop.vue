@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar link="/menu"> {{ $t('menu.regiter_shop.self_name') }}  </titleBar>
+		<TitleBar link="/menu"> {{ $t('menu.regiter_shop.self_name') }}  </TitleBar>
 
 		<div class="policy">
 			<h2>Terms of Services</h2>
@@ -20,11 +20,11 @@
 
 <script>
 import btn from '~/components/btn.vue'
-import titleBar from '~/components/titleBar'
+import TitleBar from '~/components/TitleBar'
 
 export default {
 	name: 'RegisterShop',
-	components: { titleBar, btn },
+	components: { TitleBar, btn },
 	data: () => ({}),
 	computed: {
 		user() {
@@ -64,7 +64,7 @@ export default {
 }
 
 .container {
-	.titleBar {
+	.TitleBar {
 		margin: 0;
 	}
 	.btn {

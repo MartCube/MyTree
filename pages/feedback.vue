@@ -1,14 +1,13 @@
 <template>
 	<div class="container">
-		<titleBar> {{ $t('menu.feedback.self_name')}} </titleBar>
+		<TitleBar link="/menu"> {{ $t('menu.feedback.self_name') }} </TitleBar>
 
 		<div class="content">
-			<p>{{ $t('menu.feedback.text')}}</p>
+			<p>{{ $t('menu.feedback.text') }}</p>
 			<a href="mailto:mytree.feedback@gmail.com">mytree.feedback@gmail.com</a>
 		</div>
 
-
-	  <!-- <form name="test" method="post">
+		<!-- <form name="test" method="post">
 			 Netlify Honneypot 
 			<input type="hidden" name="form-name" value="test" />
 			<input type="hidden" name="bot-field" value="test" />
@@ -44,13 +43,13 @@
 </template>
 
 <script>
-import modal from '~/components/modal'
-import titleBar from '~/components/titleBar'
-import inputItem from '~/components/inputItem.vue'
-import { ValidationObserver } from 'vee-validate'
+// import modal from '~/components/modal'
+// import TitleBar from '~/components/TitleBar'
+// import inputItem from '~/components/inputItem.vue'
+// import { ValidationObserver } from 'vee-validate'
 
 export default {
-	components: { modal, titleBar, inputItem, ValidationObserver },
+	components: {},
 	data: () => ({
 		modal: false,
 		form: {
@@ -124,12 +123,14 @@ export default {
 		}
 	}
 }
-.content{
+.content {
 	padding: 0 10%;
-	a{
+	a {
 		color: $secondary;
 		margin-top: 1rem;
 		display: inline-block;
+		text-decoration-color: #6fffe9;
+		font-size: 1.3em;
 	}
 }
 </style>

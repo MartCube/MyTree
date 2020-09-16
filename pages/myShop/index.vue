@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar link="/menu"> {{ $t('menu.my_shop.self_name') }} </titleBar>
+		<TitleBar link="/menu"> {{ $t('menu.my_shop.self_name') }} </TitleBar>
 
 		<div class="menu_links">
 			<nuxt-link class="item" :to="localePath('/myShop/editShop')">
@@ -26,11 +26,11 @@
 </template>
 
 <script>
-import titleBar from '~/components/titleBar'
+import TitleBar from '~/components/TitleBar'
 
 export default {
 	middleware: ['auth', 'shop'],
-	components: { titleBar },
+	components: { TitleBar },
 	data: () => ({}),
 	computed: {},
 	methods: {},

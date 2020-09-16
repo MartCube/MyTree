@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar :back="false"> {{ $t('menu.self_name') }}</titleBar>
+		<TitleBar :back="false"> {{ $t('menu.self_name') }}</TitleBar>
 
 		<div class="menu_links">
 			<nuxt-link class="item" :to="localePath('/account')">
@@ -37,7 +37,7 @@
 				<svg class="icon" viewBox="0 0 24 24">
 					<path d="M8.41,10.2h7.18a.72.72,0,0,0,.72-.72V8.77a.72.72,0,0,0-.72-.72H8.41a.72.72,0,0,0-.72.72v.71A.72.72,0,0,0,8.41,10.2Zm-.72,3.6a.72.72,0,0,0,.72.72h7.18a.72.72,0,0,0,.72-.72v-.72a.72.72,0,0,0-.72-.72H8.41a.72.72,0,0,0-.72.72ZM12,19.24a3.63,3.63,0,0,1-2.11-.68L.5,11.77v9.57A2.16,2.16,0,0,0,2.66,23.5H21.34a2.16,2.16,0,0,0,2.16-2.16V11.77l-9.39,6.79a3.63,3.63,0,0,1-2.11.68ZM22.67,7.82c-.39-.31-.77-.61-1.33-1v-2a2.15,2.15,0,0,0-2.15-2.15H15.7l-.4-.3C14.54,1.81,13,.48,12,.5S9.46,1.81,8.7,2.36l-.4.3H4.81A2.15,2.15,0,0,0,2.66,4.81v2c-.56.41-.94.71-1.33,1A2.13,2.13,0,0,0,.5,9.52V10l4.31,3.11V4.81H19.19v8.3L23.5,10V9.52a2.13,2.13,0,0,0-.83-1.7Z" />
 				</svg>
-				<span>{{ $t('menu.feedback') }}</span>
+				<span>{{ $t('menu.feedback.self_name') }}</span>
 			</nuxt-link>
 
 			<div class="item" @click="userSignOut">
@@ -54,11 +54,11 @@
 
 <script>
 import modal from '~/components/modal'
-import titleBar from '~/components/titleBar'
+import TitleBar from '~/components/TitleBar'
 
 export default {
 	middleware: 'auth',
-	components: { modal, titleBar },
+	components: { modal, TitleBar },
 	data: () => ({
 		modalSignOut: false,
 	}),

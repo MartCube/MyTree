@@ -1,5 +1,5 @@
 <template>
-	<div class="titleBar">
+	<div class="title_bar">
 		<div class="line"></div>
 
 		<span> <slot> title slot </slot> </span>
@@ -30,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 @import '~/assets/colors.scss';
 
-.titleBar {
+.title_bar {
 	width: 100%;
 	height: 70px;
 	margin-bottom: 10%;

@@ -39,8 +39,8 @@
 		</ValidationObserver>
 
 		<div class="links">
-				<p>{{ $t('system_messages.dont_have_account') }}  ?</p>
-			<nuxt-link :to="localePath('/auth/register')"> {{ $t('system_messages.sign_up') }}  </nuxt-link>
+			<p>{{ $t('system_messages.dont_have_account') }} ?</p>
+			<nuxt-link :to="localePath('/auth/register')"> {{ $t('system_messages.sign_up') }} </nuxt-link>
 			<nuxt-link :to="localePath('/auth/password_reset')" class="forgot_password"> {{ $t('system_messages.forgot_pass') }} </nuxt-link>
 		</div>
 

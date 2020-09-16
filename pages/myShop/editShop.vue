@@ -42,7 +42,7 @@
 		</div>
 
 		<modal v-if="modal" type="error" @getValue="getModal">
-			<span>{{ $t('system_messages.errors.big_img')}}</span>
+			<span>{{ $t('system_messages.errors.big_img') }}</span>
 		</modal>
 
 		<div class="image" @click="Upload">

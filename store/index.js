@@ -94,6 +94,7 @@ export const actions = {
 			await this.$fireAuth
 				.signInWithEmailAndPassword(userPayload.email, userPayload.password)
 				.then(async (cred) => {
+					console.log(cred)
 					if (cred != null) {
 						if (cred.user.emailVerified) {
 							//	get user from db

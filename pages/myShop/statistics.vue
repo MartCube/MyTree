@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar link="/myShop"> {{ $t('menu.my_shop.statistics') }} </titleBar>
+		<TitleBar link="/myShop"> {{ $t('menu.my_shop.statistics') }} </TitleBar>
 
 		<div v-if="shopScans > 0" class="inner-container">
 			<div class="item">
@@ -41,7 +41,7 @@
 
 <script>
 import modal from '~/components/modal'
-import titleBar from '~/components/titleBar'
+import TitleBar from '~/components/TitleBar'
 import { Cartesian, Line } from 'laue'
 
 export default {
@@ -50,7 +50,7 @@ export default {
 	components: {
 		modal,
 		LaCartesian: Cartesian,
-		titleBar,
+		TitleBar,
 	},
 	data: () => ({
 		modal: false,
