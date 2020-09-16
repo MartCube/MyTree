@@ -41,12 +41,18 @@
 			</svg>
 		</div>
 
+		<modal v-if="modal" type="error" @getValue="getModal">
+			<span>{{ $t('system_messages.errors.big_img')}}</span>
+		</modal>
+
 		<div class="image" @click="Upload">
 			<img ref="image" class="lazyload" :src="shop.image" />
 
 			<template v-if="edit">
 				<div class="color_overlay"></div>
-				<div class="text">Upload Image</div>
+				<div class="text">
+					{{ $t('system_messages.upload_img') }}
+				</div>
 				<input ref="fileUpload" class="fileUpload" type="file" @change="OnFileSelected" />
 			</template>
 		</div>
@@ -73,8 +79,8 @@
 					<svg class="icon" viewBox="0 0 24 24">
 						<path d="M11.13,23C4.59,13.62,3.41,12.64,3.41,9.09a8.59,8.59,0,0,1,17.18,0c0,3.45-1.18,4.38-7.72,14a1.06,1.06,0,0,1-1.74,0ZM12,12.75a3.6,3.6,0,0,0,3.65-3.66A3.51,3.51,0,0,0,12,5.54,3.58,3.58,0,0,0,8.35,9.09,3.67,3.67,0,0,0,12,12.75Z" />
 					</svg>
-					<p v-if="!edit" @click="showPosition">View on map</p>
-					<p v-else @click="pickPosition">Pick your position on map</p>
+					<p v-if="!edit" @click="showPosition">{{ $t('system_messages.view_on_map') }}</p>
+					<p v-else @click="pickPosition">{{ $t('system_messages.pick_position_on_map') }}</p>
 				</div>
 			</div>
 			<div class="description">

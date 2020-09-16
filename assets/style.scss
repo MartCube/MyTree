@@ -1,6 +1,6 @@
 @import '~/assets/fonts.scss';
 @import '~/assets/colors.scss';
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap');
 
 * {
 	margin: 0;
@@ -18,8 +18,10 @@
 body{
 	color: $text;
 	background: white;
-	font-family: 'config';
-
+	font-family:  'Nunito', sans-serif;
+	font-weight: 700;
+	// font-family: 'config';
+	font-size: 3.6vw;
 	-webkit-tap-highlight-color: transparent;
 	&.dark {
 		background: $text;
@@ -67,7 +69,7 @@ body{
 			}
 	
 			.icon {
-				width: 50px;
+				width: 11vw;
 				padding: 10px;
 				border-radius: 15px;
 	
@@ -76,7 +78,11 @@ body{
 			}
 	
 			span {
-				margin: 0 5%;
+				margin: 0 0 0 5%	;
+				white-space: nowrap;
+				width: 100%;
+				display: inline-block;
+				overflow: auto;
 			}
 		}
 	}

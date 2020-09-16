@@ -1,9 +1,15 @@
 <template>
 	<div class="container">
-		<titleBar> Feedback </titleBar>
+		<titleBar> {{ $t('menu.feedback.self_name')}} </titleBar>
 
-		<form name="test" method="post">
-			<!-- Netlify Honneypot -->
+		<div class="content">
+			<p>{{ $t('menu.feedback.text')}}</p>
+			<a href="mailto:mytree.feedback@gmail.com">mytree.feedback@gmail.com</a>
+		</div>
+
+
+	  <!-- <form name="test" method="post">
+			 Netlify Honneypot 
 			<input type="hidden" name="form-name" value="test" />
 			<input type="hidden" name="bot-field" value="test" />
 			<input type="hidden" name="Email" :value="user.email" />
@@ -14,7 +20,7 @@
 		</form>
 
 		<ValidationObserver ref="feedback" tag="form" class="form" name="feedback" method="post" @submit.prevent="feedback()">
-			<!-- Netlify Honneypot -->
+			 Netlify Honneypot 
 			<input type="hidden" name="bot-field" value="feedback" />
 			<input type="hidden" name="form-name" value="feedback" />
 			<input type="hidden" name="Email" :value="user.email" />
@@ -33,7 +39,7 @@
 				<path d="M9.59,18.37,4.72,13.5a.75.75,0,0,1,0-1.06l1.06-1.06a.74.74,0,0,1,1.06,0l3.28,3.28,7-7a.74.74,0,0,1,1.06,0l1.06,1.06a.75.75,0,0,1,0,1.06l-8.62,8.62a.75.75,0,0,1-1.07,0Z" style="fill: #6fffe9" />
 			</svg>
 			<span>Successfully Send</span>
-		</modal>
+		</modal>-->
 	</div>
 </template>
 
@@ -116,6 +122,14 @@ export default {
 		&:focus {
 			outline: none;
 		}
+	}
+}
+.content{
+	padding: 0 10%;
+	a{
+		color: $secondary;
+		margin-top: 1rem;
+		display: inline-block;
 	}
 }
 </style>

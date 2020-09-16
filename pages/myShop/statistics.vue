@@ -1,10 +1,10 @@
 <template>
 	<div class="container">
-		<titleBar link="/myShop"> Statistics </titleBar>
+		<titleBar link="/myShop"> {{ $t('menu.my_shop.statistics') }} </titleBar>
 
 		<div v-if="shopScans > 0" class="inner-container">
 			<div class="item">
-				<h2>shop scans</h2>
+				<h2> {{ $t('menu.my_shop.shop_scans') }} </h2>
 				<p>{{ shopScans }}</p>
 			</div>
 			<div class="item">
