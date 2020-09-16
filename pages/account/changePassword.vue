@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar> {{ $t('menu.account.change_password') }} </titleBar>
+		<titleBar link="/account"> {{ $t('menu.account.change_password') }}</titleBar>
 
 		<ValidationObserver v-show="!reAuth" ref="SignIn" tag="form" class="auth" @submit.prevent="SignIn()">
 			<inputItem dark :name="password" :rules="'required'" type="password" @getValue="getPass" />

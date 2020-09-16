@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar> 	{{ $t('menu.my_shop.qr') }} </titleBar>
+		<titleBar link="/myShop"> 	{{ $t('menu.my_shop.qr') }} </titleBar>
 
 		<vue-qrcode v-if="user.isSeller" ref="qrcode" class="qrcode" :value="user.email" :color="qrCodeOptions.color" :width="qrCodeOptions.width" :error-correction-level="qrCodeOptions.errorCorrectionLevel" />
 

@@ -15,7 +15,7 @@
 				</svg>
 			</div>
 			<n-link class="back" :to="localePath('/myShop')">
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+				<svg class="icon" viewBox="0 0 24 24">
 					<path d="M7.38,14.05h15.5a.61.61,0,0,0,.62-.61V10.56a.61.61,0,0,0-.62-.61H7.38V7.58a1.23,1.23,0,0,0-2.1-.87L.86,11.13a1.23,1.23,0,0,0,0,1.74l4.42,4.42a1.23,1.23,0,0,0,2.1-.87V14.05Z" />
 				</svg>
 			</n-link>
@@ -63,22 +63,23 @@
 			</div>
 			<div class="info">
 				<div class="item rating">
-					<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<svg class="icon" viewBox="0 0 24 24">
 						<path d="M10.77,1.76,8,7.45l-6.28.92a1.37,1.37,0,0,0-.76,2.34l4.54,4.43L4.39,21.4a1.37,1.37,0,0,0,2,1.45l5.62-3,5.62,3a1.37,1.37,0,0,0,2-1.45l-1.07-6.26,4.54-4.43a1.37,1.37,0,0,0-.76-2.34L16,7.45,13.23,1.76a1.37,1.37,0,0,0-2.46,0Z" />
 					</svg>
 					<p>4.7</p>
 				</div>
 				<div class="item phone">
-					<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<svg class="icon" viewBox="0 0 24 24">
 						<path d="M22.84,16.75l-5-2.15a1.07,1.07,0,0,0-1.26.31l-2.22,2.72a16.64,16.64,0,0,1-8-8L9.09,7.44A1.08,1.08,0,0,0,9.4,6.18l-2.16-5A1.07,1.07,0,0,0,6,.53L1.34,1.61A1.07,1.07,0,0,0,.5,2.66,20.84,20.84,0,0,0,21.34,23.5a1.09,1.09,0,0,0,1.06-.84L23.47,18a1.09,1.09,0,0,0-.63-1.24Z" />
 					</svg>
-					<p>+380 723 245</p>
+					<p v-if="!edit">{{ shop.phone }}</p>
+					<input v-else ref="phone" :value="shop.phone" type="text" />
 				</div>
 				<div class="item map">
-					<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<svg class="icon" viewBox="0 0 24 24">
 						<path d="M11.13,23C4.59,13.62,3.41,12.64,3.41,9.09a8.59,8.59,0,0,1,17.18,0c0,3.45-1.18,4.38-7.72,14a1.06,1.06,0,0,1-1.74,0ZM12,12.75a3.6,3.6,0,0,0,3.65-3.66A3.51,3.51,0,0,0,12,5.54,3.58,3.58,0,0,0,8.35,9.09,3.67,3.67,0,0,0,12,12.75Z" />
 					</svg>
-					<p v-if="!edit">{{ $t('system_messages.view_on_map') }}</p>
+					<p v-if="!edit" @click="showPosition">{{ $t('system_messages.view_on_map') }}</p>
 					<p v-else @click="pickPosition">{{ $t('system_messages.pick_position_on_map') }}</p>
 				</div>
 			</div>
@@ -174,12 +175,14 @@ export default {
 		async save() {
 			var image = this.$refs.image.src
 			var title = this.$refs.title.value
+			var phone = this.$refs.phone.value
 			var description = this.$refs.description.value
 
 			//save chages to store
 			await this.$store.commit('setShop', {
 				image: image,
 				title: title,
+				phone: phone,
 				description: description,
 				position: this.shopOptions.position,
 				shopScans: 0,
@@ -193,6 +196,10 @@ export default {
 			console.log('saved')
 		},
 
+		async showPosition() {
+			await this.$store.commit('setMapOptions', { lat: this.shop.position.lat, lng: this.shop.position.lng })
+			this.$router.push('/map')
+		},
 		getLocation() {
 			if (navigator.geolocation) navigator.geolocation.getCurrentPosition(this.setLocation, this.locationError)
 			else alert('Geolocation is not supported by this browser.')
@@ -354,13 +361,25 @@ export default {
 			.item {
 				@include d-flex(row, flex-start);
 				margin-bottom: 5%;
-				p {
-					margin: 0 10px;
-				}
+
 				.icon {
 					width: 1.2em;
 					margin: 0 2px;
 					fill: $secondary;
+				}
+				p {
+					margin: 0 10px;
+				}
+				input {
+					width: 100%;
+					margin: 0 10px;
+					outline: 0;
+					border: none;
+					border-bottom: 1px solid $text;
+					font-size: 1em;
+					&:focus {
+						border-color: $primary;
+					}
 				}
 				&.map {
 					text-decoration: underline;

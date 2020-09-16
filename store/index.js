@@ -7,6 +7,7 @@ export const state = () => ({
 	shop: {
 		image: 'https://firebasestorage.googleapis.com/v0/b/my-tree-app.appspot.com/o/local%2Fcoffee_shop.jpg?alt=media&token=d6a7d68d-6048-4515-9f2e-70e2e4e344a3',
 		title: 'My Tree Coffee Shop',
+		phone: '+380 723 245',
 		description: 'This is short description about the coffee shop.',
 		position: { lat: 0, lng: 0 },
 		shopScans: 0,
@@ -20,6 +21,16 @@ export const state = () => ({
 			},
 		],
 	},
+	mapOptions: {
+		center: { lat: 50.45158, lng: 30.527538 },
+		zoom: 10,
+		rotateControl: true,
+		fullscreenControl: false,
+		mapTypeControl: false,
+		scaleControl: false,
+		zoomControl: false,
+		streetViewControl: false,
+	},
 
 	// auth state needs to be separated
 	isAuth: false,
@@ -31,6 +42,7 @@ export const state = () => ({
 export const getters = {
 	user: (state) => state.user,
 	shop: (state) => state.shop,
+	mapOptions: (state) => state.mapOptions,
 	isAuth: (state) => state.isAuth,
 	authError: (state) => state.authError,
 	loading: (state) => state.loading,
@@ -38,8 +50,8 @@ export const getters = {
 
 // Functions that directly mutate the state.
 export const mutations = {
-	setUser(state, user) {
-		state.user = user
+	setUser(state, value) {
+		state.user = value
 	},
 	setShop(state, payload) {
 		const scanLogsArray = []
@@ -50,6 +62,10 @@ export const mutations = {
 
 		payload.scanLogs = scanLogsArray
 		state.shop = Object.assign(payload)
+	},
+	setMapOptions(state, value) {
+		state.mapOptions.center = value
+		state.mapOptions.zoom = 12
 	},
 	setAuth(state, value) {
 		state.isAuth = value

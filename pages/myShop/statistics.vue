@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<titleBar> {{ $t('menu.my_shop.statistics') }} </titleBar>
+		<titleBar link="/myShop"> {{ $t('menu.my_shop.statistics') }} </titleBar>
 
 		<div v-if="shopScans > 0" class="inner-container">
 			<div class="item">
