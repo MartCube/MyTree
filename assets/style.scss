@@ -20,7 +20,6 @@ body{
 	background: white;
 	font-family:  'Nunito', sans-serif;
 	font-weight: 700;
-	// font-family: 'config';
 	font-size: 3.6vw;
 	-webkit-tap-highlight-color: transparent;
 	&.dark {
@@ -69,20 +68,20 @@ body{
 			}
 	
 			.icon {
-				width: 11vw;
+				width: 40px;
 				padding: 10px;
 				border-radius: 15px;
-	
 				fill: $secondary;
 				background: $primary;
 			}
 	
 			span {
-				margin: 0 0 0 5%	;
+				margin: 0 0 0 5%;
 				white-space: nowrap;
-				width: 100%;
+				width: calc(90% - 40px);
 				display: inline-block;
 				overflow: auto;
+				
 			}
 		}
 	}

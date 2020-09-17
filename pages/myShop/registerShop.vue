@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<TitleBar link="/menu"> {{ $t('menu.regiter_shop.self_name') }}  </TitleBar>
+		<TitleBar link="/menu"> {{ $t('menu.regiter_shop.self_name') }} </TitleBar>
 
 		<div class="policy">
 			<h2>Terms of Services</h2>

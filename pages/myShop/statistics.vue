@@ -4,7 +4,7 @@
 
 		<div v-if="shopScans > 0" class="inner-container">
 			<div class="item">
-				<h2> {{ $t('menu.my_shop.shop_scans') }} </h2>
+				<h2>{{ $t('menu.my_shop.shop_scans') }}</h2>
 				<p>{{ shopScans }}</p>
 			</div>
 			<div class="item">
@@ -40,17 +40,13 @@
 </template>
 
 <script>
-import modal from '~/components/modal'
-import TitleBar from '~/components/TitleBar'
 import { Cartesian, Line } from 'laue'
 
 export default {
 	name: 'Statistics',
 	middleware: ['auth', 'shop'],
 	components: {
-		modal,
 		LaCartesian: Cartesian,
-		TitleBar,
 	},
 	data: () => ({
 		modal: false,
@@ -95,7 +91,6 @@ export default {
 			}
 		},
 	},
-	mounted() {},
 	methods: {
 		async getModal(value) {
 			if (value) {
