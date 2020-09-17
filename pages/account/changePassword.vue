@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<TitleBar link="/account"> {{ $t('menu.account.change_password') }}</TitleBar>
+		<titleBar link="/account"> {{ $t('menu.account.change_password') }}</titleBar>
 
 		<ValidationObserver v-show="!reAuth" ref="SignIn" tag="form" class="auth" @submit.prevent="SignIn()">
 			<inputItem dark :name="password" :rules="'required'" type="password" @getValue="getPass" />
@@ -39,12 +39,12 @@
 
 <script>
 import modal from '~/components/modal'
-import TitleBar from '~/components/TitleBar'
+import titleBar from '~/components/titleBar'
 import inputItem from '~/components/inputItem.vue'
 import { ValidationObserver } from 'vee-validate'
 
 export default {
-	components: { modal, TitleBar, inputItem, ValidationObserver },
+	components: { modal, titleBar, inputItem, ValidationObserver },
 	data: () => ({
 		modal: false,
 		reAuth: false,

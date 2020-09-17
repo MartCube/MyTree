@@ -65,7 +65,7 @@ module.exports = {
 			{
 				ignoreWhenNoAttributes: true,
 				ignoreWhenEmpty: true,
-				ignores: ['TitleBar', 'modal', 'n-link', 'nuxt-link', 'span', 'a', 'label', 'btn', 'h2', 'p', 'div'],
+				ignores: ['titleBar', 'modal', 'n-link', 'nuxt-link', 'span', 'a', 'label', 'btn', 'h2', 'p', 'div'],
 			},
 		],
 	},

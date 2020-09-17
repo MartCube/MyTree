@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<TitleBar link="/menu"> {{ $t('menu.feedback.self_name') }} </TitleBar>
+		<titleBar link="/menu"> {{ $t('menu.feedback.self_name') }} </titleBar>
 
 		<div class="content">
 			<p>{{ $t('menu.feedback.text') }}</p>
@@ -46,10 +46,10 @@
 // import modal from '~/components/modal'
 // import inputItem from '~/components/inputItem.vue'
 // import { ValidationObserver } from 'vee-validate'
-import TitleBar from '~/components/TitleBar'
+import titleBar from '~/components/titleBar'
 
 export default {
-	components: { TitleBar },
+	components: { titleBar },
 	data: () => ({
 		modal: false,
 		form: {

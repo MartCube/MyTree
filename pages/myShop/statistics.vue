@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<TitleBar link="/myShop"> {{ $t('menu.my_shop.statistics') }} </TitleBar>
+		<titleBar link="/myShop"> {{ $t('menu.my_shop.statistics') }} </titleBar>
 
 		<div v-if="shopScans > 0" class="inner-container">
 			<div class="item">
@@ -41,7 +41,7 @@
 
 <script>
 import { Cartesian, Line } from 'laue'
-import TitleBar from '~/components/TitleBar'
+import titleBar from '~/components/titleBar'
 import modal from '~/components/modal'
 
 export default {
@@ -49,7 +49,7 @@ export default {
 	middleware: ['auth', 'shop'],
 	components: {
 		LaCartesian: Cartesian,
-		TitleBar,
+		titleBar,
 		modal,
 	},
 	data: () => ({

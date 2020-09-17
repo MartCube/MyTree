@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<TitleBar :back="false"> {{ $t('menu.self_name') }}</TitleBar>
+		<titleBar :back="false"> {{ $t('menu.self_name') }}</titleBar>
 
 		<div class="menu_links">
 			<nuxt-link class="item" :to="localePath('/account')">
@@ -48,11 +48,11 @@
 
 <script>
 import modal from '~/components/modal'
-import TitleBar from '~/components/TitleBar'
+import titleBar from '~/components/titleBar'
 
 export default {
 	middleware: 'auth',
-	components: { modal, TitleBar },
+	components: { modal, titleBar },
 	data: () => ({
 		modalSignOut: false,
 	}),

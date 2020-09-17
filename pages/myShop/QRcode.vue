@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<TitleBar link="/myShop"> {{ $t('menu.my_shop.qr') }} </TitleBar>
+		<titleBar link="/myShop"> {{ $t('menu.my_shop.qr') }} </titleBar>
 
 		<vue-qrcode v-if="user.isSeller" ref="qrcode" class="qrcode" :value="user.email" :color="qrCodeOptions.color" :width="qrCodeOptions.width" :error-correction-level="qrCodeOptions.errorCorrectionLevel" />
 
@@ -19,7 +19,7 @@
 
 <script>
 import VueQrcode from 'vue-qrcode'
-import TitleBar from '~/components/TitleBar'
+import titleBar from '~/components/titleBar'
 import btn from '~/components/btn'
 
 export default {
@@ -27,7 +27,7 @@ export default {
 	middleware: ['auth', 'shop'],
 	components: {
 		VueQrcode,
-		TitleBar,
+		titleBar,
 		btn,
 	},
 	data: () => ({

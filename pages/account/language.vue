@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<TitleBar link="/account"> {{ $t('menu.account.choose_language') }} </TitleBar>
+		<titleBar link="/account"> {{ $t('menu.account.choose_language') }} </titleBar>
 
 		<div class="menu_links">
 			<nuxt-link v-for="locale in availableLocales" :key="locale.code" :class="{ active: locale.code == currentLocale }" class="item" :to="switchLocalePath(locale.code)">
@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import TitleBar from '~/components/TitleBar'
+import titleBar from '~/components/titleBar'
 
 export default {
 	middleware: 'auth',
-	components: { TitleBar },
+	components: { titleBar },
 	computed: {
 		user() {
 			return this.$store.getters.user
