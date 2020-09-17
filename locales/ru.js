@@ -7,7 +7,6 @@ export default {
 			change_password: 'Изменить пароль',
 			change_language: 'Изменить язык',
 			choose_language: 'Выбрать язык',
-
 		},
 		auth: {
 			action_link: 'Скинуть пароль',
@@ -28,10 +27,8 @@ export default {
 		about_my_tree: 'Про My Tree',
 		feedback: {
 			self_name: 'Обратная связь',
-			text: 'Мы хотим улучшать наше приложение. Будем рады вашим отзывам и предложениям!'
+			text: 'Мы хотим улучшать наше приложение. Будем рады вашим отзывам и предложениям!',
 		},
-
-
 	},
 
 	system_messages: {
@@ -61,7 +58,6 @@ export default {
 		pick_position_on_map: 'Выбрать позицию на карте',
 		errors: {
 			big_img: 'Изображение слишком большое',
-			big_img: '',
 		},
 	},
 
@@ -69,6 +65,5 @@ export default {
 		ua: 'Українська',
 		en: 'English',
 		ru: 'Русский',
-	}
-
+	},
 }

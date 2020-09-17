@@ -41,10 +41,6 @@
 			</svg>
 		</div>
 
-		<modal v-if="modal" type="error" @getValue="getModal">
-			<span>{{ $t('system_messages.errors.big_img') }}</span>
-		</modal>
-
 		<div class="image" @click="Upload">
 			<img ref="image" class="lazyload" :src="shop.image" />
 
@@ -56,6 +52,7 @@
 				<input ref="fileUpload" class="fileUpload" type="file" @change="OnFileSelected" />
 			</template>
 		</div>
+
 		<div class="content">
 			<div class="title">
 				<h2 v-if="!edit">{{ shop.title }}</h2>
@@ -90,7 +87,7 @@
 		</div>
 
 		<modal v-if="imgModal" type="error" @getValue="getImgModal">
-			<span>Image to big</span>
+			<span>{{ $t('system_messages.errors.big_img') }}</span>
 		</modal>
 		<modal v-if="deleteModal" @getValue="getDeleteModal">
 			<span>Delete this shop ?</span>
@@ -100,7 +97,6 @@
 
 <script>
 import { gmapsMap, gmapsMarker } from 'x5-gmaps'
-import btn from '~/components/btn'
 import modal from '~/components/modal'
 
 export default {
@@ -145,7 +141,7 @@ export default {
 			var imageRef = storageRef.child(`shop/${this.user.email}`)
 
 			if (this.file.size > 300000) {
-				this.modal = true
+				this.imgModal = true
 				return
 			}
 			await imageRef.put(this.file)

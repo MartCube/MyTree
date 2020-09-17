@@ -19,12 +19,16 @@
 
 <script>
 import VueQrcode from 'vue-qrcode'
+import TitleBar from '~/components/TitleBar'
+import btn from '~/components/btn'
 
 export default {
 	name: 'QRcode',
 	middleware: ['auth', 'shop'],
 	components: {
 		VueQrcode,
+		TitleBar,
+		btn,
 	},
 	data: () => ({
 		qrCodeOptions: {

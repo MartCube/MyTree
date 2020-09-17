@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<TitleBar link="/account"> {{ $t('menu.account.choose_language') }}  </TitleBar>
+		<TitleBar link="/account"> {{ $t('menu.account.choose_language') }} </TitleBar>
 
 		<div class="menu_links">
 			<nuxt-link v-for="locale in availableLocales" :key="locale.code" :class="{ active: locale.code == currentLocale }" class="item" :to="switchLocalePath(locale.code)">

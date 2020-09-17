@@ -41,12 +41,16 @@
 
 <script>
 import { Cartesian, Line } from 'laue'
+import TitleBar from '~/components/TitleBar'
+import modal from '~/components/modal'
 
 export default {
 	name: 'Statistics',
 	middleware: ['auth', 'shop'],
 	components: {
 		LaCartesian: Cartesian,
+		TitleBar,
+		modal,
 	},
 	data: () => ({
 		modal: false,

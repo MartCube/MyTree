@@ -7,7 +7,6 @@ export default {
 			change_password: 'Змінити пароль',
 			change_language: 'Змінити мову',
 			choose_language: 'Обрати мову',
-
 		},
 		auth: {
 			action_link: 'Скинути пароль',
@@ -27,12 +26,10 @@ export default {
 		privacy_policy: 'Privacy Policy',
 		about_my_tree: 'Про My Tree',
 		feedback: {
-			self_name: 'Зворотній зв\'язок',
-			text: 'Мы хотим улучшать наше приложение. Будем рады вашим отзывам и предложениям!'
+			self_name: "Зворотній зв'язок",
+			text: 'Мы хотим улучшать наше приложение. Будем рады вашим отзывам и предложениям!',
 		},
-		feedback: 'Зворотній зв\'язок',
-
-
+		feedback: "Зворотній зв'язок",
 	},
 
 	system_messages: {
@@ -62,7 +59,6 @@ export default {
 		pick_position_on_map: 'Вибрати позицію на карті',
 		errors: {
 			big_img: 'Зображення надто велике',
-			big_img: '',
 		},
 	},
 
@@ -70,6 +66,5 @@ export default {
 		ua: 'Українська',
 		en: 'English',
 		ru: 'Русский',
-	}
-
+	},
 }

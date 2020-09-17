@@ -44,12 +44,12 @@
 
 <script>
 // import modal from '~/components/modal'
-// import TitleBar from '~/components/TitleBar'
 // import inputItem from '~/components/inputItem.vue'
 // import { ValidationObserver } from 'vee-validate'
+import TitleBar from '~/components/TitleBar'
 
 export default {
-	components: {},
+	components: { TitleBar },
 	data: () => ({
 		modal: false,
 		form: {
