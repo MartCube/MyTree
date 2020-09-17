@@ -1,6 +1,6 @@
 <template>
 	<div class="bar">
-		<nuxt-link class="link menu" to="/menu" @click.native="menuAnim">
+		<nuxt-link class="link menu" :to="localePath('/menu')" @click.native="menuAnim">
 			<svg viewBox="0 0 512 512">
 				<rect class="top" x="83" y="111.5" width="173" height="41" rx="20.5" ry="20.5" />
 				<rect class="mid" x="83" y="235.5" width="346" height="41" rx="20.5" ry="20.5" />
@@ -8,7 +8,7 @@
 			</svg>
 			<!-- Menu -->
 		</nuxt-link>
-		<nuxt-link class="link home" to="/" @click.native="homeAnim">
+		<nuxt-link class="link home" :to="localePath('/')" @click.native="homeAnim">
 			<svg viewBox="0 0 512 512">
 				<g class="triangles">
 					<path class="secondary" d="M224.28,180.86,68.63,418.4c-16.53,25.22,1.57,58.71,31.73,58.71H411.64c30.16,0,48.26-33.49,31.73-58.71L287.72,180.86A37.92,37.92,0,0,0,224.28,180.86Z" />
@@ -17,7 +17,7 @@
 			</svg>
 			<!-- Home -->
 		</nuxt-link>
-		<nuxt-link class="link map" to="/map" @click.native="mapAnim">
+		<nuxt-link class="link map" :to="localePath('/map')" @click.native="mapAnim">
 			<svg viewBox="0 0 512 512">
 				<path class="secondary" d="M5.2,436a3,3,0,0,0,1.73,3.89,3.08,3.08,0,0,0,1.08.2H137.18l14.88-96.36H40.14Z" />
 				<path class="secondary" d="M75.88,249.67l-23,60.62H157.21l9.69-62.57H78.72A3,3,0,0,0,75.88,249.67Z" />
@@ -29,7 +29,7 @@
 			</svg>
 			<!-- Find -->
 		</nuxt-link>
-		<nuxt-link class="link qr" to="/qr" @click.native="QRcodeAnim">
+		<nuxt-link class="link qr" :to="localePath('/qr')" @click.native="QRcodeAnim">
 			<svg viewBox="0 0 512 512">
 				<g class="boxes">
 					<path class="secondary" d="M82.2,72.3h68.2c5.5,0,10,4.5,10,10v68.2c0,5.5-4.5,10-10,10H82.2c-5.5,0-10-4.5-10-10V82.3C72.2,76.8,76.7,72.3,82.2,72.3z" />
