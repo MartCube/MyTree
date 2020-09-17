@@ -23,7 +23,7 @@
 				{{ authError }}
 			</div>
 			<input type="submit" class="submit" :value="signup" />
-			<div class="SMedias">
+			<!-- <div class="SMedias">
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path class="yellow" d="M22.3,9.9h-0.8v0H12v4.2h5.9c-0.9,2.4-3.2,4.2-5.9,4.2c-3.5,0-6.3-2.8-6.3-6.3S8.5,5.7,12,5.7c1.6,0,3.1,0.6,4.2,1.6l3-3c-1.9-1.7-4.4-2.8-7.1-2.8C6.2,1.5,1.5,6.2,1.5,12S6.2,22.5,12,22.5S22.5,17.8,22.5,12C22.5,11.3,22.4,10.6,22.3,9.9z" />
 					<path class="red" d="M2.7,7.1l3.4,2.5C7.1,7.3,9.4,5.7,12,5.7c1.6,0,3.1,0.6,4.2,1.6l3-3c-1.9-1.7-4.4-2.8-7.1-2.8C8,1.5,4.5,3.8,2.7,7.1z" />
@@ -33,7 +33,7 @@
 				<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<path class="fb" d="M17,13.4l0.6-3.9h-3.8V6.9c0-1.1,0.5-2.1,2.2-2.1h1.7V1.4c0,0-1.6-0.3-3-0.3c-3.1,0-5.1,1.9-5.1,5.3v3H6.2v3.9h3.4v9.5h4.2v-9.5H17z" />
 				</svg>
-			</div>
+			</div> -->
 		</ValidationObserver>
 		<div v-else>
 			<span>{{ $t('system_messages.verification_email_sent') }}</span>
@@ -183,7 +183,6 @@ export default {
 		background-color: $secondary;
 		color: $bg;
 		font-size: 1.2em;
-		font-family: 'config';
 		text-align: center;
 		transition: all 0.2s ease;
 		cursor: pointer;

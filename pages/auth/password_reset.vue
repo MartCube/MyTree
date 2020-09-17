@@ -171,7 +171,6 @@ export default {
 		background-color: $secondary;
 		color: $bg;
 		font-size: 1.2em;
-		font-family: 'config';
 		text-align: center;
 		transition: all 0.2s ease;
 		cursor: pointer;
